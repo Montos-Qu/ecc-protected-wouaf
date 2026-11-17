@@ -1,0 +1,766 @@
+[
+  {
+    "additional_step": 400,
+    "rank": [
+      false,
+      186,
+      640,
+      79,
+      413
+    ],
+    "metrics": {
+      "11": {
+        "correct": 640,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 233,
+          "jpeg_q90_444": 221,
+          "jpeg_q90_420": 186
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 233,
+            "bad": 0,
+            "reject": 23
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 221,
+            "bad": 0,
+            "reject": 35
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 186,
+            "bad": 0,
+            "reject": 70
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "16": {
+        "correct": 413,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 190,
+          "jpeg_q90_444": 144,
+          "jpeg_q90_420": 79
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 190,
+            "bad": 0,
+            "reject": 66
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 144,
+            "bad": 0,
+            "reject": 112
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 79,
+            "bad": 0,
+            "reject": 177
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      }
+    },
+    "retention_vs_v1": {
+      "11": {
+        "png8_control": 0.9957264957264957,
+        "jpeg_q90_444": 1.0,
+        "jpeg_q90_420": 1.0054054054054054
+      },
+      "16": {
+        "png8_control": 1.0,
+        "jpeg_q90_444": 1.006993006993007,
+        "jpeg_q90_420": 1.0
+      }
+    },
+    "best_additional_step": 0
+  },
+  {
+    "additional_step": 800,
+    "rank": [
+      false,
+      188,
+      642,
+      79,
+      414
+    ],
+    "metrics": {
+      "11": {
+        "correct": 642,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 233,
+          "jpeg_q90_444": 221,
+          "jpeg_q90_420": 188
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 233,
+            "bad": 0,
+            "reject": 23
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 221,
+            "bad": 0,
+            "reject": 35
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 188,
+            "bad": 0,
+            "reject": 68
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "16": {
+        "correct": 414,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 190,
+          "jpeg_q90_444": 145,
+          "jpeg_q90_420": 79
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 190,
+            "bad": 0,
+            "reject": 66
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 145,
+            "bad": 0,
+            "reject": 111
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 79,
+            "bad": 0,
+            "reject": 177
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      }
+    },
+    "retention_vs_v1": {
+      "11": {
+        "png8_control": 0.9957264957264957,
+        "jpeg_q90_444": 1.0,
+        "jpeg_q90_420": 1.0162162162162163
+      },
+      "16": {
+        "png8_control": 1.0,
+        "jpeg_q90_444": 1.013986013986014,
+        "jpeg_q90_420": 1.0
+      }
+    },
+    "best_additional_step": 0
+  },
+  {
+    "additional_step": 1200,
+    "rank": [
+      false,
+      188,
+      642,
+      79,
+      412
+    ],
+    "metrics": {
+      "11": {
+        "correct": 642,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 233,
+          "jpeg_q90_444": 221,
+          "jpeg_q90_420": 188
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 233,
+            "bad": 0,
+            "reject": 23
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 221,
+            "bad": 0,
+            "reject": 35
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 188,
+            "bad": 0,
+            "reject": 68
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "16": {
+        "correct": 412,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 189,
+          "jpeg_q90_444": 144,
+          "jpeg_q90_420": 79
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 189,
+            "bad": 0,
+            "reject": 67
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 144,
+            "bad": 0,
+            "reject": 112
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 79,
+            "bad": 0,
+            "reject": 177
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      }
+    },
+    "retention_vs_v1": {
+      "11": {
+        "png8_control": 0.9957264957264957,
+        "jpeg_q90_444": 1.0,
+        "jpeg_q90_420": 1.0162162162162163
+      },
+      "16": {
+        "png8_control": 0.9947368421052631,
+        "jpeg_q90_444": 1.006993006993007,
+        "jpeg_q90_420": 1.0
+      }
+    },
+    "best_additional_step": 0
+  },
+  {
+    "additional_step": 1600,
+    "rank": [
+      false,
+      187,
+      641,
+      79,
+      415
+    ],
+    "metrics": {
+      "11": {
+        "correct": 641,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 233,
+          "jpeg_q90_444": 221,
+          "jpeg_q90_420": 187
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 233,
+            "bad": 0,
+            "reject": 23
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 221,
+            "bad": 0,
+            "reject": 35
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 187,
+            "bad": 0,
+            "reject": 69
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "16": {
+        "correct": 415,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 190,
+          "jpeg_q90_444": 146,
+          "jpeg_q90_420": 79
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 190,
+            "bad": 0,
+            "reject": 66
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 146,
+            "bad": 0,
+            "reject": 110
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 79,
+            "bad": 0,
+            "reject": 177
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      }
+    },
+    "retention_vs_v1": {
+      "11": {
+        "png8_control": 0.9957264957264957,
+        "jpeg_q90_444": 1.0,
+        "jpeg_q90_420": 1.0108108108108107
+      },
+      "16": {
+        "png8_control": 1.0,
+        "jpeg_q90_444": 1.020979020979021,
+        "jpeg_q90_420": 1.0
+      }
+    },
+    "best_additional_step": 0
+  }
+]

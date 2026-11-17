@@ -1,0 +1,10 @@
+{
+  "plan_sha256": "71f45a55ffe6c1aa5c4b6ad42b2d0562da4dc565ca1a37bd71127808b08ff361",
+  "files": {
+    "evaluate_v3_independent.py": "c50cac8e87368fc684633ad17ea4817ccdda661e248236b9242370bb0c08a647",
+    "summarize_v3_independent.py": "a976561cb3c8dd1b144053e8f8114a8a16c25542f2e2e62ab6fa5b1dc8132a33",
+    "run_v3_independent_validation.py": "927de322524605d6028352133b6b36c149cf181035beda1128dd526a60e1c147",
+    "finalize_v3_independent.py": "d6bf83826ee87ca316330fd020a7e5670fa228dd520e1f58b2711fffa3450c9c"
+  },
+  "locked_before_any_new_extractor_prediction": true
+}

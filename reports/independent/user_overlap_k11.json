@@ -1,0 +1,7 @@
+{
+  "distinct_users": 1024,
+  "overlap_development_users": 0,
+  "overlap_old_regression_users": 881,
+  "all_codebook_users_remain_allowed": true,
+  "note": "k11 reuses historical evaluation user IDs because capacity is 2048; new content/latent/image independence is the study claim, not wholly unseen identities."
+}

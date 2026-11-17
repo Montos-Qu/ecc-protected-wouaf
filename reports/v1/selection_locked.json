@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "selected_step": 2400,
+  "selected_weights_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "steps_completed": 2400,
+  "ranking": [
+    true,
+    0.9954954954954955,
+    640,
+    1.021505376344086,
+    412
+  ],
+  "calibration_and_test_not_used": true,
+  "frozen_parameters_unchanged": 72,
+  "batchnorm_buffers_unchanged": true,
+  "initial_generator_and_mapping_unchanged": true,
+  "wall_seconds": 763.5903191190009
+}

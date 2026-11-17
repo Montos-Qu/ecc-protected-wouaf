@@ -1,0 +1,4 @@
+{
+  "active_continuation_stdout": "continuation.stdout",
+  "reason": "Live output is excluded from the immutable result ZIP checksum list. No scientific source, plan, model, data or metric changed."
+}

@@ -1,0 +1,6 @@
+{
+  "state": "complete",
+  "independent_audit_passed": true,
+  "checker_correction": "AUDIT_CORRECTION.json",
+  "initial_failure_preserved": true
+}

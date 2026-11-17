@@ -1,0 +1,9 @@
+{
+  "stage": "complete",
+  "regression_promising": false,
+  "blend": [
+    0.5,
+    0.5
+  ],
+  "source_extra_step": 800
+}

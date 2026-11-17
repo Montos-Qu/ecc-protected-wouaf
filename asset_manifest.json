@@ -1,0 +1,263 @@
+{
+  "format": 1,
+  "part_bytes": 1073741824,
+  "assets": {
+    "frozen_environment": {
+      "bytes": 2319751708,
+      "sha256": "6af89f6f753b8fde104d4e076b58a6b60aea907d3b83c4ba458ed69c3daef4f2",
+      "parts": [
+        {
+          "path": "frozen_environment/frozen_environment.part000",
+          "bytes": 1073741824,
+          "sha256": "3ff86ba424249644f44b2cbd1e26a3b35bc51f4cb03aaf46ee3407e93e6a368c"
+        },
+        {
+          "path": "frozen_environment/frozen_environment.part001",
+          "bytes": 1073741824,
+          "sha256": "aec5f627b697ce4c9a9bec4f5276bde5b74fe5b74c69cb7695738702d4a3d232"
+        },
+        {
+          "path": "frozen_environment/frozen_environment.part002",
+          "bytes": 172268060,
+          "sha256": "2504c964cd9a68c3df896180d460233593f859f764ba0094c824e35ff7a208b9"
+        }
+      ],
+      "destination": "environment/locked/wouaf_python310_torch112_frozen_env.tar.gz",
+      "kind": "file",
+      "original_filename": "wouaf_python310_torch112_frozen_env.tar.gz"
+    },
+    "training_data": {
+      "bytes": 1829249514,
+      "sha256": "15990222823df1a223ba0cf164916958e7da58d864bcc51f360bd66e54613268",
+      "parts": [
+        {
+          "path": "training_data/training_data.part000",
+          "bytes": 1073741824,
+          "sha256": "1c1004e02a2a0108768116716b0a4fbce0c7a18bd34203c9725cd0ed0a9f2839"
+        },
+        {
+          "path": "training_data/training_data.part001",
+          "bytes": 755507690,
+          "sha256": "7a3bf868db80614b42502f5bc4fb036da177dc2f65dcefb9039be89d052aa2c6"
+        }
+      ],
+      "destination": "data/development",
+      "kind": "zip",
+      "original_filename": "training_data.zip"
+    },
+    "evaluation_data": {
+      "bytes": 1688418211,
+      "sha256": "d4dd08d83f4b148a15ce8312bbc4e055c53ee6483585620fb081a9c14f17acd5",
+      "parts": [
+        {
+          "path": "evaluation_data/evaluation_data.part000",
+          "bytes": 1073741824,
+          "sha256": "7cccf403de787e6a506ee8a5a3922e831193b64083070ad57bcf5653a22ca983"
+        },
+        {
+          "path": "evaluation_data/evaluation_data.part001",
+          "bytes": 614676387,
+          "sha256": "aac702813976aa9a0c3746766fa807011cae7a988fb6b0bd51d76ecfaa741895"
+        }
+      ],
+      "destination": "data/evaluation",
+      "kind": "zip",
+      "original_filename": "evaluation_data.zip"
+    },
+    "training_initialization": {
+      "bytes": 94601153,
+      "sha256": "9ba874812b07603d17605d4b2b8f4ab102c31ec96a6721349a1f10c8344639aa",
+      "parts": [
+        {
+          "path": "training_initialization/training_initialization.part000",
+          "bytes": 94601153,
+          "sha256": "9ba874812b07603d17605d4b2b8f4ab102c31ec96a6721349a1f10c8344639aa"
+        }
+      ],
+      "destination": "training/assets/candidate300.pth",
+      "kind": "file",
+      "original_filename": "selected_branch_extractor.pth"
+    },
+    "baseline_generator": {
+      "bytes": 6845793952,
+      "sha256": "30f05401ef3f206d5b4acf9b33c69d54253c765faede1bb7e450da4772b34164",
+      "parts": [
+        {
+          "path": "baseline_generator/baseline_generator.part000",
+          "bytes": 1073741824,
+          "sha256": "b98594b56b5d29b2c70190c7c31bc4f8ad3d8e3a791432427032b90b3a139b6d"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part001",
+          "bytes": 1073741824,
+          "sha256": "977b57d29e9bea72fbc1853c36b74d07c33932885ee07dfbce54ff3341163779"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part002",
+          "bytes": 1073741824,
+          "sha256": "abae2cc1f00921ef86118c332f88a0c8d7d6b4c14db1bb3ac1c597b35983105e"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part003",
+          "bytes": 1073741824,
+          "sha256": "d797cab3fa58ea483650bf87d51ec1f098af2665dee1e25f5efc12f0382a533a"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part004",
+          "bytes": 1073741824,
+          "sha256": "4ae31b5dc3a01e9c109fc1b88074e09b3e11ca4d1a3a30a1dd797e843e16e2dc"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part005",
+          "bytes": 1073741824,
+          "sha256": "db7aba4829730660a8df8aff923d66ecd48a203f7d0cfd921765d28dc80e2087"
+        },
+        {
+          "path": "baseline_generator/baseline_generator.part006",
+          "bytes": 403343008,
+          "sha256": "ff4460d158246f6a1c6fd6a6aaeec8aa356e081d4aefd59280dca89652672203"
+        }
+      ],
+      "destination": "generation/assets",
+      "kind": "zip",
+      "original_filename": "baseline_generator.zip"
+    },
+    "validation_latents": {
+      "bytes": 2425089839,
+      "sha256": "4ae20150597d060502d4d87fd9448b5d931c38d596dc84fcaf91a1aa57629108",
+      "parts": [
+        {
+          "path": "validation_latents/validation_latents.part000",
+          "bytes": 1073741824,
+          "sha256": "7d5e4a9d83b66504352a6b688f01e932e40bcfd81a0763e5a424d9b590a65ac6"
+        },
+        {
+          "path": "validation_latents/validation_latents.part001",
+          "bytes": 1073741824,
+          "sha256": "e6ec82f2843fb2dd3033e8c47fba5055b1aa3e3d54bbb624875fa4553dbc36ed"
+        },
+        {
+          "path": "validation_latents/validation_latents.part002",
+          "bytes": 277606191,
+          "sha256": "2ad7e12f43a02e6903f7920b3bc0e1981b2011d3b6993706677deccdb74ae639"
+        }
+      ],
+      "destination": "data/WOUAF_validation_latents.tar.gz",
+      "kind": "file",
+      "original_filename": "WOUAF_validation_latents.tar.gz"
+    },
+    "independent_source_pngs_positive_k11": {
+      "bytes": 458231358,
+      "sha256": "5b19e774d6752202184386e7792ce0a19865ebe33b7f209be90a9958da63a7cd",
+      "parts": [
+        {
+          "path": "independent_source_pngs_positive_k11/source_pngs_positive_k11.zip",
+          "bytes": 458231358,
+          "sha256": "5b19e774d6752202184386e7792ce0a19865ebe33b7f209be90a9958da63a7cd"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_positive_k11.zip"
+    },
+    "independent_source_pngs_positive_k16": {
+      "bytes": 458263430,
+      "sha256": "31a1356342449bf1cae4815ec73a7d35dd32630adcedc4fedba45eea3e087e3e",
+      "parts": [
+        {
+          "path": "independent_source_pngs_positive_k16/source_pngs_positive_k16.zip",
+          "bytes": 458263430,
+          "sha256": "31a1356342449bf1cae4815ec73a7d35dd32630adcedc4fedba45eea3e087e3e"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_positive_k16.zip"
+    },
+    "independent_source_pngs_generated_negative": {
+      "bytes": 472933398,
+      "sha256": "c8c82b0f41532089f909aacaa6e39eea376eebe435d87158317c45e822ae6fb4",
+      "parts": [
+        {
+          "path": "independent_source_pngs_generated_negative/source_pngs_generated_negative.zip",
+          "bytes": 472933398,
+          "sha256": "c8c82b0f41532089f909aacaa6e39eea376eebe435d87158317c45e822ae6fb4"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_generated_negative.zip"
+    },
+    "independent_source_pngs_natural_negative": {
+      "bytes": 409355808,
+      "sha256": "bf62e115490a2b64b213b62a895660c8e253962a7a4b02f1a25abf7b8c0d3cb2",
+      "parts": [
+        {
+          "path": "independent_source_pngs_natural_negative/source_pngs_natural_negative.zip",
+          "bytes": 409355808,
+          "sha256": "bf62e115490a2b64b213b62a895660c8e253962a7a4b02f1a25abf7b8c0d3cb2"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_natural_negative.zip"
+    },
+    "independent_encoded_jpeg_q90_444": {
+      "bytes": 396389848,
+      "sha256": "9bb9f9b535c5f6ed3e29e631739176c49646eeb52fc38a56ed525e9267fb1dac",
+      "parts": [
+        {
+          "path": "independent_encoded_jpeg_q90_444/encoded_jpeg_q90_444.zip",
+          "bytes": 396389848,
+          "sha256": "9bb9f9b535c5f6ed3e29e631739176c49646eeb52fc38a56ed525e9267fb1dac"
+        }
+      ],
+      "destination": "data/independent/encoded/jpeg_q90_444",
+      "kind": "zip",
+      "original_filename": "encoded_jpeg_q90_444.zip"
+    },
+    "independent_encoded_jpeg_q90_420": {
+      "bytes": 315041629,
+      "sha256": "e85aa98b9322efcd5a039b602196c13a4615a16b5c7e26089c8add34fb84b01f",
+      "parts": [
+        {
+          "path": "independent_encoded_jpeg_q90_420/encoded_jpeg_q90_420.zip",
+          "bytes": 315041629,
+          "sha256": "e85aa98b9322efcd5a039b602196c13a4615a16b5c7e26089c8add34fb84b01f"
+        }
+      ],
+      "destination": "data/independent/encoded/jpeg_q90_420",
+      "kind": "zip",
+      "original_filename": "encoded_jpeg_q90_420.zip"
+    },
+    "independent_natural_originals": {
+      "bytes": 166173514,
+      "sha256": "e676141e7fcdc714218be6672f15e00f0d3ccf094582c0d5fee411a911a4d66c",
+      "parts": [
+        {
+          "path": "independent_natural_originals/natural_originals.zip",
+          "bytes": 166173514,
+          "sha256": "e676141e7fcdc714218be6672f15e00f0d3ccf094582c0d5fee411a911a4d66c"
+        }
+      ],
+      "destination": "data/independent/natural_originals",
+      "kind": "zip",
+      "original_filename": "natural_originals.zip"
+    },
+    "independent_new_latents": {
+      "bytes": 67108992,
+      "sha256": "b1d4c726cd2b490886e06b66bea6bc977f95d9b833bc3188ce7925cbae3b707c",
+      "parts": [
+        {
+          "path": "independent_new_latents/new_latents.npy",
+          "bytes": 67108992,
+          "sha256": "b1d4c726cd2b490886e06b66bea6bc977f95d9b833bc3188ce7925cbae3b707c"
+        }
+      ],
+      "destination": "data/independent/new_latents.npy",
+      "kind": "file",
+      "original_filename": "new_latents.npy"
+    }
+  },
+  "release_scope": "V3 final: original frozen environment/generator/training data and fresh independent native image assets"
+}

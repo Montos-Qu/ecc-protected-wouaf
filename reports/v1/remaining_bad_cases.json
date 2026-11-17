@@ -1,0 +1,14 @@
+[
+  {
+    "k": 16,
+    "item_id": "positive_k16:2920",
+    "condition": "jpeg_q90_420",
+    "source_group": "positive_k16",
+    "candidate_user_id": 46443,
+    "gt_user_id": 48506,
+    "presence_logit": 11.8590726852417,
+    "candidate_loglikelihood": -0.17842233170143285,
+    "distance32": 1,
+    "source_zip_member": "positive_k16/2920.png"
+  }
+]

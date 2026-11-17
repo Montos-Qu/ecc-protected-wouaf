@@ -1,0 +1,20 @@
+[
+  {
+    "condition": "png8_control",
+    "images": 4,
+    "bits_match": true,
+    "max_logit_difference": 7.62939453125e-06
+  },
+  {
+    "condition": "jpeg_q90_444",
+    "images": 4,
+    "bits_match": true,
+    "max_logit_difference": 4.76837158203125e-06
+  },
+  {
+    "condition": "jpeg_q90_420",
+    "images": 4,
+    "bits_match": true,
+    "max_logit_difference": 4.5299530029296875e-06
+  }
+]

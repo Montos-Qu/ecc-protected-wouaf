@@ -1,0 +1,8 @@
+{
+  "created_utc": "2026-10-29T05:17:21.093566+00:00",
+  "original_script_sha256": "1685d2df404d4be44dbdf1bd82bfa6226fc2434655afa041336c147012a1c7ea",
+  "corrected_script_sha256": "8b99e018b2419403f277dbf5332c1ba08d9b6f6ab737f95dc6e50318b6b174e4",
+  "reason": "PyTorch 1.12.1 stateless SGD serializes one momentum_buffer: None entry per parameter. The initial checker incorrectly required an empty outer state mapping.",
+  "corrected_assertion": "Uniform final LR 0.0002, momentum=weight_decay=0; exactly one state per optimized parameter, each exactly {momentum_buffer: None}.",
+  "training_selection_gates_metrics_unchanged": true
+}

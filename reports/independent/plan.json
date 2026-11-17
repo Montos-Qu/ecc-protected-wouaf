@@ -1,0 +1,69 @@
+{
+  "version": "V3_fresh_content_independent_validation",
+  "created_utc": "20261029T054807Z",
+  "ecc_root": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC",
+  "local": "<ORIGINAL_RUN_CACHE>",
+  "v3_root": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate",
+  "baseline_plan": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z/plan.json",
+  "extension_plan": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/plan.json",
+  "n_per_group": 1024,
+  "preparation_code_sha256": {
+    "v3_independent_common.py": "151c05a65c95b8f07834fc736dc9a3327a1addbf743316987d55cdbbfb6cf03b",
+    "generate_v3_independent.py": "56a10b258e47133d9ec4f3893210bd6c066307d6c4606751a32ce05e3090a829",
+    "v3_independent_scenes.json": "dc4d3415d172feac1b22c2aa0a810caa12a0aa0ccb106d4b80f3a827be796eb7"
+  },
+  "frozen_inputs": {
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/V3_SYSTEM_DELIVERY.json": "60fb41fc0e3ef54a0847d1deba7d0d5442dd62cb642c1c4f18947b427a6f8aff",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/router_config.json": "82bff1f74af21959f2e0026a4a208b8356e6d35502f84b29af03a40b353a8668",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/format_router_v3.py": "e9edc9800caa8b3366132891c56527096301ea10ca9042c882bf88d68630af84",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/SHA256SUMS.txt": "d04fddd6ab21cc8d1982746bbdd378331a3fc7b6afb2d297901369b840e58450",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/weights/clean_v1.pth": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/weights/jpeg420_expert.pth": "7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/configs/clean_v1.json": "86533a1e690506247f41ac5db36daf04482445eb5246fb5f0572304eeeee125a",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate/configs/jpeg420_expert.json": "723039f3e6c5666a2dc1d6396e9668841f7dc03c8f5ad1e979bbd6befdd555be",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/plan.json": "75d45ecbb46612c1c12e09185e45e3758b0bdefc40009dafde180b660eb4589c",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z/plan.json": "119258c3d5ec72c532506cbb431b9e0a59286a4f2d1e3937236dcd4fd1b6d2a4",
+    "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_snapshots/baseline_3000_portable/SHA256SUMS.txt": "4a09e6430c225075fa2be1a49632c4745a3708e0a81b99cb30e6bffa2c883f3c",
+    "/content/unwatermarked_ngc32_20261028T051846Z/pristine_vae/diffusion_pytorch_model.bin": "a4302e1efa25f3a47ceb7536bc335715ad9d1f203e90c2d25507600d74006e89"
+  },
+  "latent_seed_base": 410900000,
+  "user_seed_base": 410910000,
+  "photo_seed": 410920000,
+  "diffusion_batch": 8,
+  "diffusion_steps": 50,
+  "guidance_scale": 7.5,
+  "scheduler": "PNDMScheduler from baseline snapshot",
+  "sampling_dtype": "float32",
+  "prompt_lighting": [
+    "soft natural daylight",
+    "warm reflected light",
+    "diffused directional light",
+    "gentle backlighting"
+  ],
+  "prompt_framing": [
+    "an eye level view",
+    "a wide view of the scene",
+    "a view with clear foreground detail",
+    "a carefully framed documentary composition"
+  ],
+  "evaluation": {
+    "no_training_or_gate_fitting": true,
+    "conditions": [
+      "png8_control",
+      "jpeg_q90_444",
+      "jpeg_q90_420"
+    ],
+    "JPEG_quality": 90,
+    "JPEG_subsampling": [
+      0,
+      2
+    ],
+    "primary": "paired exact accepted user recovery delta V3-minus-V1 on k11 JPEG420",
+    "secondary": "same k16 endpoint; every PNG/444 bit and acceptance decision must be unchanged; record positive wrong-user and both negative-source accept rates",
+    "confidence": "95 percent paired percentile bootstrap; resample 64 scene clusters, preserving 16 prompt/seed variants per scene; 10000 bootstrap draws, seed 410930000; report exact two-sided McNemar binomial p values on discordant positive outcomes as secondary descriptive tests",
+    "bootstrap_seed": 410930000,
+    "bootstrap_draws": 10000,
+    "no_early_stopping_or_resampling_after_outcomes": true,
+    "independence_scope": "New prompts/noise/latents/generated images and new natural image IDs/hash values relative to saved project history. k11 historical evaluation user IDs may be reused due to finite capacity. No upstream pretraining disjointness claim."
+  }
+}

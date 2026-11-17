@@ -1,0 +1,19 @@
+{
+  "format": 1,
+  "version": "3.0.0",
+  "default_system": "v3_format_aware_v1_v2",
+  "files": [
+    {
+      "path": "models/v1_negative_aware_2400.pth",
+      "bytes": 96721397,
+      "sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+      "url": "https://github.com/Montos-Qu/ecc-protected-wouaf/releases/download/v3.0.0/v1_negative_aware_2400.pth"
+    },
+    {
+      "path": "models/v2_jpeg420_expert_extra800.pth",
+      "bytes": 96721397,
+      "sha256": "7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d",
+      "url": "https://github.com/Montos-Qu/ecc-protected-wouaf/releases/download/v3.0.0/v2_jpeg420_expert_extra800.pth"
+    }
+  ]
+}

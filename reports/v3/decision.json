@@ -1,0 +1,10 @@
+{
+  "complete": true,
+  "joint_target_met_on_observed_data": true,
+  "architecture": "two fixed pretrained extractors, actual-file-header routing",
+  "new_optimizer_updates_in_router_phase": 0,
+  "parent_training_phase_updates": 1600,
+  "pure_single_model_phase_passed": false,
+  "independent_test": false,
+  "not_automatically_promoted": true
+}

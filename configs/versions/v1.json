@@ -1,0 +1,29 @@
+{
+  "format": 1,
+  "trained": true,
+  "model_status": "trained_final_component",
+  "weights": "models/v1_negative_aware_2400.pth",
+  "weights_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "primary_k": 11,
+  "policies": {
+    "11": {
+      "bit_loglikelihood_min": -0.32913199046823777,
+      "presence_logit_min": 0.0
+    },
+    "16": {
+      "bit_loglikelihood_min": -0.1908652798183046,
+      "presence_logit_min": 0.0
+    }
+  },
+  "asset_sha256": {
+    "ecc/bch31_11_p/decoder_policy.json": "c56879fa61e5ecedd37915ad297e85d8cd7c527f5cae6ace6d4776aff02280df",
+    "ecc/bch31_11_p/bounded_distance_syndrome_table.npz": "e89aff036495eae3d15fd9d45e4b5809ff3eca542bed3293e1890cedd041badb",
+    "ecc/bch31_11_p/generator_matrix.npz": "48f101ca82ec0028a86486616aad758e215ba0d8eb536268f25a6d954732f8c3",
+    "ecc/bch31_16_p/decoder_policy.json": "f2f38522ae39512d24466257b878d53a22cf0002a2c27761a4bc38ed886726ea",
+    "ecc/bch31_16_p/bounded_distance_syndrome_table.npz": "b0c3328720a81b87e529cf3a5ccfa5740801c1a291d33546ce71332404301718",
+    "ecc/bch31_16_p/generator_matrix.npz": "bce1779c5c1bb687c54846a7badc6e97b9aa06821489b73c560d0e17de6fb919",
+    "environment/locked/locked_environment_profile.json": "b99a85d819e696711515e34beefc7bd658dafb50831b7ed1aa8a316971997c1e"
+  },
+  "version": "v1",
+  "weights_relative_to": "repository_root"
+}

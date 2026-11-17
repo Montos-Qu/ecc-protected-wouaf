@@ -1,0 +1,8 @@
+{
+  "stage": "complete",
+  "updated_unix": 1793248845.4406164,
+  "step": 2400,
+  "best_additional_step": 800,
+  "regression_promising": false,
+  "bundle_sha256": "d9f7788803b79889ed45da02bbaba176901e1c29aff15da5402b52f35cf58636"
+}

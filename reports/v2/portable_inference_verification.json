@@ -1,0 +1,14 @@
+{
+  "complete": true,
+  "fresh_v1_package_extracted": true,
+  "v2_delta_in_separate_experiments_folder": true,
+  "new_config_explicitly_selected": true,
+  "execution_cwd_independent": true,
+  "strict_reference_runtime": true,
+  "sample_id": 2420,
+  "condition": "jpeg_q90_420",
+  "logits_bits_and_decision_match_saved_v2": true,
+  "selected_model_sha256": "7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d",
+  "inference_config_sha256": "f6cc91ef387cb396b28966df501d0fa5c0d7a9b394dbb6a5ec3114c45bc90423",
+  "default_v1_files_unchanged": true
+}

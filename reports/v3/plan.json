@@ -1,0 +1,19 @@
+{
+  "version": "v3_format_aware_v1_v2",
+  "locked_utc": "2026-10-29T05:26:54.422570+00:00",
+  "source_sha256": {
+    "format_router_v3.py": "e9edc9800caa8b3366132891c56527096301ea10ca9042c882bf88d68630af84",
+    "evaluate_format_router_v3.py": "16155d34881a52d89a3b3b92560a035ac1bc60d3646afe7db8ddf47818907003"
+  },
+  "weight_sha256": {
+    "clean_v1": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+    "jpeg420_expert": "7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d"
+  },
+  "rule": "Read actual encoded file header; JPEG and get_sampling==2 uses V2, otherwise V1. No filename/GT/condition override and no extra JPEG encoding in inference.",
+  "new_optimizer_updates": 0,
+  "gates": "same frozen V1 BCH/bit/presence rules for both branches",
+  "evaluation": "Re-encode all 12288 existing regression views, compare every decoded pixel to frozen cache, detect actual headers, rerun selected networks, independently recompute both-code decisions. Reuse old development outputs with fixed per-header branching.",
+  "scope": "JPEG Q90 420/444 and PNG512. JPEG-to-PNG history and RGB-only inputs cannot retain original sampling provenance.",
+  "developmental_protocol": "Proposed after observing V1/V2 and unsuccessful single-model V3. Not preregistered from project start, and no new independent-test claim.",
+  "drive_folder_url": "https://drive.google.com/drive/u/0/folders/1R1QmviHyNiBn40uZuvY5DJUamloMqR17-"
+}

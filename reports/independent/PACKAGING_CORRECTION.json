@@ -1,0 +1,6 @@
+{
+  "original_script_sha256": "d6bf83826ee87ca316330fd020a7e5670fa228dd520e1f58b2711fffa3450c9c",
+  "corrected_script_sha256": "24fe8f763b96ac33090ad8ba44aa14872b1d2b45315080647b921793d1414c41",
+  "reason": "Convert string paths to pathlib.Path in the packaging-only read helper. The original failure and locked code remain preserved.",
+  "scope": "Packaging only; no changes to generated data, raw predictions, statistics, models, gates or evaluation protocol."
+}

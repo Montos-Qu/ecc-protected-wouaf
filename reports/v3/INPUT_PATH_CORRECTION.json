@@ -1,0 +1,4 @@
+{
+  "previous_attempt": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/format_aware_candidate_io_failure",
+  "reason": "V1 calibration artifacts use calibration_k11/k16.npz, while V2 uses calibration_fixed_k11/k16.npz. Corrected the V1 input stem. The first attempt stopped before actual-header neural regression. No model, routing, policy or metric changes."
+}

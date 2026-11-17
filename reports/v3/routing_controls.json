@@ -1,0 +1,38 @@
+[
+  {
+    "case": "JPEG420 bytes with .png extension",
+    "container": "JPEG",
+    "jpeg_sampling": 2,
+    "selected_branch": "jpeg420_expert",
+    "route_source": "actual_file_header",
+    "filename_used_for_routing": false,
+    "additional_JPEG_reencoding": false
+  },
+  {
+    "case": "JPEG420 pixels rewrapped as PNG",
+    "container": "PNG",
+    "jpeg_sampling": null,
+    "selected_branch": "clean_v1",
+    "route_source": "actual_file_header",
+    "filename_used_for_routing": false,
+    "additional_JPEG_reencoding": false
+  },
+  {
+    "case": "JPEG422 conservative fallback",
+    "container": "JPEG",
+    "jpeg_sampling": 1,
+    "selected_branch": "clean_v1",
+    "route_source": "actual_file_header",
+    "filename_used_for_routing": false,
+    "additional_JPEG_reencoding": false
+  },
+  {
+    "case": "grayscale JPEG fallback",
+    "container": "JPEG",
+    "jpeg_sampling": -1,
+    "selected_branch": "clean_v1",
+    "route_source": "actual_file_header",
+    "filename_used_for_routing": false,
+    "additional_JPEG_reencoding": false
+  }
+]

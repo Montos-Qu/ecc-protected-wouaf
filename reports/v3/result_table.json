@@ -1,0 +1,50 @@
+[
+  {
+    "k": 11,
+    "condition": "png8_control",
+    "v1_correct": 930,
+    "v3_correct": 930,
+    "images": 1024,
+    "gain_percentage_points": 0.0
+  },
+  {
+    "k": 11,
+    "condition": "jpeg_q90_444",
+    "v1_correct": 897,
+    "v3_correct": 897,
+    "images": 1024,
+    "gain_percentage_points": 0.0
+  },
+  {
+    "k": 11,
+    "condition": "jpeg_q90_420",
+    "v1_correct": 755,
+    "v3_correct": 787,
+    "images": 1024,
+    "gain_percentage_points": 3.125
+  },
+  {
+    "k": 16,
+    "condition": "png8_control",
+    "v1_correct": 729,
+    "v3_correct": 729,
+    "images": 1024,
+    "gain_percentage_points": 0.0
+  },
+  {
+    "k": 16,
+    "condition": "jpeg_q90_444",
+    "v1_correct": 597,
+    "v3_correct": 597,
+    "images": 1024,
+    "gain_percentage_points": 0.0
+  },
+  {
+    "k": 16,
+    "condition": "jpeg_q90_420",
+    "v1_correct": 333,
+    "v3_correct": 393,
+    "images": 1024,
+    "gain_percentage_points": 5.859375
+  }
+]

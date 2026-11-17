@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "source_images": 4096,
+  "encoded_views": 12288,
+  "model_forward_views": 24576,
+  "saved_decisions_recomputed": 36864,
+  "PNG_444_logits_probabilities_bits_and_decisions_exactly_identical": true,
+  "actual_header_routing_checked_for_all_views": true,
+  "route_counts": {
+    "clean_v1": 8192,
+    "jpeg420_expert": 4096
+  },
+  "four_native_file_cli_runs_match_saved_outputs": true,
+  "misleading_extension_does_not_affect_routing": true,
+  "fresh_v1_package_hashes_unchanged": true,
+  "all_frozen_V3_files_unchanged": true,
+  "no_new_optimizer_updates": true,
+  "no_gate_adjustment": true,
+  "all_samples_retained": true,
+  "wall_seconds": 388.6411064399981
+}

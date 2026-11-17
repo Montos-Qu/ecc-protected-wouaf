@@ -1,0 +1,10 @@
+{
+  "version": "v2_codeword_jpeg420",
+  "complete": true,
+  "selected_additional_step": 800,
+  "extra_steps_completed": 2400,
+  "regression_promising": false,
+  "not_automatically_promoted": true,
+  "requires_fresh_independent_cohort_before_generalization_claim": true,
+  "parent_release_unchanged": true
+}

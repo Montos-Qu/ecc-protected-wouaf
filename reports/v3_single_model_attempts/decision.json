@@ -1,0 +1,10 @@
+{
+  "version": "v3_multiview_guard",
+  "complete": true,
+  "selected_additional_step": 0,
+  "extra_steps_completed": 1600,
+  "regression_promising": false,
+  "not_automatically_promoted": true,
+  "requires_fresh_independent_cohort_before_generalization_claim": true,
+  "parent_release_unchanged": true
+}

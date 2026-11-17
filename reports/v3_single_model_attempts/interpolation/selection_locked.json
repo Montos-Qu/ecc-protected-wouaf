@@ -1,0 +1,8 @@
+{
+  "complete": true,
+  "source_extra_step": 800,
+  "body_fraction": 0.5,
+  "head_fraction": 0.5,
+  "selected_weight_sha256": "e33d148ae8063022624c03f6d642495609093b2c24b0937b54c4ce0c95a33d11",
+  "no_calibration_or_regression_used_for_selection": true
+}

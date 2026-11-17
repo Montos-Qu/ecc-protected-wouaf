@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "regression_promising": false,
+  "source_extra_step": 800,
+  "blend": [
+    0.5,
+    0.5
+  ],
+  "new_optimizer_steps": 0,
+  "not_automatically_promoted": true,
+  "independent_test": false
+}

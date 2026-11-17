@@ -1,0 +1,18 @@
+{
+  "complete": true,
+  "new_content_prompts": 1024,
+  "new_noise_seeds": 1024,
+  "new_latent_tensors": 1024,
+  "original_latent_tensors_compared": 5000,
+  "old_latent_overlap": 0,
+  "new_source_images": 4096,
+  "old_recorded_image_hash_overlap": 0,
+  "natural_photo_ids_disjoint_from_saved_history": true,
+  "natural_original_hashes_disjoint_from_saved_history": true,
+  "baseline_reference_pixels_exact": 12,
+  "weights_routing_and_gates_locked_before_new_generation": true,
+  "not_used_for_fitting_selection_or_calibration": true,
+  "upstream_foundation_model_training_overlap_unknown": true,
+  "k11_history_user_ID_reuse_disclosed": true,
+  "wall_seconds": 6583.741404155
+}

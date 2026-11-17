@@ -1,0 +1,92 @@
+{
+  "complete": true,
+  "version": "V3",
+  "root": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z",
+  "selected_phase_root": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/extension_training/v3_multiview_guard_20261029T045925Z/refinement_interpolation",
+  "model_version": "v3_multiview_guard_refined",
+  "trained_extra_steps": 1600,
+  "selected_source_extra_step": 800,
+  "blend": [
+    0.5,
+    0.5
+  ],
+  "selected_model_sha256": "e33d148ae8063022624c03f6d642495609093b2c24b0937b54c4ce0c95a33d11",
+  "joint_target_met_on_observed_data": false,
+  "independent_test": false,
+  "release_status": "experimental_joint_target_not_met",
+  "parent_versions_unchanged": true,
+  "software_unchanged": true,
+  "independent_audit_passed": true,
+  "portable_inference_verified": true,
+  "v1_remains_default": true,
+  "promoted_to_main_release": false,
+  "archive": "V3_DELIVERY.zip",
+  "archive_bytes": 97588732,
+  "archive_sha256": "ce705ed223a4eb94bd1f6ba5e0bb87d46ecede56988411cac9daec2c925fe96a",
+  "drive_folder_url": "https://drive.google.com/drive/u/0/folders/1R1QmviHyNiBn40uZuvY5DJUamloMqR17-",
+  "review": "V3_FINAL_REVIEW_zh.md",
+  "restore_entry": "RESTORE_V3_INFERENCE.ipynb",
+  "failed_criteria": [
+    "校验集 k11 jpeg_q90_444: 229→228",
+    "校验集 k16 png8_control: 164→163",
+    "校验集 k16 jpeg_q90_444: 144→143",
+    "回归 k11 jpeg_q90_444 正确恢复下降",
+    "回归 k16 png8_control 正确恢复下降"
+  ],
+  "table": [
+    {
+      "k": 11,
+      "condition": "png8_control",
+      "v1": 930,
+      "v2": 915,
+      "v3": 931,
+      "n": 1024,
+      "delta": 1
+    },
+    {
+      "k": 11,
+      "condition": "jpeg_q90_444",
+      "v1": 897,
+      "v2": 887,
+      "v3": 895,
+      "n": 1024,
+      "delta": -2
+    },
+    {
+      "k": 11,
+      "condition": "jpeg_q90_420",
+      "v1": 755,
+      "v2": 787,
+      "v3": 756,
+      "n": 1024,
+      "delta": 1
+    },
+    {
+      "k": 16,
+      "condition": "png8_control",
+      "v1": 729,
+      "v2": 711,
+      "v3": 723,
+      "n": 1024,
+      "delta": -6
+    },
+    {
+      "k": 16,
+      "condition": "jpeg_q90_444",
+      "v1": 597,
+      "v2": 589,
+      "v3": 598,
+      "n": 1024,
+      "delta": 1
+    },
+    {
+      "k": 16,
+      "condition": "jpeg_q90_420",
+      "v1": 333,
+      "v2": 393,
+      "v3": 335,
+      "n": 1024,
+      "delta": 2
+    }
+  ]
+}

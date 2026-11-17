@@ -1,0 +1,30 @@
+{
+  "complete": true,
+  "teacher_views": 6684,
+  "teacher_roles": [
+    "fit"
+  ],
+  "parent_reference_views": [
+    {
+      "condition": "png8_control",
+      "views": 4,
+      "max_logit_difference": 0.0
+    },
+    {
+      "condition": "jpeg_q90_444",
+      "views": 4,
+      "max_logit_difference": 0.0
+    },
+    {
+      "condition": "jpeg_q90_420",
+      "views": 4,
+      "max_logit_difference": 0.0
+    }
+  ],
+  "full_codebook_sizes": {
+    "11": 2048,
+    "16": 65536
+  },
+  "codeword_ce_matches_direct_expression": true,
+  "no_optimizer_updates_before_this_check": true
+}

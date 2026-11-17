@@ -1,0 +1,359 @@
+{
+  "complete": true,
+  "selected_weights_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "per_code": {
+    "11": {
+      "threshold": 0.0,
+      "new_joint": {
+        "correct": 658,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 239,
+          "jpeg_q90_444": 229,
+          "jpeg_q90_420": 190
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 239,
+            "bad": 0,
+            "reject": 17
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 229,
+            "bad": 0,
+            "reject": 27
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 190,
+            "bad": 0,
+            "reject": 66
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "reference_candidate300": {
+        "correct": 618,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 236,
+          "jpeg_q90_444": 220,
+          "jpeg_q90_420": 162
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 236,
+            "bad": 0,
+            "reject": 20
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 220,
+            "bad": 0,
+            "reject": 36
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k11",
+            "images": 256,
+            "correct": 162,
+            "bad": 0,
+            "reject": 94
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "retention": {
+        "png8_control": 1.0127118644067796,
+        "jpeg_q90_444": 1.040909090909091,
+        "jpeg_q90_420": 1.1728395061728396
+      },
+      "eligible_for_later_adoption_review": true
+    },
+    "16": {
+      "threshold": 0.0,
+      "new_joint": {
+        "correct": 394,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 164,
+          "jpeg_q90_444": 144,
+          "jpeg_q90_420": 86
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 164,
+            "bad": 0,
+            "reject": 92
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 144,
+            "bad": 0,
+            "reject": 112
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 86,
+            "bad": 0,
+            "reject": 170
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "reference_candidate300": {
+        "correct": 351,
+        "bad": 0,
+        "correct_by_condition": {
+          "png8_control": 169,
+          "jpeg_q90_444": 125,
+          "jpeg_q90_420": 57
+        },
+        "cells": [
+          {
+            "condition": "png8_control",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 169,
+            "bad": 0,
+            "reject": 87
+          },
+          {
+            "condition": "png8_control",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "png8_control",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 125,
+            "bad": 0,
+            "reject": 131
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_444",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "positive_k16",
+            "images": 256,
+            "correct": 57,
+            "bad": 0,
+            "reject": 199
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "generated_negative",
+            "images": 381,
+            "correct": 0,
+            "bad": 0,
+            "reject": 381
+          },
+          {
+            "condition": "jpeg_q90_420",
+            "group": "natural_negative",
+            "images": 221,
+            "correct": 0,
+            "bad": 0,
+            "reject": 221
+          }
+        ]
+      },
+      "retention": {
+        "png8_control": 0.9704142011834319,
+        "jpeg_q90_444": 1.152,
+        "jpeg_q90_420": 1.5087719298245614
+      },
+      "eligible_for_later_adoption_review": true
+    }
+  },
+  "rule": "existing BCH radius and fixed original per-code candidate bit-likelihood threshold AND trained presence logit >= independently calibrated threshold",
+  "no_future_test_generated_or_observed": true,
+  "no_active_policy_replacement": true
+}

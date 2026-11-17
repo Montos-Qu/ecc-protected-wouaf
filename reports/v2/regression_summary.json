@@ -1,0 +1,352 @@
+[
+  {
+    "k": 11,
+    "parent_v1": {
+      "correct": 2582,
+      "bad": 0,
+      "correct_by_condition": {
+        "png8_control": 930,
+        "jpeg_q90_444": 897,
+        "jpeg_q90_420": 755
+      },
+      "cells": [
+        {
+          "condition": "png8_control",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 930,
+          "bad": 0,
+          "reject": 94
+        },
+        {
+          "condition": "png8_control",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "png8_control",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 897,
+          "bad": 0,
+          "reject": 127
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 755,
+          "bad": 0,
+          "reject": 269
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        }
+      ]
+    },
+    "extension_v2": {
+      "correct": 2589,
+      "bad": 0,
+      "correct_by_condition": {
+        "png8_control": 915,
+        "jpeg_q90_444": 887,
+        "jpeg_q90_420": 787
+      },
+      "cells": [
+        {
+          "condition": "png8_control",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 915,
+          "bad": 0,
+          "reject": 109
+        },
+        {
+          "condition": "png8_control",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "png8_control",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 887,
+          "bad": 0,
+          "reject": 137
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "positive_k11",
+          "images": 1024,
+          "correct": 787,
+          "bad": 0,
+          "reject": 237
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        }
+      ]
+    },
+    "retention": {
+      "png8_control": 0.9838709677419355,
+      "jpeg_q90_444": 0.9888517279821628,
+      "jpeg_q90_420": 1.042384105960265
+    },
+    "independent_test": false
+  },
+  {
+    "k": 16,
+    "parent_v1": {
+      "correct": 1659,
+      "bad": 1,
+      "correct_by_condition": {
+        "png8_control": 729,
+        "jpeg_q90_444": 597,
+        "jpeg_q90_420": 333
+      },
+      "cells": [
+        {
+          "condition": "png8_control",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 729,
+          "bad": 0,
+          "reject": 295
+        },
+        {
+          "condition": "png8_control",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "png8_control",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 597,
+          "bad": 0,
+          "reject": 427
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 333,
+          "bad": 1,
+          "reject": 690
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        }
+      ]
+    },
+    "extension_v2": {
+      "correct": 1693,
+      "bad": 1,
+      "correct_by_condition": {
+        "png8_control": 711,
+        "jpeg_q90_444": 589,
+        "jpeg_q90_420": 393
+      },
+      "cells": [
+        {
+          "condition": "png8_control",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 711,
+          "bad": 0,
+          "reject": 313
+        },
+        {
+          "condition": "png8_control",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "png8_control",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 589,
+          "bad": 0,
+          "reject": 435
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_444",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "positive_k16",
+          "images": 1024,
+          "correct": 393,
+          "bad": 1,
+          "reject": 630
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "generated_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        },
+        {
+          "condition": "jpeg_q90_420",
+          "group": "natural_negative",
+          "images": 1024,
+          "correct": 0,
+          "bad": 0,
+          "reject": 1024
+        }
+      ]
+    },
+    "retention": {
+      "png8_control": 0.9753086419753086,
+      "jpeg_q90_444": 0.9865996649916248,
+      "jpeg_q90_420": 1.1801801801801801
+    },
+    "independent_test": false
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "complete": true,
+  "fresh_v1_release_hash_verified": true,
+  "four_real_cli_runs_passed": true,
+  "filename_does_not_control_route": true,
+  "outputs_match_full_regression": true,
+  "strict_runtime": true,
+  "all_original_v1_files_unchanged": true
+}

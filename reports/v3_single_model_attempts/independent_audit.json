@@ -1,0 +1,21 @@
+{
+  "complete": true,
+  "all_1600_fit_batches_audited": true,
+  "all_losses_finite": true,
+  "paired_content_sampling_verified": true,
+  "frozen_parameters_and_BN_state_entries": 294,
+  "selected_and_terminal_frozen_entries_unchanged": true,
+  "training_update_count": 1600,
+  "optimizer": "stateless_SGD",
+  "recorded_two_clean_gradient_constraints_verified": true,
+  "optimizer_final_learning_rates_verified": true,
+  "independently_recomputed_decisions": 36864,
+  "result_table_cells_verified": 36,
+  "gt_bits_probabilities_and_hamming_verified": true,
+  "full_bundle_sha256_entries_verified": true,
+  "parent_release_and_all_frozen_inputs_unchanged": true,
+  "independent_test": false,
+  "selected_model_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "parent_model_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "bundle_sha256": "dd5df4ed934f986fcc9422a177785d88ac3c97cc197e5a64fd513c7ef6f2fccf"
+}

@@ -1,0 +1,11 @@
+{
+  "complete": true,
+  "decisions_recomputed": 18432,
+  "source_images": 4096,
+  "image_views": 12288,
+  "real_views_replayed": 48,
+  "maximum_replay_logit_difference": 0.0,
+  "fixed_gates_unchanged": true,
+  "no_independent_test_claim": true,
+  "regression_promising": false
+}

@@ -1,0 +1,12 @@
+{
+  "complete": true,
+  "source_images": 4096,
+  "views": 12288,
+  "model_image_inferences": 36864,
+  "models": 3,
+  "original_syndrome_decisions_agree": true,
+  "policy_locked_before_any_test_outputs": true,
+  "policy_hash_unchanged": "fba0b5f7a9a4493466ec9365a8816eb1723cd78d27e283d7f1eb6e4748d93078",
+  "no_test_based_retuning": true,
+  "wall_seconds": 262.8920471950005
+}

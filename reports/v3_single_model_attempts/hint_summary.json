@@ -1,0 +1,5 @@
+{
+  "fit_positive_hints": 677,
+  "only_correctly_decoded_V2_with_lower_GT_BCE": true,
+  "no_selection_calibration_or_test_hints": true
+}

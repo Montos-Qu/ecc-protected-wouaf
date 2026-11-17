@@ -1,0 +1,16 @@
+{
+  "complete": true,
+  "fresh_v1_package_extracted": true,
+  "v1_zip_hash_verified": true,
+  "all_bundle_hashes_verified": true,
+  "v3_delta_in_separate_experiments_folder": true,
+  "new_config_explicitly_selected": true,
+  "execution_cwd_independent": true,
+  "strict_reference_runtime": true,
+  "sample_id": 2420,
+  "condition": "jpeg_q90_420",
+  "logits_bits_and_decision_match_saved_v3": true,
+  "default_v1_files_unchanged": true,
+  "selected_model_sha256": "e33d148ae8063022624c03f6d642495609093b2c24b0937b54c4ce0c95a33d11",
+  "inference_config_sha256": "f716791ad96aebe7409b2b2f4b6f96f572301bee13196ef8905bcb095919d1d0"
+}

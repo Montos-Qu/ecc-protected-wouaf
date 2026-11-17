@@ -1,0 +1,14 @@
+[
+  {
+    "k": 11,
+    "new_correct_only": 57,
+    "parent_correct_only": 50,
+    "net_correct": 7
+  },
+  {
+    "k": 16,
+    "new_correct_only": 103,
+    "parent_correct_only": 69,
+    "net_correct": 34
+  }
+]

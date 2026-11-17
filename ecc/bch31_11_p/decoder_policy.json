@@ -1,0 +1,34 @@
+{
+  "scheme": "BCH(31,11)+P",
+  "k": 11,
+  "t": 5,
+  "capacity": 2048,
+  "samples": 5000,
+  "unique_users": 2048,
+  "images_per_sampled_user_range": [
+    2,
+    3
+  ],
+  "generator_polynomial": "x^20 + x^18 + x^17 + x^13 + x^10 + x^9 + x^7 + x^6 + x^4 + x^2 + 1",
+  "generator_polynomial_integer": 1451733,
+  "galois": "0.4.11",
+  "numpy": "1.23.5",
+  "python": "3.10.21",
+  "primary_acceptance": "BCH bounded-distance syndrome candidate; accept only full32 Hamming distance <=t. No ground truth used until acceptance frozen.",
+  "valid_registry": "All 2048 IDs, not only sampled IDs",
+  "secondary": [
+    "Strict reconstructed-parity equality after bounded-distance BCH",
+    "Identical predictions, parity ignored"
+  ],
+  "extended_minimum_distance_lower_bound": 12,
+  "independent_decoder_validation": "Exhaustive unique syndrome table for EVERY first31 error pattern of weight<=t, checked against galois on all real predictions; five fixed codec fixtures. Not synthetic BER simulation.",
+  "syndrome_table_size": 206368,
+  "user_id_bit_order": "MSB first",
+  "parity_coordinate_0based": 31,
+  "latent_range": [
+    0,
+    4999
+  ],
+  "study_plan_sha256": "d06aa7772f94f19df10ac913dd3636c77ce9222d291061704d6b865a0a4d9caf",
+  "sampling": "All2048 IDs twice plus904 randomly selected IDs a third time; shuffle5000 assignments, seed20261014. Different latent for every image."
+}

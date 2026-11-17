@@ -1,0 +1,61 @@
+{
+  "fit_folds": [
+    0,
+    1
+  ],
+  "selection_fold": 2,
+  "calibration_fold": 3,
+  "steps": 2400,
+  "checkpoints": [
+    400,
+    800,
+    1200,
+    1600,
+    2000,
+    2400
+  ],
+  "batch": {
+    "positive_k11": 4,
+    "positive_k16": 4,
+    "matched_generated_negative": 8,
+    "extra_generated_negative": 4,
+    "natural_negative": 4
+  },
+  "real_JPEG_conditions": [
+    "PNG8",
+    "Q90_444",
+    "Q90_420"
+  ],
+  "sampling_weights": [
+    0.25,
+    0.25,
+    0.5
+  ],
+  "loss_weights": {
+    "positive_bit_BCE": 2,
+    "presence_BCE": 1,
+    "negative_bit_uncertainty_BCE": 0.05,
+    "positive_teacher_MSE": 0.05,
+    "paired_presence_margin1": 0.2
+  },
+  "optimizer": "AdamW",
+  "weight_decay": 0.0001,
+  "learning_rates": {
+    "layer3": 2e-06,
+    "layer4": 5e-06,
+    "bit_head": 1e-05,
+    "presence_head": 0.0001
+  },
+  "lr_schedule": "100-step warmup then cosine to 10%",
+  "checkpoint_selection": "Selection-fold thresholds above all bad bit-gate candidates, minimum0. Rank primary retention>=95%, min primary condition retention, primary correct sum, min secondary retention, secondary correct sum. Earliest tie. No calibration or future-test use.",
+  "calibration_rule": "Per code presence threshold=max(0,nextafter(max presence score among calibration bad bit-gate accepts,+inf)), or0 if no bad; keep original BCH radius and bit likelihood gate. No recalibration after future evaluation.",
+  "candidate_criteria": "Primary calibration and future evaluation each retain >=95% initial candidate300 correct in all conditions; future bad=0 and strictly fewer than initial candidate300. Research candidate only, no automatic working-policy replacement.",
+  "test_per_group": 1024,
+  "test_latent_ids": [
+    2420,
+    3443
+  ],
+  "evaluation_disclosure": "New rendered positive fingerprints and fresh natural photos; latent content was evaluated historically by original baseline5000, not untouched external data. Old batches remain inspected development data.",
+  "no_generator_or_mapping_update": true,
+  "no_new_synthetic_ECC_simulation": true
+}

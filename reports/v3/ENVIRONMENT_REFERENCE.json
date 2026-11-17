@@ -1,0 +1,11 @@
+{
+  "strict_launcher": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/strict_environment_restore_20261028T055354Z/run_wouaf_locked.py",
+  "profile_sha256": "b99a85d819e696711515e34beefc7bd658dafb50831b7ed1aa8a316971997c1e",
+  "reference_gpu": "A100-SXM4-80GB",
+  "reference_driver": "580.82.07",
+  "python": "3.10.21",
+  "torch": "1.12.1+cu116",
+  "numpy": "1.23.5",
+  "software_installed_or_upgraded_in_v3": false,
+  "frozen_assets_from": "<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/releases/github_pretrained_20261029T032626Z/offline_assets"
+}

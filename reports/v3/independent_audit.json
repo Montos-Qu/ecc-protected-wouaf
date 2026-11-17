@@ -1,0 +1,19 @@
+{
+  "complete": true,
+  "actual_encoded_images_header_checked": 12288,
+  "all_decoded_pixels_equal_frozen_cache": true,
+  "actual_selected_network_forward_views": 12288,
+  "independently_recomputed_development_and_regression_decisions": 28728,
+  "clean_bits_and_accept_decisions_identical_to_v1": true,
+  "routed_outputs_match_frozen_v1_v2_references": true,
+  "maximum_logit_difference": 0.0,
+  "branch_view_counts": {
+    "clean_v1": 8192,
+    "jpeg420_expert": 4096
+  },
+  "four_format_metadata_controls_passed": true,
+  "old_versions_and_frozen_inputs_unchanged": true,
+  "software_unchanged": true,
+  "new_optimizer_updates": 0,
+  "independent_test": false
+}

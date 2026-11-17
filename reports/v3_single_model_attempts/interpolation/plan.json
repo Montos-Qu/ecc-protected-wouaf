@@ -1,0 +1,35 @@
+{
+  "script_sha256": "13bf0a8657f6da190807fbcadd0da0d295147950657e15d15d1a30968bae3ffa",
+  "grid": [
+    [
+      0.125,
+      0.125
+    ],
+    [
+      0.25,
+      0.25
+    ],
+    [
+      0.5,
+      0.5
+    ],
+    [
+      0.75,
+      0.75
+    ],
+    [
+      0.5,
+      0.0
+    ],
+    [
+      0.0,
+      0.5
+    ]
+  ],
+  "specified_before_any_blended_candidate_inference": true,
+  "motivated_by_observed_training_selection_PNG_minus_one": true,
+  "not_part_of_original_training_protocol": true,
+  "selection_only_choice": true,
+  "no_gate_fitting": true,
+  "skip_if_original_V3_passes_all_criteria": true
+}

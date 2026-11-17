@@ -1,0 +1,7 @@
+{
+  "upstream": "https://github.com/kylemin/WOUAF",
+  "recorded_snapshot_commit": "3bafeb0eaae05ff47d4d477bcbb2b06a7f75ab45",
+  "license_source": "https://raw.githubusercontent.com/kylemin/WOUAF/3bafeb0eaae05ff47d4d477bcbb2b06a7f75ab45/LICENSE",
+  "license_sha256": "e02cce45989c9496fc8e9110a94b42dcb2ae31d3e74cc072255981efd4219517",
+  "does_not_relicense_all_weights_or_images": true
+}

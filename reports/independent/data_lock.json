@@ -1,0 +1,9 @@
+{
+  "new_prompt_manifest.json": "6a701490da5ba2ca9a492573bd2ecfe04f28cea8467da53f6af191e2348034d0",
+  "new_latent_manifest.json": "a9ef3c0405ac209c74352229be546ce2ea41fecfb1426205f254df7f00e65ce1",
+  "source_image_manifest.json": "a42f310c00553761b9b938fc003e3679df49cfd8bfe69672a2f51904bb35c42d",
+  "new_photo_selection.json": "268f042055140777eba1a2ffc271a1578f9a31e291400cb3f5c35850e829e730",
+  "inputs_k11.npz": "93934f5a856193286ebac852aebd2152dc963dbb3555c3ce697bdf50759ba60b",
+  "inputs_k16.npz": "bf5c231acfacd458eb4ccf80963a91d3365ac5962ec7ec2929bc9a055bde09bb",
+  "new_latents.npy": "b1d4c726cd2b490886e06b66bea6bc977f95d9b833bc3188ce7925cbae3b707c"
+}

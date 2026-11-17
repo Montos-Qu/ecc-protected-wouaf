@@ -1,0 +1,17 @@
+{
+  "complete": true,
+  "additional_steps_completed": 1600,
+  "selected_additional_step": 0,
+  "selected_weight_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "parent_weight_sha256": "39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb",
+  "rank": [
+    true,
+    185,
+    640,
+    79,
+    412
+  ],
+  "test_and_calibration_not_used_for_selection": true,
+  "frozen_parameter_count": 135,
+  "batchnorm_buffers_unchanged": true
+}

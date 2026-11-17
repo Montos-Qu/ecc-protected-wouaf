@@ -1,0 +1,13 @@
+{
+  "complete": true,
+  "version": "v2_codeword_jpeg420_20261029T042333Z",
+  "trained_extra_steps": 2400,
+  "selected_extra_step": 800,
+  "release_status": "experimental_not_promoted",
+  "parent_release_unchanged": true,
+  "independent_audit_passed": true,
+  "portable_inference_passed": true,
+  "drive_folder_url": "https://drive.google.com/drive/u/0/folders/1QsP-AbbpQsxVLBd_MJkGM2sRwR-deILH",
+  "gate_failure_explanation": "k11 jpeg_q90_444: 229 → 223, 保留率97.38%，低于98%要求",
+  "new_independent_cohort_tested": false
+}
