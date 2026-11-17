@@ -1,3 +1,15 @@
+# 环境自动配置与严格复现
+
+成品安装入口：
+
+```bash
+python wouaf.py setup
+```
+
+不需要对照清单逐个安装依赖。安装器自动下载已经公开的冻结环境3个分片，校验大小与SHA256、拼接并恢复完整软件栈，然后检查运行时及预训练模型。下载与解压使用Linux宿主Python3.12+，实际推理使用归档中的Python3.10.21。完整环境[公开下载目录](https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt)及所有文件hash见 [public_assets.json](../public_assets.json)。
+
+Windows/macOS可用 `python wouaf.py setup --download-only` 下载、检查文件；归档是Linux二进制环境，其可执行平台和参考GPU/驱动要求不能由下载命令消除。完整步骤和其他平台边界见[公开复现指南](PUBLIC_REPRODUCTION.md)。
+
 # 环境配置与严格复现的边界
 
 ## 已冻结并保留

@@ -1,0 +1,33 @@
+{
+  "distribution_version": "3.0.1",
+  "trained_system": "V3",
+  "default_version": "v3",
+  "available_versions": [
+    "v1",
+    "v2",
+    "v3"
+  ],
+  "automatic_setup_entry": "python wouaf.py setup",
+  "audit_counts": {
+    "python_files": 54,
+    "notebooks": 2,
+    "readmes": 9,
+    "archived_reference_python_comments": 19
+  },
+  "maintained_code_comments_and_docstrings_English_no_emoji": true,
+  "maintained_code_has_no_emoji": true,
+  "bilingual_readmes_complete_English_then_Chinese": true,
+  "language_fragment_links_present": true,
+  "default_and_explicit_version_dispatch_passed": true,
+  "input_output_paths_with_spaces_passed": true,
+  "download_only_has_no_training_or_runtime_execution": true,
+  "weights_inference_and_decoding_assets_byte_unchanged": true,
+  "public_Drive_groups": 7,
+  "public_Drive_files": 9,
+  "anonymous_file_byte_access_passed": true,
+  "public_environment_and_image_bytes": 4829967179,
+  "frozen_reference_archives_preserved": true,
+  "new_training_steps": 0,
+  "reference_GPU_setup_rerun_this_session": false,
+  "colab_started": false
+}

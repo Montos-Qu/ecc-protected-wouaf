@@ -1,0 +1,171 @@
+{
+  "format": 1,
+  "version": "3.0.0",
+  "purpose": "Public minimal assets for pretrained V3 inference and full independent-content evaluation",
+  "presets": {
+    "demo": [
+      "frozen_environment"
+    ],
+    "images": [
+      "independent_encoded_jpeg_q90_420",
+      "independent_encoded_jpeg_q90_444",
+      "independent_source_pngs_generated_negative",
+      "independent_source_pngs_natural_negative",
+      "independent_source_pngs_positive_k11",
+      "independent_source_pngs_positive_k16"
+    ],
+    "independent": [
+      "frozen_environment",
+      "independent_encoded_jpeg_q90_420",
+      "independent_encoded_jpeg_q90_444",
+      "independent_source_pngs_generated_negative",
+      "independent_source_pngs_natural_negative",
+      "independent_source_pngs_positive_k11",
+      "independent_source_pngs_positive_k16"
+    ]
+  },
+  "assets": {
+    "frozen_environment": {
+      "bytes": 2319751708,
+      "sha256": "6af89f6f753b8fde104d4e076b58a6b60aea907d3b83c4ba458ed69c3daef4f2",
+      "parts": [
+        {
+          "path": "frozen_environment/frozen_environment.part000",
+          "bytes": 1073741824,
+          "sha256": "3ff86ba424249644f44b2cbd1e26a3b35bc51f4cb03aaf46ee3407e93e6a368c",
+          "file_id": "1sMErk4a_C8ZK6w3i5EauY1Lz0Rqjo2iD",
+          "view_url": "https://drive.google.com/file/d/1sMErk4a_C8ZK6w3i5EauY1Lz0Rqjo2iD/view"
+        },
+        {
+          "path": "frozen_environment/frozen_environment.part001",
+          "bytes": 1073741824,
+          "sha256": "aec5f627b697ce4c9a9bec4f5276bde5b74fe5b74c69cb7695738702d4a3d232",
+          "file_id": "1NfI0n6RExdjsnao_1X8DBYdf6Z9Zi9b_",
+          "view_url": "https://drive.google.com/file/d/1NfI0n6RExdjsnao_1X8DBYdf6Z9Zi9b_/view"
+        },
+        {
+          "path": "frozen_environment/frozen_environment.part002",
+          "bytes": 172268060,
+          "sha256": "2504c964cd9a68c3df896180d460233593f859f764ba0094c824e35ff7a208b9",
+          "file_id": "1HNy9xBzNpYTaYWj4w3qsYnD9sdXNZTKo",
+          "view_url": "https://drive.google.com/file/d/1HNy9xBzNpYTaYWj4w3qsYnD9sdXNZTKo/view"
+        }
+      ],
+      "destination": "environment/locked/wouaf_python310_torch112_frozen_env.tar.gz",
+      "kind": "file",
+      "original_filename": "wouaf_python310_torch112_frozen_env.tar.gz",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_encoded_jpeg_q90_420": {
+      "bytes": 315041629,
+      "sha256": "e85aa98b9322efcd5a039b602196c13a4615a16b5c7e26089c8add34fb84b01f",
+      "parts": [
+        {
+          "path": "independent_encoded_jpeg_q90_420/encoded_jpeg_q90_420.zip",
+          "bytes": 315041629,
+          "sha256": "e85aa98b9322efcd5a039b602196c13a4615a16b5c7e26089c8add34fb84b01f",
+          "file_id": "1sNMYit3B050-lx2GZL_vHpKKYFZst09G",
+          "view_url": "https://drive.google.com/file/d/1sNMYit3B050-lx2GZL_vHpKKYFZst09G/view"
+        }
+      ],
+      "destination": "data/independent/encoded/jpeg_q90_420",
+      "kind": "zip",
+      "original_filename": "encoded_jpeg_q90_420.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_encoded_jpeg_q90_444": {
+      "bytes": 396389848,
+      "sha256": "9bb9f9b535c5f6ed3e29e631739176c49646eeb52fc38a56ed525e9267fb1dac",
+      "parts": [
+        {
+          "path": "independent_encoded_jpeg_q90_444/encoded_jpeg_q90_444.zip",
+          "bytes": 396389848,
+          "sha256": "9bb9f9b535c5f6ed3e29e631739176c49646eeb52fc38a56ed525e9267fb1dac",
+          "file_id": "1ZlUaxakbTBsyVOtmKpP-c5nEqZTIjqSe",
+          "view_url": "https://drive.google.com/file/d/1ZlUaxakbTBsyVOtmKpP-c5nEqZTIjqSe/view"
+        }
+      ],
+      "destination": "data/independent/encoded/jpeg_q90_444",
+      "kind": "zip",
+      "original_filename": "encoded_jpeg_q90_444.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_source_pngs_generated_negative": {
+      "bytes": 472933398,
+      "sha256": "c8c82b0f41532089f909aacaa6e39eea376eebe435d87158317c45e822ae6fb4",
+      "parts": [
+        {
+          "path": "independent_source_pngs_generated_negative/source_pngs_generated_negative.zip",
+          "bytes": 472933398,
+          "sha256": "c8c82b0f41532089f909aacaa6e39eea376eebe435d87158317c45e822ae6fb4",
+          "file_id": "14hQBofKtDUBQWSbzNwudQMlyHdNA-1qt",
+          "view_url": "https://drive.google.com/file/d/14hQBofKtDUBQWSbzNwudQMlyHdNA-1qt/view"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_generated_negative.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1MAbvrbca6pEMSOhdRQ7itg_piP0zVbh1",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_source_pngs_natural_negative": {
+      "bytes": 409355808,
+      "sha256": "bf62e115490a2b64b213b62a895660c8e253962a7a4b02f1a25abf7b8c0d3cb2",
+      "parts": [
+        {
+          "path": "independent_source_pngs_natural_negative/source_pngs_natural_negative.zip",
+          "bytes": 409355808,
+          "sha256": "bf62e115490a2b64b213b62a895660c8e253962a7a4b02f1a25abf7b8c0d3cb2",
+          "file_id": "1ybyhh1xrULcDJ6pnMyvNweFm8jRHHii9",
+          "view_url": "https://drive.google.com/file/d/1ybyhh1xrULcDJ6pnMyvNweFm8jRHHii9/view"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_natural_negative.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1--F3b4k6_mGp-yFE1qAqjc0OjxR54QeL",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_source_pngs_positive_k11": {
+      "bytes": 458231358,
+      "sha256": "5b19e774d6752202184386e7792ce0a19865ebe33b7f209be90a9958da63a7cd",
+      "parts": [
+        {
+          "path": "independent_source_pngs_positive_k11/source_pngs_positive_k11.zip",
+          "bytes": 458231358,
+          "sha256": "5b19e774d6752202184386e7792ce0a19865ebe33b7f209be90a9958da63a7cd",
+          "file_id": "1z5PhK0Nzh3c9Blnshn_C7CZC9PsYJ1cw",
+          "view_url": "https://drive.google.com/file/d/1z5PhK0Nzh3c9Blnshn_C7CZC9PsYJ1cw/view"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_positive_k11.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA",
+      "permission": "anyone_with_link_reader"
+    },
+    "independent_source_pngs_positive_k16": {
+      "bytes": 458263430,
+      "sha256": "31a1356342449bf1cae4815ec73a7d35dd32630adcedc4fedba45eea3e087e3e",
+      "parts": [
+        {
+          "path": "independent_source_pngs_positive_k16/source_pngs_positive_k16.zip",
+          "bytes": 458263430,
+          "sha256": "31a1356342449bf1cae4815ec73a7d35dd32630adcedc4fedba45eea3e087e3e",
+          "file_id": "17I4z-4WXCXmxXWOwOZDP8jbFAZQidwMU",
+          "view_url": "https://drive.google.com/file/d/17I4z-4WXCXmxXWOwOZDP8jbFAZQidwMU/view"
+        }
+      ],
+      "destination": "data/independent/source_pngs",
+      "kind": "zip",
+      "original_filename": "source_pngs_positive_k16.zip",
+      "folder_url": "https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO",
+      "permission": "anyone_with_link_reader"
+    }
+  },
+  "training_or_generation_assets_required": false,
+  "total_bytes": 4829967179
+}

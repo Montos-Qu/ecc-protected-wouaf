@@ -1,42 +1,254 @@
-# ECC-Protected WOUAF — pretrained final V3
+# ECC-Protected WOUAF - Pretrained V3 Product
 
-The default entry loads the trained final research system. V3 routes actual JPEG 4:2:0 files to the V2 expert and native PNG/JPEG444 files to V1. It contains two immutable pretrained extractors and performs one network forward per image. It is not a newly trained single network. V1 and V2 remain selectable controls. Training lives separately in `training/` and never runs during inference.
+[English](#english) | [中文](#chinese)
 
-See the detailed [Chinese README](README.md) for the complete workflow, package inventory, frozen environment, training recipes, reproduction commands, results, and limitations.
+<a name="english"></a>
 
-## Quick start
+## English
 
-Clone this repository and run `python scripts/download_pretrained.py`, or download the complete pretrained ZIP from the v3.0.0 GitHub Release. The two real checkpoint files are distributed through Release assets, with their original SHA256 values. No training is required.
+**Download the product, run the setup command, and use the trained final V3. No retraining is required.** The tool reads native 512x512 PNG/JPEG files, extracts WOUAF user fingerprints, and returns an accepted user attribution or `REJECT` when evidence is insufficient.
 
-The frozen environment, generator, and full image/latent archives remain in the [Drive release directory](https://drive.google.com/drive/u/0/folders/1CTqCSbCHS480Hz6xRbp17KvvmTad3_cq) under `offline_assets/`, subject to its existing access permissions. Obtain/download/mount those assets and point `ASSETS` to that directory before strict reproduction. They are separate from both the Git checkout and the main project ZIP.
+Code, configuration and selection for V1, V2 and V3 are included. V3 is the default final product; V1/V2 are optional controls. Training source is separate in `training/` and is never invoked by normal setup or inference.
+
+### 1. Download and use
+
+Download the **complete product ZIP** from the [latest Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest), or clone this repository / use GitHub Code -> Download ZIP. Enter the extracted project directory:
 
 ```bash
-python scripts/download_pretrained.py
-python scripts/materialize_assets.py --asset-root "$ASSETS" --id frozen_environment
-python scripts/restore_environment.py
-python scripts/run_locked.py --check
-python scripts/verify_files.py
-python scripts/run_locked.py scripts/verify_pretrained.py --output outputs/demo_verification.json
-python scripts/run_locked.py infer.py --image demo/images/png8_control/positive_k11/10000000.png --output outputs/prediction.json
+python wouaf.py setup
+python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
 ```
 
-Omit `--version` for V3; use `--version v1` or `--version v2` for controls. Primary BCH(31,11)+overall parity supports 2048 users; `--code 16` selects the 65536-user capacity control. A rejection returns `user_id: null`. Outputs retain actual format/sampling, selected branch, model hash, bits, logits, probabilities, presence score, and rejection reason. The CLI reads existing encoded files without recompression or silent resizing.
+`setup` downloads missing trained checkpoints, support files and frozen-environment parts; checks original SHA256 values; reassembles/restores the interpreter and dependencies; verifies the runtime; and runs a pretrained self-check. **Users do not compare a package inventory and install dependencies individually, train a model, or log into the author's Drive.** The complete product ZIP already includes weights and support files, which setup verifies and reuses.
 
-## Independent-content validation
+The executable archive targets **Linux x86_64 / Colab Linux**. Bootstrap with host Python 3.12+; actual inference automatically uses restored **Python 3.10.21, torch1.12.1+cu116, torchvision0.13.1+cu116**, and all frozen dependencies. These packages are not installed into the host interpreter. Strict reference hardware is **A100-SXM4-80GB / driver580.82.07**; a mismatch reports an error. On Windows/macOS, `python wouaf.py setup --download-only` downloads/verifies files but does not execute the Linux archive. See [runtime boundaries](docs/ENVIRONMENT.md) for other hardware/platforms.
 
-4096 source images, 12288 actual encoded views, 1024 positive images per code and condition. Fresh prompts/seeds/latents and natural-photo IDs/hashes were locked after the models and rules were frozen. The primary endpoint was k11 JPEG420 accepted exact-user recovery.
+The [public product notebook](01_PUBLIC_V3_REPRODUCE.ipynb) runs the same Python setup without mounting the author's Drive. `00_PRETRAINED_V3_DEMO.ipynb` remains the historical author-Drive restore workflow.
 
-| Code | Native PNG V1→V3 | JPEG444 Q90 V1→V3 | JPEG420 Q90 V1→V3 |
+Try a supplied input and run the self-check:
+
+```bash
+python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.png
+python wouaf.py verify
+```
+
+### 2. Choose V1, V2 or V3
+
+| Version | Behavior and trade-off | Role |
+|---|---|---|
+| **V3, default** | Actual JPEG420 -> trained V2 expert; PNG/JPEG444 -> V1; one forward per image | **Final product; recommended default** |
+| V1 | Trained balanced extractor for every format | Optional balanced baseline/control |
+| V2 | Trained JPEG420 expert for every format; better 420 with PNG/444 trade-offs | Optional expert/control |
+
+```bash
+python wouaf.py versions
+python wouaf.py predict --image YOUR_IMAGE.jpg
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+```
+
+The default BCH(31,11)+overall parity supports 2048 users. Add `--code 16` for the 65536-user capacity control. All versions use fixed BCH, parity and rejection policies; inference never trains or calibrates them. Routing uses the **actual encoded file header**, not filenames, GT or test labels.
+
+### 3. Trained weights and training requirements
+
+Weights are learned network parameters stored in `.pth` files. Code defines the architecture; the weights supply the behavior learned during training. **Actual trained weights are provided and downloaded automatically, so consumers do not retrain the model.** Missing/corrupt files fail verification instead of silently using a randomly initialized network.
+
+V3 combines two trained components; it does not require a third separately trained V3 `.pth`:
+
+| File | Used by | Original SHA256 |
+|---|---|---|
+| `models/v1_negative_aware_2400.pth` | V1; V3 PNG/JPEG444 branch | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
+| `models/v2_jpeg420_expert_extra800.pth` | V2; V3 JPEG420 branch | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
+
+### 4. Inputs and outputs
+
+`ACCEPT` means the candidate passed correction and rejection rules; `user_id` is the accepted identity. `REJECT` returns `user_id: null`; an internal candidate must not be treated as a valid attribution. JSON also records version/branch, model hash, 32-bit fingerprint, logits/probabilities and rejection reason.
+
+The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. No silent resizing occurs. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
+
+### 5. Public environment and data
+
+These seven asset groups/nine files are read-only link-public and can be downloaded anonymously. **Demo setup needs only the frozen environment; full independent-image evaluation adds six image groups.** The author's private parent release folder is not needed.
+
+| Public asset group | Download | Compressed size |
+|---|---|---:|
+| Frozen runtime: three parts | [frozen_environment](https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt) | 2.16 GiB |
+| Native JPEG420 views | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
+| Native JPEG444 views | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
+| Generated negative PNGs | [independent_source_pngs_generated_negative](https://drive.google.com/drive/u/0/folders/1MAbvrbca6pEMSOhdRQ7itg_piP0zVbh1) | 0.44 GiB |
+| Natural negative PNGs | [independent_source_pngs_natural_negative](https://drive.google.com/drive/u/0/folders/1--F3b4k6_mGp-yFE1qAqjc0OjxR54QeL) | 0.38 GiB |
+| Positive k11 PNGs | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
+| Positive k16 PNGs | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
+
+Downloads default to `offline_assets/`; select another destination with `--asset-root PATH`. Environment parts total 2,319,751,708 bytes; environment plus the independent images totals 4,829,967,179 bytes. Extraction needs additional space. Exact file URLs, sizes and SHA256 values are in [public_assets.json](public_assets.json).
+
+```bash
+python wouaf.py setup --with-evaluation
+python wouaf.py evaluate --version v3 --out outputs/independent_v3
+python wouaf.py evaluate --version v1 --out outputs/independent_v1
+python wouaf.py evaluate --version v2 --out outputs/independent_v2
+```
+
+To recompute statistics from saved per-image predictions without new network forwards, see the [full public reproduction guide](docs/PUBLIC_REPRODUCTION.md). Original training data, the full generator and historical 5000 latents remain optional research assets; **loading the trained product and rerunning this fixed independent image cohort does not require them**.
+
+### 6. Final-version results
+
+Fresh independent-content validation, 1024 positives per code/condition, V1 -> final V3:
+
+| Code | PNG accepted exact recovery | JPEG444 Q90 | JPEG420 Q90 |
 |---|---:|---:|---:|
-| k11 | 90.14%→90.14% | 87.60%→87.60% | **74.12%→76.86%** |
-| k16 | 67.68%→67.68% | 56.35%→56.35% | **33.40%→37.40%** |
+| k11, default | 90.14% -> 90.14% | 87.60% -> 87.60% | **74.12% -> 76.86%** |
+| k16, capacity control | 67.68% -> 67.68% | 56.35% -> 56.35% | **33.40% -> 37.40%** |
 
-Paired 64-scene-cluster bootstrap, 10000 resamples: JPEG420 gain +2.73 pp [1.37,4.10] for k11; +4.00 pp [2.64,5.47] for k16. PNG/444 saved outputs match per sample. Zero false attributions were observed in this finite study; this is not a zero population-risk guarantee. Historical k11 evaluation identities may repeat; independence concerns fresh content and recorded project data, not upstream foundation-model pretraining.
+The JPEG420 gain has a paired scene-cluster 95% interval of +1.37 to +4.10 percentage points for k11, and +2.64 to +5.47 for k16. PNG/444 outputs remain identical per sample. Zero false attribution was observed in this finite study, not a guarantee of zero population risk. Full new-cohort V2 results across all formats are not presented as part of the original final validation table; save additional evaluations separately. Complete V1/V2/V3 controls, training history and limitations are in [RESULTS](docs/RESULTS.md) and the [research workflow](docs/RESEARCH_REPRODUCTION_zh.md).
 
-## Reproduction
+### 7. Project layout and optional training
 
-`analysis/recompute.py --out NEW_DIRECTORY` re-decodes saved predictions and recomputes all full-cohort statistics without network inference. `evaluate.py` reads restored native files, defaults to V3, and exports new per-image predictions. The complete image/latent assets are stored separately with checksums. `generation/from_latents.py` and `generation/sample_latents.py` explicitly reconstruct the frozen generator workflow. The clean notebook provides the default pretrained demo.
+```text
+wouaf.py                         Product setup / predict / versions / verify / evaluate
+configs/pretrained.json          Default final V3 system
+configs/versions/v1.json,v2.json Optional V1/V2 controls
+models/                          Checkpoint destinations and verified download manifest
+ecc_wouaf/                       Extractor, format routing, BCH, parity, rejection
+environment/locked/              Frozen runtime restorer, inventories and isolated launcher
+public_assets.json               Public runtime/image file URLs, sizes and hashes
+training/                        Separate training source, unused by normal inference
+reports/                         Controls, training history and per-image results
+docs/                            Runtime, workflow, training and reproduction details
+01_PUBLIC_V3_REPRODUCE.ipynb      Public product setup without private Drive mounting
+```
 
-Use the archived Python3.10.21 / torch1.12.1+cu116 environment and reference A100/driver profile; do not upgrade packages. Re-execution on other software/hardware is an explicitly unvalidated mode. Portable training entries were dry-run checked; the release packaging does not claim a new full-training rerun or byte-identical retraining weights.
+Only consumers who want to change/retrain models need the separate [training workflow](docs/TRAINING.md). `setup` automatically restores saved predictions, native demo files and binary decoding tables from support assets. Large objects use GitHub Releases/public Drive rather than ordinary Git history.
 
-The qualification covers 512×512 native PNG and Pillow JPEG Q90 444/420. Converting previously compressed JPEG pixels into a real PNG erases sampling provenance; the router then uses V1. Other sizes, sampling modes, codecs, and attacks need separate evaluation. Third-party notices remain in `THIRD_PARTY_NOTICES.md` and `licenses/`. No new blanket license is applied to third-party models, images, or environment components. The original Drive archive is immutable; GitHub packaging changes are recorded in `reports/github_publication.json`.
+Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace original model, image and library terms. Product-distribution updates do not retrain models, modify weights or tune thresholds.
+
+---
+
+<a name="chinese"></a>
+
+## 中文
+
+**下载、运行环境配置命令，然后直接使用。默认是已经训练好的最终 V3，不需要重新训练。** 本工具读取 512×512 的原生 PNG/JPEG 图片，恢复 WOUAF 用户指纹，并输出用户归属或 `REJECT`。证据不足时拒绝归属。
+
+V1、V2、V3 的代码、配置和版本选择均保留；V1/V2 是额外选项。训练源码单独位于 `training/`，普通安装和预测不会进入训练。
+
+### 1. 下载并使用
+
+从 [最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest) 下载 **完整产品 ZIP** 并解压；也可 clone 本仓库或使用 GitHub 的 Code → Download ZIP。进入项目目录后：
+
+```bash
+# Download trained checkpoints, demo assets and the frozen runtime; restore and self-check.
+python wouaf.py setup
+
+# Use final V3 on a native 512x512 PNG/JPEG file.
+python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
+```
+
+`setup` 会下载缺失文件、核对原始 SHA256、拼接环境分片、恢复已打包的解释器与依赖、检查运行时，并验证预训练模型。**不用按环境清单逐个找包，不需要手动训练，也不用登录作者的 Google Drive。** 完整产品 ZIP 已包含模型和演示附件，安装时会复用并校验它们。
+
+软件归档的可执行平台是 **Linux x86_64 / Colab Linux**。安装入口使用宿主 Python 3.12+，实际推理自动使用恢复出的 **Python 3.10.21、torch 1.12.1+cu116、torchvision 0.13.1+cu116** 及其全部冻结依赖，不会向宿主 Python 安装这些包。严格参考运行时为 **A100-SXM4-80GB / driver 580.82.07**；检查不匹配时会报出原因。Windows/macOS 可用 `python wouaf.py setup --download-only` 下载和校验，但该 Linux 归档不能直接在 Windows/macOS 执行。其他硬件的迁移边界见 [环境说明](docs/ENVIRONMENT.md)。
+
+不想复制终端命令时，使用 [公开产品 notebook](01_PUBLIC_V3_REPRODUCE.ipynb)：它直接从公开 GitHub/Drive 文件恢复，不挂载作者 Drive。原 `00_PRETRAINED_V3_DEMO.ipynb` 保留为作者原 Drive 归档的历史恢复入口。
+
+先用随附图片验证输入：
+
+```bash
+python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.png
+python wouaf.py verify
+```
+
+### 2. V1、V2、V3 怎么选
+
+| 版本 | 行为与区别 | 用途 |
+|---|---|---|
+| **V3，默认** | 真实 JPEG420 → V2 专家；PNG/JPEG444 → V1；每图一次网络前向 | **最终产品，推荐日常使用** |
+| V1 | 所有格式都用已训练的平衡提取器 | 额外的平衡基线/对照 |
+| V2 | 所有格式都用已训练 JPEG420 专家；420 改善，PNG/444 有取舍 | 额外的专家/对照 |
+
+```bash
+python wouaf.py versions
+python wouaf.py predict --image YOUR_IMAGE.jpg                 # Final V3 by default.
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+```
+
+默认 BCH(31,11)+整体 parity，容量 2048 用户；需要容量对照时添加 `--code 16`，容量 65536 用户。所有版本使用固定 BCH、parity 和拒绝门槛，预测时不会校准或训练。V3 按**实际文件头**识别 JPEG420，不按文件名或 GT 选分支。
+
+### 3. 模型权重是什么，需不需要训练
+
+权重是训练得到的网络参数，保存在 `.pth` 文件中；代码定义网络，权重提供训练学到的行为。**本项目提供真实训练权重，安装器自动取得它们，所以使用者无需重新训练。** 缺失、损坏或校验不符会报错，不会把随机初始化网络当作成品。
+
+V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pth`：
+
+| 文件 | 使用版本 | 原始 SHA256 |
+|---|---|---|
+| `models/v1_negative_aware_2400.pth` | V1，以及 V3 的 PNG/JPEG444 分支 | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
+| `models/v2_jpeg420_expert_extra800.pth` | V2，以及 V3 的 JPEG420 分支 | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
+
+权重与实验支撑附件在 [v3.0.0 模型 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0) 保留不变；当前产品安装器使用这些已校验的原始对象。产品安装/下载流程更新不代表追加训练了一个新模型版本。
+
+### 4. 读取结果
+
+`ACCEPT` 表示通过纠错与拒绝规则，`user_id` 是接受的用户 ID。`REJECT` 时 `user_id` 为 `null`，内部候选不能当作有效归属。JSON 还保留所选版本/分支、模型 hash、32-bit 指纹、logits/probabilities 和拒绝原因。
+
+验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。输入不会被静默缩放。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
+
+### 5. 公开环境和数据下载
+
+下面 7 组、9 个文件已经设置为“知道链接的任何人可查看”，允许匿名下载。**演示只需冻结环境，完整独立图像验证再加六组图片**。不要去作者的私有发布根目录寻找这些文件。
+
+| 公开文件组 | 下载链接 | 下载大小 |
+|---|---|---:|
+| 冻结 Python、PyTorch 与全部依赖（3 个分片） | [frozen_environment](https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt) | 2.16 GiB |
+| k11 水印 PNG 正样本 | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
+| k16 水印 PNG 正样本 | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
+| 同源无水印 PNG 负样本 | [independent_source_pngs_generated_negative](https://drive.google.com/drive/u/0/folders/1MAbvrbca6pEMSOhdRQ7itg_piP0zVbh1) | 0.44 GiB |
+| 自然图 PNG 负样本 | [independent_source_pngs_natural_negative](https://drive.google.com/drive/u/0/folders/1--F3b4k6_mGp-yFE1qAqjc0OjxR54QeL) | 0.38 GiB |
+| 真实 JPEG444 Q90 验证视图 | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
+| 真实 JPEG420 Q90 验证视图 | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
+
+自动配置和下载的默认位置为 `offline_assets/`，也可通过 `--asset-root PATH` 指定。演示环境归档共 2,319,751,708 字节；完整环境加独立图像共 4,829,967,179 字节，解压需额外空间。每个分片的 URL、大小和 SHA256 在 [public_assets.json](public_assets.json)。
+
+```bash
+# Prepare the product and complete independent images without training.
+python wouaf.py setup --with-evaluation
+
+# Evaluate V3 on native images and save new outputs.
+python wouaf.py evaluate --version v3 --out outputs/independent_v3
+# Optional controls on the same image cohort.
+python wouaf.py evaluate --version v1 --out outputs/independent_v1
+python wouaf.py evaluate --version v2 --out outputs/independent_v2
+```
+
+无需重新前向时，可按 [完整复现指南](docs/PUBLIC_REPRODUCTION.md) 从公开保存的逐样本预测重算统计。旧训练数据、完整生成器、历史 5000 latents 等属于可选研究资产，仍独立保存；**加载成品和重跑上述独立图像验证不需要这些资产**。
+
+### 6. 最终版本的结果
+
+以下为新独立内容验证，每码、每条件 1024 张正样本，V1 → 最终 V3：
+
+| 码 | PNG 正确恢复 | JPEG444 Q90 | JPEG420 Q90 |
+|---|---:|---:|---:|
+| k11，默认 | 90.14% → 90.14% | 87.60% → 87.60% | **74.12% → 76.86%** |
+| k16，容量对照 | 67.68% → 67.68% | 56.35% → 56.35% | **33.40% → 37.40%** |
+
+JPEG420 改善的 95% 场景块配对区间：k11 +1.37～4.10 个百分点，k16 +2.64～5.47 个百分点。PNG/444 逐样本输出保持一致。本次有限样本中观察到错误归属为 0，不代表总体风险为 0。V2 在所有新格式的全量结果不冒充原最终验证表；自行评估应另存。详细的 V1/V2/V3 对照、训练过程与局限见 [RESULTS](docs/RESULTS.md) 和 [完整研究流程](docs/RESEARCH_REPRODUCTION_zh.md)。
+
+### 7. 项目结构与可选自行训练
+
+```text
+wouaf.py                         成品入口：setup / predict / versions / verify / evaluate
+configs/pretrained.json          默认最终 V3
+configs/versions/v1.json,v2.json  可选 V1/V2
+models/                          真实权重的目标路径及自动下载清单
+ecc_wouaf/                       提取、格式路由、BCH、parity 与拒绝逻辑
+environment/locked/              冻结环境恢复器、清单和隔离启动器
+public_assets.json               已公开环境/验证图像的实际下载与校验信息
+training/                        单独的训练源码；普通使用不会调用
+reports/                         版本对照、训练历史与逐样本实验结果
+docs/                            完整环境、研究流程、训练和复现说明
+01_PUBLIC_V3_REPRODUCE.ipynb      不挂载私人 Drive 的成品入口
+```
+
+自行训练仅供需要改变模型的使用者，说明在 [TRAINING](docs/TRAINING.md)。保存预测、演示图与二进制表由 `setup` 自动从支撑附件恢复。大文件采用 GitHub Releases / 公开 Drive 分发，不放进普通 Git 历史。
+
+保留上游 [WOUAF](https://github.com/kylemin/WOUAF) 许可与 [第三方通知](THIRD_PARTY_NOTICES.md)。公开下载不改变原模型、照片和归档库的既有许可。当前产品分发补全没有重训、修改权重或调整门槛。

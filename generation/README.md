@@ -1,4 +1,32 @@
-# 固定baseline-3000生成器复现
+# Frozen baseline-3000 generator reproduction
+
+[English](#english) | [中文](#chinese)
+
+<a name="english"></a>
+
+## English
+
+Default pretrained attribution does not load the Stable Diffusion generator. The separate `baseline_generator` research asset includes SD2 UNet/text encoder/tokenizer/original PNDM scheduler, VAE, checkpoint3000, mapping network, original training source/commit/diff/environment records and the pristine VAE. Restore optional assets with:
+
+```bash
+python scripts/materialize_assets.py --asset-root "$ASSETS" --id baseline_generator independent_new_latents
+```
+
+`from_latents.py` restores custom VAE/mapping sources and renders with the original checkpoint and 32-bit codewords. It reads archived models, uses float32, disables TF32, preserves cudnn deterministic=False, latent scale .18215, mapping input bits+1e-8 and the original uint8 rounding. The independent cohort used batch4; this entry retains that batch size and exports PNGs with GT/latent/file hashes. Check the root research guide's limit4 command before explicitly requesting the full run.
+
+`sample_latents.py` resamples from saved new prompts/seeds using local SD2 components, PNDM50, CFG7.5, per-unit seeded CPU initial noise and batch8. It does not automatically download new models or upgrade dependencies. Sampling all1024 units takes longer than restoring saved latents and is not part of the default demo.
+
+For the exact verified JPEG bytes, restore `independent_encoded_jpeg_q90_444/420` directly. `encode_views.py` explicitly creates PNG/JPEG Q90 444/420 view manifests from PNG sources for historical regression or custom labeled data; default inference reads existing files without this reencoding.
+
+`validation_latents` preserves the original5000 WOUAF latent tar.gz with its recorded directory structure, separately from the final1024 fresh latents. Original COCO natural photos are in `independent_natural_originals`, with cropped PNGs stored separately to preserve playback against future download/codec changes.
+
+Original upstream full-training source and the3000-step checkpoint are research references under the restored asset's `code/` and `checkpoint-3000/`. The release verified portable extractor training and frozen generator restoration; it does not claim one-command exact replay of every upstream training branch. Optional generator/training/latent assets retain their separate access and licensing terms; they are not required for the pretrained product or public fixed-image evaluation.
+
+---
+
+<a name="chinese"></a>
+
+## 中文
 
 默认归属不需要加载SD生成器。完整生成资产作为 `baseline_generator` 单独保存，包括SD2的UNet/text encoder/tokenizer/原PNDMscheduler、VAE、checkpoint3000、mapping、原训练脚本/commit/diff/环境记录及pristine VAE。恢复：
 

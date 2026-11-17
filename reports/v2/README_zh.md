@@ -1,4 +1,33 @@
-# V2 扩展训练：完整码字目标＋JPEG420恢复
+# V2 extension: full-codeword objective and JPEG420 recovery
+
+[English](#english) | [中文](#chinese)
+
+<a name="english"></a>
+
+## English
+
+Historical experiment record: this candidate failed the full predeclared retention requirements, so V1 remained the retained release at that stage. The current product defaults to final format-routed V3; V2 is its optional JPEG420 expert/control. No historical outcome is changed here.
+
+Parent: `<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z`.
+Parent model SHA256: `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb`.
+
+This independent experiment did not overwrite the previous GitHub preparation package. It uses the same dual-head architecture; `selected_multitask.pth` was the selected checkpoint. Plan/protocol locks record the fixed recipe/rules, training/selection histories record progress, and the last resumable checkpoint retains optimizer/RNG state.
+
+The objective adds full BCH-codebook cross-entropy divided by32 to the dual-head loss, with V1 as a fit-only teacher. Actual view conditions cycle PNG/JPEG420/JPEG444/JPEG420/JPEG420. Group learning rates are1e-6/2.5e-6/5e-6/2e-5. Training adds2400 steps with100-step warmup and cosine scheduling; BN statistics and earlier layers are frozen.
+
+Selection requires at least98% of V1's per-condition correct count for k11,95% for k16, and no bad acceptance for either code. Candidates are ordered by the fixed JPEG420 criteria, with the parent as step0 fallback. BCH/bit/presence thresholds never change; tests are not used for selection/tuning. Calibration roles had been observed historically, so this is not fresh independent data.
+
+Regression tables are in `RESULTS_zh.html`/`regression_cells.csv`; per-image GT/logits/bits/presence/decisions are in `regression_v2_k*.npz`. Zero observed error is not zero population risk. This experiment did not automatically replace the release; later independent content validation addresses generalization.
+
+---
+
+<a name="chinese"></a>
+
+## 中文
+
+历史实验记录；当前成品默认版本见仓库根README中的最终V3。以下保留该阶段的方法和结果。
+
+## V2 扩展训练：完整码字目标＋JPEG420恢复
 
 未通过全部预先固定的回归候选要求；V1仍是保留发布版本，V2结果仅作为实验记录。
 
