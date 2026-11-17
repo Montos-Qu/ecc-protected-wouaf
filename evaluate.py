@@ -9,9 +9,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__)
     p.add_argument('--data',type=Path,required=True,help='Directory containing manifest.json and native encoded files')
     p.add_argument('--version',choices=['v1','v2','v3'],default='v3')
-    p.add_argument('--out',type=Path,required=True);a=p.parse_args()
+    p.add_argument('--out',type=Path,required=True)
+    p.add_argument('--device',choices=['cpu','cuda'],default='cuda')
+    p.add_argument('--allow-unvalidated-runtime',action='store_true');a=p.parse_args()
     assert not a.out.exists(),'Use a new output directory.'
-    rows=json.loads((a.data/'manifest.json').read_text());model=Predictor(a.version)
+    rows=json.loads((a.data/'manifest.json').read_text());model=Predictor(a.version,a.device,not a.allow_unvalidated_runtime)
     assert len({r['image_id'] for r in rows})==len(rows)
     a.out.mkdir(parents=True);decisions={11:[],16:[]}
     with (a.out/'predictions.jsonl').open('w') as output:

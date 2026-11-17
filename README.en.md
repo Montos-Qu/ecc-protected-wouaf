@@ -12,6 +12,8 @@ Code, configuration and selection for V1, V2 and V3 are included. V3 is the defa
 
 ### 1. Download and use
 
+**Windows without Python:** extract the complete product ZIP and run `setup_windows.cmd`. It bootstraps a project-local Python automatically. Then drag a 512x512 image onto `predict_windows.cmd`, or use `predict_windows.cmd "YOUR_IMAGE.png" v3` in a terminal. The optional second argument selects `v1` or `v2`. Prediction JSON is saved under `outputs/`. No system Python or A100 is needed.
+
 Download the **complete product ZIP** from the [latest Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest), or clone this repository / use GitHub Code -> Download ZIP. Enter the extracted project directory:
 
 ```bash
@@ -19,11 +21,31 @@ python wouaf.py setup
 python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
 ```
 
-`setup` downloads missing trained checkpoints, support files and frozen-environment parts; checks original SHA256 values; reassembles/restores the interpreter and dependencies; verifies the runtime; and runs a pretrained self-check. **Users do not compare a package inventory and install dependencies individually, train a model, or log into the author's Drive.** The complete product ZIP already includes weights and support files, which setup verifies and reuses.
+`setup` automatically downloads/verifies trained checkpoints and support files, creates an isolated managed Python environment, installs fully locked and hash-verified official PyTorch packages, and checks the trained model. It does not change system Python. The complete product ZIP already contains weights and support files. No retraining or login to the author's Drive is required.
 
-The executable archive targets **Linux x86_64 / Colab Linux**. Bootstrap with host Python 3.12+; actual inference automatically uses restored **Python 3.10.21, torch1.12.1+cu116, torchvision0.13.1+cu116**, and all frozen dependencies. These packages are not installed into the host interpreter. Strict reference hardware is **A100-SXM4-80GB / driver580.82.07**; a mismatch reports an error. On Windows/macOS, `python wouaf.py setup --download-only` downloads/verifies files but does not execute the Linux archive. See [runtime boundaries](docs/ENVIRONMENT.md) for other hardware/platforms.
+**Ordinary local use is now the default. An A100 is not required.** Supported product platforms are Windows 10/11 x64 and x86_64 Linux (glibc2.28+). Any working host Python3.9+ can start setup; it automatically manages Python3.12.12, torch2.7.1, torchvision0.22.1, NumPy1.26.4, Pillow12.3.0 and SciPy1.15.3. Users do not locate/install packages one by one.
 
-The [public product notebook](01_PUBLIC_V3_REPRODUCE.ipynb) runs the same Python setup without mounting the author's Drive. `00_PRETRAINED_V3_DEMO.ipynb` remains the historical author-Drive restore workflow.
+```bash
+python wouaf.py setup                              # Select NVIDIA CUDA when usable, otherwise CPU.
+python wouaf.py predict --image YOUR_IMAGE.png
+python wouaf.py setup --device cpu                 # Explicit local CPU installation.
+python wouaf.py setup --device cuda                # Require a working supported NVIDIA GPU/driver.
+python wouaf.py predict --image YOUR_IMAGE.png --device cpu
+```
+
+Automatic GPU setup selects official CUDA11.8 or CUDA12.8 PyTorch wheels for the detected NVIDIA generation. RTX50/compute capability10+ selects CUDA12.8. `--cuda-backend cu118` or `--cuda-backend cu128` can override selection. A supported NVIDIA driver is required for GPU acceleration; setup does not replace drivers. In automatic mode, an unusable CUDA runtime selects CPU. CPU mode also works on PCs with AMD graphics; this product does not claim AMD GPU acceleration. Hardware is checked by an actual tensor operation and a model self-check, rather than an A100 model-name restriction.
+
+**A100 is retained only for historical strict reference reproduction**, through an explicit option:
+
+```bash
+python wouaf.py setup --runtime reference
+python wouaf.py predict --runtime reference --image YOUR_IMAGE.png
+```
+
+Reference mode preserves the original Linux Python3.10.21 / torch1.12.1+cu116 archive and A100-SXM4-80GB / driver580.82.07 checks. Portable mode uses the same trained weights, preprocessing, BCH codebooks, routing and rejection thresholds, with a separately pinned runtime; it does not label its output as strict A100 reference execution. See [portable runtime details](docs/PORTABLE_RUNTIME.md) and [reference environment](docs/ENVIRONMENT.md). macOS/ARM inference is outside the current executable profiles.
+
+
+The [public product notebook](01_PUBLIC_V3_REPRODUCE.ipynb) runs the same portable setup without mounting the author's Drive; A100 selection is optional. `00_PRETRAINED_V3_DEMO.ipynb` remains the historical author-Drive restore workflow.
 
 Try a supplied input and run the self-check:
 
@@ -68,7 +90,7 @@ The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:
 
 ### 5. Public environment and data
 
-These seven asset groups/nine files are read-only link-public and can be downloaded anonymously. **Demo setup needs only the frozen environment; full independent-image evaluation adds six image groups.** The author's private parent release folder is not needed.
+These seven research asset groups/nine files are read-only link-public. **Ordinary portable setup does not download the archived A100 environment.** Full independent-image evaluation adds the six image groups; the archived environment is used only with `--runtime reference`. The private parent release folder is not needed.
 
 | Public asset group | Download | Compressed size |
 |---|---|---:|
@@ -80,7 +102,7 @@ These seven asset groups/nine files are read-only link-public and can be downloa
 | Positive k11 PNGs | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
 | Positive k16 PNGs | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
 
-Downloads default to `offline_assets/`; select another destination with `--asset-root PATH`. Environment parts total 2,319,751,708 bytes; environment plus the independent images totals 4,829,967,179 bytes. Extraction needs additional space. Exact file URLs, sizes and SHA256 values are in [public_assets.json](public_assets.json).
+Requested research-data downloads default to `offline_assets/`; select another destination with `--asset-root PATH`. Environment parts total 2,319,751,708 bytes; environment plus the independent images totals 4,829,967,179 bytes. Extraction needs additional space. Exact file URLs, sizes and SHA256 values are in [public_assets.json](public_assets.json).
 
 ```bash
 python wouaf.py setup --with-evaluation
@@ -120,7 +142,7 @@ docs/                            Runtime, workflow, training and reproduction de
 
 Only consumers who want to change/retrain models need the separate [training workflow](docs/TRAINING.md). `setup` automatically restores saved predictions, native demo files and binary decoding tables from support assets. Large objects use GitHub Releases/public Drive rather than ordinary Git history.
 
-Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace original model, image and library terms. Product-distribution updates do not retrain models, modify weights or tune thresholds.
+Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace original model, image and library terms. Product-distribution updates do not retrain models, modify weights or tune thresholds. Windows CPU migration was tested on 48 native fixtures: zero bit differences and zero changed accepted attribution decisions versus saved A100 outputs; maximum logit difference was 0.0000362396240234375. This finite fixture check does not prove identical behavior on the entire cohort or on every GPU. NVIDIA CUDA and Linux installation paths use official binaries but were not hardware-tested in this Windows/AMD session.
 
 ---
 
@@ -134,6 +156,8 @@ V1、V2、V3 的代码、配置和版本选择均保留；V1/V2 是额外选项�
 
 ### 1. 下载并使用
 
+**Windows没有预装Python也可以：**解压完整产品ZIP后运行 `setup_windows.cmd`，它会自动准备项目独立的Python环境。然后把512×512图片拖到 `predict_windows.cmd` 上，或在终端执行 `predict_windows.cmd "YOUR_IMAGE.png" v3`；第二个参数也可选择v1或v2。结果JSON保存在 `outputs/`。不需要系统Python，也不需要A100。
+
 从 [最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest) 下载 **完整产品 ZIP** 并解压；也可 clone 本仓库或使用 GitHub 的 Code → Download ZIP。进入项目目录后：
 
 ```bash
@@ -144,9 +168,29 @@ python wouaf.py setup
 python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
 ```
 
-`setup` 会下载缺失文件、核对原始 SHA256、拼接环境分片、恢复已打包的解释器与依赖、检查运行时，并验证预训练模型。**不用按环境清单逐个找包，不需要手动训练，也不用登录作者的 Google Drive。** 完整产品 ZIP 已包含模型和演示附件，安装时会复用并校验它们。
+`setup` 自动下载/校验训练权重与支撑文件，创建独立的 Python 环境，按完整版本与hash锁文件安装官方 PyTorch 依赖，然后检查模型。不修改系统 Python。完整产品 ZIP 已包含权重和支撑文件，安装时直接复用。**不需要逐个对照清单安装依赖，不需要重新训练，也不用登录作者的 Drive。**
 
-软件归档的可执行平台是 **Linux x86_64 / Colab Linux**。安装入口使用宿主 Python 3.12+，实际推理自动使用恢复出的 **Python 3.10.21、torch 1.12.1+cu116、torchvision 0.13.1+cu116** 及其全部冻结依赖，不会向宿主 Python 安装这些包。严格参考运行时为 **A100-SXM4-80GB / driver 580.82.07**；检查不匹配时会报出原因。Windows/macOS 可用 `python wouaf.py setup --download-only` 下载和校验，但该 Linux 归档不能直接在 Windows/macOS 执行。其他硬件的迁移边界见 [环境说明](docs/ENVIRONMENT.md)。
+**普通个人电脑本地使用已设为默认，不要求 A100。** 支持 Windows10/11 x64、x86_64 Linux（glibc2.28+）。用已有的 Python3.9+ 启动安装器即可，它自动管理 Python3.12.12、torch2.7.1、torchvision0.22.1、NumPy1.26.4、Pillow12.3.0 和 SciPy1.15.3。
+
+```bash
+python wouaf.py setup                              # Prefer usable NVIDIA CUDA; otherwise select CPU.
+python wouaf.py predict --image YOUR_IMAGE.png
+python wouaf.py setup --device cpu                 # Explicit CPU installation.
+python wouaf.py setup --device cuda                # Require a supported NVIDIA GPU and driver.
+python wouaf.py predict --image YOUR_IMAGE.png --device cpu
+```
+
+自动配置按显卡代际选择官方 CUDA11.8 或 CUDA12.8 PyTorch 安装包，RTX50/compute capability10+ 使用 CUDA12.8；也可添加 `--cuda-backend cu118` 或 `--cuda-backend cu128` 明确选择。GPU 加速需要可用的 NVIDIA 驱动，程序不替换系统驱动。自动模式下 CUDA 无法工作时改用 CPU。配有 AMD 显卡的电脑也可运行 CPU 模式，但本版不声称支持 AMD GPU 加速。检查依据是真实张量运算与模型自检，不再把显卡名称必须为 A100 当作普通使用条件。
+
+**A100 只作为原实验的严格参考环境保留**，需要主动选择：
+
+```bash
+python wouaf.py setup --runtime reference
+python wouaf.py predict --runtime reference --image YOUR_IMAGE.png
+```
+
+严格参考模式继续保留原 Linux Python3.10.21 / torch1.12.1+cu116 归档以及 A100-SXM4-80GB / driver580.82.07 检查。普通模式使用同一份训练权重、预处理、BCH 码表、格式路由和拒绝门槛，通过单独锁定的软件栈在本地运行；输出不会冒充 A100 严格复现。详见[普通运行模式](docs/PORTABLE_RUNTIME.md)和[参考环境说明](docs/ENVIRONMENT.md)。当前没有提供 macOS/ARM 的可执行推理环境。
+
 
 不想复制终端命令时，使用 [公开产品 notebook](01_PUBLIC_V3_REPRODUCE.ipynb)：它直接从公开 GitHub/Drive 文件恢复，不挂载作者 Drive。原 `00_PRETRAINED_V3_DEMO.ipynb` 保留为作者原 Drive 归档的历史恢复入口。
 
@@ -195,7 +239,7 @@ V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pt
 
 ### 5. 公开环境和数据下载
 
-下面 7 组、9 个文件已经设置为“知道链接的任何人可查看”，允许匿名下载。**演示只需冻结环境，完整独立图像验证再加六组图片**。不要去作者的私有发布根目录寻找这些文件。
+下面 7 组、9 个研究资产允许匿名只读下载。**普通本地安装不下载旧 A100 环境归档**；完整独立图像验证才额外下载六组图片。旧环境归档只在 `--runtime reference` 模式中使用，不需要访问作者的私有发布根目录。
 
 | 公开文件组 | 下载链接 | 下载大小 |
 |---|---|---:|
@@ -207,7 +251,7 @@ V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pt
 | 真实 JPEG444 Q90 验证视图 | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
 | 真实 JPEG420 Q90 验证视图 | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
 
-自动配置和下载的默认位置为 `offline_assets/`，也可通过 `--asset-root PATH` 指定。演示环境归档共 2,319,751,708 字节；完整环境加独立图像共 4,829,967,179 字节，解压需额外空间。每个分片的 URL、大小和 SHA256 在 [public_assets.json](public_assets.json)。
+可选研究数据的默认下载位置为 `offline_assets/`，也可通过 `--asset-root PATH` 指定。演示环境归档共 2,319,751,708 字节；完整环境加独立图像共 4,829,967,179 字节，解压需额外空间。每个分片的 URL、大小和 SHA256 在 [public_assets.json](public_assets.json)。
 
 ```bash
 # Prepare the product and complete independent images without training.
@@ -251,4 +295,4 @@ docs/                            完整环境、研究流程、训练和复现�
 
 自行训练仅供需要改变模型的使用者，说明在 [TRAINING](docs/TRAINING.md)。保存预测、演示图与二进制表由 `setup` 自动从支撑附件恢复。大文件采用 GitHub Releases / 公开 Drive 分发，不放进普通 Git 历史。
 
-保留上游 [WOUAF](https://github.com/kylemin/WOUAF) 许可与 [第三方通知](THIRD_PARTY_NOTICES.md)。公开下载不改变原模型、照片和归档库的既有许可。当前产品分发补全没有重训、修改权重或调整门槛。
+保留上游 [WOUAF](https://github.com/kylemin/WOUAF) 许可与 [第三方通知](THIRD_PARTY_NOTICES.md)。公开下载不改变原模型、照片和归档库的既有许可。本次本地兼容改造没有重训、修改权重或调整门槛。Windows CPU 已实测48张原生测试图片：与保存的A100结果相比，指纹位差异为0、接受的归属决定变化为0，最大logit差异0.0000362396240234375。这是有限测试，不能据此声称全部队列或所有显卡逐位一致。本机是Windows/AMD配置，本次未对NVIDIA CUDA或Linux硬件进行实测；其安装入口使用官方二进制。

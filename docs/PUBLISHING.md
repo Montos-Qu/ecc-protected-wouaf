@@ -1,10 +1,3 @@
-# 成品分发
+# Product distribution
 
-主入口为 `wouaf.py`，默认已训练V3。V1/V2由 `predict --version` 选择，训练位于独立 `training/`。完整产品ZIP包含实际模型、支撑附件和自动安装程序。
-
-- GitHub保存可浏览的代码、配置、结果摘要、公开下载清单、环境自动恢复器和研究文档。
-- 原始权重与112项实验/演示支撑文件保留在v3.0.0 Release，按原始hash自动下载。
-- 必需的冻结环境和独立验证图片7组9文件已开放匿名只读下载；安装器按 `public_assets.json` 自动取得。
-- 原备份、训练数据、生成器、历史latent等可选资产保持原访问状态，非成品使用必需。
-- 安装/文档补丁不会覆盖旧模型、旧Release或Drive快照；完整研究过程仍可查看。
-- 上游及第三方许可保持适用；不为所有资产统一添加新许可。
+Default product setup is the isolated Windows/Linux portable runtime. The historical A100 environment remains available through `--runtime reference`; it is not required by ordinary users. V3 weights remain unchanged, V1/V2 are optional, and training is separate. Complete release ZIPs include both trained checkpoints and all support files; Python/PyTorch binaries are installed automatically from pinned official artifacts rather than included in Git. Public Drive image assets remain optional for full-cohort evaluation. All nine READMEs remain complete English-first bilingual documents with language links; maintained source comments are English without emoji.

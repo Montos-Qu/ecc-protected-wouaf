@@ -13,6 +13,6 @@ def main():
     p.add_argument('--allow-unvalidated-runtime',action='store_true')
     a=p.parse_args();model=Predictor(a.version,a.device,not a.allow_unvalidated_runtime)
     result=model.predict(a.image,a.code);text=json.dumps(result,ensure_ascii=False,indent=2)+'\n'
-    if a.output:a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(text)
+    if a.output:a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(text,encoding='utf-8')
     print(text)
 if __name__=='__main__':main()

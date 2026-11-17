@@ -1,0 +1,108 @@
+{
+  "format": 1,
+  "python": "3.12.12",
+  "uv": {
+    "version": "0.9.5",
+    "artifacts": {
+      "windows": {
+        "url": "https://files.pythonhosted.org/packages/af/14/0f07d0b2e561548b4e3006208480a5fce8cdaae5247d85efbfb56e8e596b/uv-0.9.5-py3-none-win_amd64.whl",
+        "sha256": "48a12390421f91af8a8993cf15c38297c0bb121936046286e287975b2fbf1789",
+        "filename": "uv-0.9.5-py3-none-win_amd64.whl"
+      },
+      "linux": {
+        "url": "https://files.pythonhosted.org/packages/9b/83/a0bdf4abf86ede79b427778fe27e2b4a022c98a7a8ea1745dcd6c6561f17/uv-0.9.5-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl",
+        "sha256": "6507bbbcd788553ec4ad5a96fa19364dc0f58b023e31d79868773559a83ec181",
+        "filename": "uv-0.9.5-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl"
+      }
+    }
+  },
+  "torch": "2.7.1",
+  "torchvision": "0.22.1",
+  "numpy": "1.26.4",
+  "pillow": "12.3.0",
+  "scipy": "1.15.3",
+  "wheels": {
+    "cpu": {
+      "windows": {
+        "torch": "https://download-r2.pytorch.org/whl/cpu/torch-2.7.1%2Bcpu-cp312-cp312-win_amd64.whl#sha256=0bc887068772233f532b51a3e8c8cfc682ae62bef74bf4e0c53526c8b9e4138f",
+        "torchvision": "https://download-r2.pytorch.org/whl/cpu/torchvision-0.22.1%2Bcpu-cp312-cp312-win_amd64.whl#sha256=433cb4dbced7291f17064cea08ac1e5aebd02ec190e1c207d117ad62a8961f2b"
+      },
+      "linux": {
+        "torch": "https://download-r2.pytorch.org/whl/cpu/torch-2.7.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=8f8b3cfc53010a4b4a3c7ecb88c212e9decc4f5eeb6af75c3c803937d2d60947",
+        "torchvision": "https://download-r2.pytorch.org/whl/cpu/torchvision-0.22.1%2Bcpu-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=b5fa7044bd82c6358e8229351c98070cf3a7bf4a6e89ea46352ae6c65745ef94"
+      }
+    },
+    "cu118": {
+      "windows": {
+        "torch": "https://download-r2.pytorch.org/whl/cu118/torch-2.7.1%2Bcu118-cp312-cp312-win_amd64.whl#sha256=80855ec840b7b06372ff43535d01393a8ec101842618d1f9ed629572b52aed71",
+        "torchvision": "https://download-r2.pytorch.org/whl/cu118/torchvision-0.22.1%2Bcu118-cp312-cp312-win_amd64.whl#sha256=3e927a3b0b08c7582cfa09e5f16b35435de390a612cfe76eed1418ab7b68d6b6"
+      },
+      "linux": {
+        "torch": "https://download-r2.pytorch.org/whl/cu118/torch-2.7.1%2Bcu118-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=91454dcfdb81f181fdf216d6d6d9912fbd8795578b90384b3b8b8132737072bb",
+        "torchvision": "https://download-r2.pytorch.org/whl/cu118/torchvision-0.22.1%2Bcu118-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=e4a8696261b8c64297a2683656f4ee64418d7ee391627702fe5c06b72ce81123"
+      }
+    },
+    "cu128": {
+      "windows": {
+        "torch": "https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp312-cp312-win_amd64.whl#sha256=2bb8c05d48ba815b316879a18195d53a6472a03e297d971e916753f8e1053d30",
+        "torchvision": "https://download-r2.pytorch.org/whl/cu128/torchvision-0.22.1%2Bcu128-cp312-cp312-win_amd64.whl#sha256=650561ba326d21021243f5e064133dc62dc64d52f79623db5cd76637a9665f96"
+      },
+      "linux": {
+        "torch": "https://download-r2.pytorch.org/whl/cu128/torch-2.7.1%2Bcu128-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=0b64f7d0a6f2a739ed052ba959f7b67c677028c9566ce51997f9f90fe573ddaa",
+        "torchvision": "https://download-r2.pytorch.org/whl/cu128/torchvision-0.22.1%2Bcu128-cp312-cp312-manylinux_2_28_x86_64.whl#sha256=f64ef9bb91d71ab35d8384912a19f7419e35928685bc67544d58f45148334373"
+      }
+    }
+  },
+  "default_runtime": "portable",
+  "reference_runtime_unchanged": true,
+  "sources": [
+    "https://pytorch.org/get-started/previous-versions/",
+    "https://docs.astral.sh/uv/guides/install-python/"
+  ],
+  "common_packages": {
+    "filelock": "4.2.10",
+    "fsspec": "2026.9.0",
+    "jinja2": "3.1.6",
+    "markupsafe": "3.0.4",
+    "mpmath": "1.3.0",
+    "networkx": "3.7",
+    "numpy": "1.26.4",
+    "pillow": "12.3.0",
+    "scipy": "1.15.3",
+    "setuptools": "84.2.1",
+    "sympy": "1.14.0",
+    "typing-extensions": "4.16.0"
+  },
+  "lock_files": {
+    "cpu": {
+      "windows": {
+        "path": "environment/portable/locks/windows-cpu.txt",
+        "sha256": "3d12ea53a5fa8945156bca14ab702483f14193ff146d556dca1fb7ef8420ba46"
+      },
+      "linux": {
+        "path": "environment/portable/locks/linux-cpu.txt",
+        "sha256": "48fd83d9c7af2bc3e064cc10e9c4e13dc8f09d48b8b5b9c5eaa464f23466008b"
+      }
+    },
+    "cu118": {
+      "windows": {
+        "path": "environment/portable/locks/windows-cu118.txt",
+        "sha256": "d52eb358f1e1e617cb614805ea5018d0ccd5e36c17147a54ced9de884faec09a"
+      },
+      "linux": {
+        "path": "environment/portable/locks/linux-cu118.txt",
+        "sha256": "025adcbb196caac5d7d818fa45c231af246c89d12561ca7d7d3f6bda5bb8794e"
+      }
+    },
+    "cu128": {
+      "windows": {
+        "path": "environment/portable/locks/windows-cu128.txt",
+        "sha256": "ae3856a48ffc93c3d3c0cb563099a8a08355cb96f9a06ada48ca8b145db7a981"
+      },
+      "linux": {
+        "path": "environment/portable/locks/linux-cu128.txt",
+        "sha256": "73582c6eb4de66ccf3862482a7b9c914fb4e2599cf77d56b368e041fd2b2967a"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "passed": true,
+  "runtime": "portable",
+  "reference_runtime_verified": false,
+  "system": "Windows",
+  "python": "3.12.12",
+  "device": "cpu",
+  "native_fixture_files": 48,
+  "V1_V2_branch_equivalence_controls": 48,
+  "maximum_A100_reference_logit_difference": 3.62396240234375e-05,
+  "bit_differences_from_A100_reference": 0,
+  "changed_accepted_attribution_decisions": [],
+  "weights_and_thresholds_changed": false,
+  "new_training_steps": 0
+}

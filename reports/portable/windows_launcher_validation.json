@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "Windows_launcher_without_system_Python_PATH": true,
+  "public_bootstrap_download_passed": true,
+  "model_version": "v3",
+  "device": "cpu",
+  "decision": "ACCEPT",
+  "user_id": 565,
+  "Unicode_and_space_paths_passed": true,
+  "A100_required": false,
+  "training_performed": false,
+  "profile_scope_tested": "Windows CPU dependency lock",
+  "NVIDIA_hardware_tested": false
+}
