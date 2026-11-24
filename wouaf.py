@@ -105,7 +105,6 @@ def main():
     predict.add_argument("--image", type=Path, required=True)
     predict.add_argument("--version", choices=("v3", "v1", "v2"), default="v3")
     predict.add_argument("--code", type=int, choices=(11, 16), default=11)
-    predict.add_argument("--resize", choices=("native", "fit"), default="native")
     predict.add_argument("--output", type=Path)
     predict.add_argument("--runtime", choices=("portable", "reference"), default="portable")
     predict.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
@@ -126,8 +125,6 @@ def main():
     args = parser.parse_args()
     if args.command not in ("setup", "versions") and args.runtime == "reference" and args.device == "cpu":
         raise SystemExit("Reference mode requires its archived CUDA profile; use --runtime portable --device cpu")
-    if args.command == "predict" and args.runtime == "reference" and args.resize != "native":
-        raise SystemExit("Optional resizing is a portable-mode experiment; strict reference inference remains native-only")
     if args.command == "setup":
         setup(args)
     elif args.command == "versions":
@@ -153,8 +150,6 @@ def main():
             portable("evaluate.py", args.device, *arguments)
     else:
         arguments = ["--image", args.image.resolve(), "--version", args.version, "--code", args.code]
-        if args.resize != "native":
-            arguments.extend(["--resize", args.resize])
         if args.output:
             arguments.extend(["--output", args.output.resolve()])
         if args.runtime == "reference":

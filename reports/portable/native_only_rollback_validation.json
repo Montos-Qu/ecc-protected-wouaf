@@ -1,0 +1,41 @@
+{
+  "distribution_version": "3.0.5",
+  "native_only_rollback_passed": true,
+  "restored_behavior_from": "3.0.3",
+  "native_CLI_entrypoints_byte_equal_3_0_3": true,
+  "automatic_resize_available": false,
+  "removed_active_resize_module_and_script": true,
+  "old_resize_API_requests_HTTP_400": true,
+  "old_resize_CLI_flag_rejected": true,
+  "HTTP_test_methods_passed": 5,
+  "original_versions_full_result_regression_passed": true,
+  "browser_resize_control_count": 0,
+  "browser_1024_input_rejected": true,
+  "browser_native_accept_user_id": 565,
+  "bilingual_size_explanation_visible": true,
+  "upstream_reference_in_UI": "https://github.com/kylemin/WOUAF",
+  "upstream_reference_in_both_README_languages": true,
+  "upstream_reference_verified_against_original_repository": true,
+  "resize_experiment_preserved_as_history": "reports/resize_v3_0_4/",
+  "weights_changed": false,
+  "thresholds_changed": false,
+  "dependencies_changed": false,
+  "training_performed": false,
+  "CUDA_hardware_tested": false,
+  "Linux_hardware_tested": false,
+  "colab_started": false,
+  "desktop_readability_validation": {
+    "viewport": [
+      2560,
+      1440
+    ],
+    "body_font_px": 18,
+    "primary_button_font_px": 18,
+    "section_heading_font_px": 21,
+    "size_explanation_font_px": 15,
+    "workspace_width_px": 1560,
+    "horizontal_overflow": false,
+    "native_user565_after_typography_change": true,
+    "default_viewport_restored": true
+  }
+}

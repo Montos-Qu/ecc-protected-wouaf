@@ -40,7 +40,7 @@ class WebProductTests(unittest.TestCase):
                 try:
                     with urllib.request.urlopen(url + "/api/health", timeout=1) as response:
                         health = json.load(response)
-                    if health.get("version") == "3.0.4":
+                    if health.get("version") == "3.0.5":
                         cls.url = url
                         break
                 except (OSError, ValueError):
@@ -129,39 +129,22 @@ class WebProductTests(unittest.TestCase):
         self.assertEqual(self.request("/../models/v1_negative_aware_2400.pth")[0], 404)
         self.assertEqual(self.request("/api/sample?id=../../models")[0], 404)
 
-    def test_optional_fit_and_noop_native_equivalence(self):
-        from image_preprocessing import prepare_image
-        path = ROOT / "demo/images/png8_control/positive_k11/10000000.png"
-        original = path.read_bytes()
-        expected = Predictor("v3", "cpu", False).predict_encoded(original, 11, path.name)
-        status, body = self.request("/api/predict?resize=fit", original, {"X-Filename": path.name})
-        response = json.loads(body)
-        self.assertEqual(status, 200)
-        actual = response["result"]
-        self.assertFalse(actual.pop("preprocessing")["applied"])
-        self.assertEqual(actual, expected)
-        self.assertIsNone(response["processed_preview"])
-        for version in ("v3", "v1", "v2"):
-            with Image.open(io.BytesIO(original)) as image:
-                buffer = io.BytesIO()
-                image.resize((1024, 1024), Image.Resampling.LANCZOS).save(buffer, format="PNG")
-            status, body = self.request("/api/predict?resize=fit&version=" + version, buffer.getvalue())
-            result = json.loads(body)
-            self.assertEqual(status, 200)
-            self.assertEqual(result["result"]["requested_version"], version)
-            self.assertEqual(result["result"]["preprocessing"]["target_size"], [512, 512])
-            self.assertTrue(result["processed_preview"].startswith("data:image/png;base64,"))
-        stream = io.BytesIO()
-        Image.new("RGB", (1000, 500)).save(stream, format="PNG")
-        prepared = prepare_image(stream.getvalue(), "fit")
-        self.assertEqual(prepared.preprocessing["fitted_size"], [512, 256])
-        self.assertEqual(prepared.preprocessing["padding_ltrb"], [0, 128, 0, 128])
-        with self.assertRaisesRegex(ValueError, "wrong_dimensions"):
-            prepare_image(stream.getvalue(), "native")
-        stream = io.BytesIO()
-        Image.new("RGB", (8193, 1)).save(stream, format="PNG")
-        self.assertEqual(self.request("/api/predict?resize=fit", stream.getvalue())[0], 400)
-        self.assertEqual(self.request("/api/predict?resize=stretch", original)[0], 400)
+    def test_resizing_removed_and_native_only(self):
+        original = (ROOT / "demo/images/png8_control/positive_k11/10000000.png").read_bytes()
+        for mode in ("fit", "native"):
+            status, payload = self.request("/api/predict?resize=" + mode, original)
+            self.assertEqual(status, 400)
+            self.assertEqual(json.loads(payload)["error"], "resizing_not_supported")
+        buffer = io.BytesIO()
+        Image.new("RGB", (1024, 1024)).save(buffer, format="PNG")
+        status, payload = self.request("/api/predict", buffer.getvalue())
+        self.assertEqual(status, 400)
+        self.assertEqual(json.loads(payload)["error"], "wrong_dimensions")
+        command = [sys.executable, str(ROOT / "wouaf.py"), "predict", "--image", "test.png", "--resize", "fit"]
+        process = subprocess.run(command, capture_output=True, text=True)
+        self.assertEqual(process.returncode, 2)
+        self.assertIn("unrecognized arguments", process.stderr)
+        self.assertFalse((ROOT / "image_preprocessing.py").exists())
 
 
 if __name__ == "__main__":

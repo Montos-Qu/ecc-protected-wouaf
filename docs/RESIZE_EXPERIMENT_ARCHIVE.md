@@ -2,7 +2,9 @@
 
 <a name="english"></a>
 
-# Optional image fitting (3.0.4)
+# Archived optional-fitting experiment (3.0.4)
+
+**Removed from the current product in3.0.5.** This document describes only the historical3.0.4 experiment and its measurements. Fitting is no longer available in the current UI, CLI or API. Historical reproduction requires the immutable [v3.0.4 source](https://github.com/Montos-Qu/ecc-protected-wouaf/tree/v3.0.4). Current users should follow the [native image size policy](IMAGE_SIZE_LIMITS.md).
 
 **Native512 remains the default. No training, weight or threshold changes.** In the local UI select **Image sizing → Fit to512 + padding · Experimental** to accept other sizes. The processed preview shows the exact512x512 model input. The original upload stays unmodified. CLI:
 
@@ -46,7 +48,9 @@ python scripts/run_portable.py tests/test_local_ui.py
 
 <a name="chinese"></a>
 
-# 可选自动缩放（3.0.4）
+# 已归档的可选缩放实验（3.0.4）
+
+**当前3.0.5已取消此功能。** 下文仅保留历史3.0.4的方法与测量，不是当前使用说明。现行UI、CLI和API均不提供缩放；历史复现需使用[v3.0.4源码](https://github.com/Montos-Qu/ecc-protected-wouaf/tree/v3.0.4)，当前规则见[图片尺寸说明](IMAGE_SIZE_LIMITS.md)。
 
 **默认仍为原始512模式，不训练、不改权重、不改门槛。** 网页选择“图片尺寸处理→等比缩放至512 + 补边·实验”，才能接收其他尺寸；处理后预览显示实际送入模型的512x512图片。原上传文件不变。以上CLI中 `--resize fit` 为显式开启，默认不缩放。
 

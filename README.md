@@ -61,7 +61,7 @@ python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.p
 python wouaf.py verify
 ```
 
-Optional sizing: the default remains **Original512**. Select **Fit to512 + padding · Experimental** to accept other sizes with proportional scaling, a processed preview, and explicit JSON metadata. Native512 inputs retain original bytes. The small real-image regression found worse recovery after resizing; this is an ingestion feature, not a robustness improvement. See [separate resize protocol/results](docs/OPTIONAL_RESIZE.md).
+**Image size policy:** this release restores the native512-only behavior of3.0.3 and removes the3.0.4 fitting UI, CLI option and API support. Resizing/padding changed fingerprint pixels and reduced measured recovery. Use original512x512 files; manually resizing a file does not ensure recovery. See [why automatic resizing was removed](docs/IMAGE_SIZE_LIMITS.md). The UI has the same explanation below the image preview.
 
 ### 2. Choose V1, V2 or V3
 
@@ -95,7 +95,7 @@ V3 combines two trained components; it does not require a third separately train
 
 `ACCEPT` means the candidate passed correction and rejection rules; `user_id` is the accepted identity. `REJECT` returns `user_id: null`; an internal candidate must not be treated as a valid attribution. JSON also records version/branch, model hash, 32-bit fingerprint, logits/probabilities and rejection reason.
 
-The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. Native mode never resizes; the separate explicit experimental fit option is documented above. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
+The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. No silent resizing occurs. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
 
 ### 5. Public environment and data
 
@@ -152,6 +152,10 @@ docs/                            Runtime, workflow, training and reproduction de
 Only consumers who want to change/retrain models need the separate [training workflow](docs/TRAINING.md). `setup` automatically restores saved predictions, native demo files and binary decoding tables from support assets. Large objects use GitHub Releases/public Drive rather than ordinary Git history.
 
 Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace original model, image and library terms. Product-distribution updates do not retrain models, modify weights or tune thresholds. Windows CPU migration was tested on 48 native fixtures: zero bit differences and zero changed accepted attribution decisions versus saved A100 outputs; maximum logit difference was 0.0000362396240234375. This finite fixture check does not prove identical behavior on the entire cohort or on every GPU. NVIDIA CUDA and Linux installation paths use official binaries but were not hardware-tested in this Windows/AMD session.
+
+### 8. References and upstream credit
+
+This Applied Project builds on [the original WOUAF repository by kylemin](https://github.com/kylemin/WOUAF), the upstream implementation accompanying the CVPR2024 work. Our additions include ECC/parity/rejection experiments, V1/V2/V3 comparisons, local deployment and this web UI. The upstream work remains credited to its authors; this repository is an applied extension. For academic citation, use the [upstream citation information](https://github.com/kylemin/WOUAF#citation). See [references and contribution scope](docs/REFERENCES.md).
 
 ---
 
@@ -217,7 +221,7 @@ python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.p
 python wouaf.py verify
 ```
 
-可选尺寸处理：默认仍为**原始512**。显式选择“等比缩放至512 + 补边·实验”后，才处理其他尺寸，并显示处理后预览、保存JSON元数据。原图512保留编码字节。真实小样本回归显示缩放后恢复率下降，这是接收尺寸的兼容功能，不代表鲁棒性改善；见[独立保存的缩放协议与结果](docs/OPTIONAL_RESIZE.md)。
+**图片尺寸规则：**本版恢复3.0.3的原始512行为，取消3.0.4的缩放界面、CLI选项和API支持。缩放/补边改变指纹像素，实测导致恢复率下降。请使用原始512x512文件，手工改尺寸不保证恢复。原因见[为什么取消自动缩放](docs/IMAGE_SIZE_LIMITS.md)，网页预览下方也有相同说明。
 
 ### 2. V1、V2、V3 怎么选
 
@@ -253,7 +257,7 @@ V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pt
 
 `ACCEPT` 表示通过纠错与拒绝规则，`user_id` 是接受的用户 ID。`REJECT` 时 `user_id` 为 `null`，内部候选不能当作有效归属。JSON 还保留所选版本/分支、模型 hash、32-bit 指纹、logits/probabilities 和拒绝原因。
 
-验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。默认原始模式不缩放；另有显式开启的实验性等比缩放选项，效果边界见上文。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
+验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。输入不会被静默缩放。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
 
 ### 5. 公开环境和数据下载
 
@@ -314,3 +318,7 @@ docs/                            完整环境、研究流程、训练和复现�
 自行训练仅供需要改变模型的使用者，说明在 [TRAINING](docs/TRAINING.md)。保存预测、演示图与二进制表由 `setup` 自动从支撑附件恢复。大文件采用 GitHub Releases / 公开 Drive 分发，不放进普通 Git 历史。
 
 保留上游 [WOUAF](https://github.com/kylemin/WOUAF) 许可与 [第三方通知](THIRD_PARTY_NOTICES.md)。公开下载不改变原模型、照片和归档库的既有许可。本次本地兼容改造没有重训、修改权重或调整门槛。Windows CPU 已实测48张原生测试图片：与保存的A100结果相比，指纹位差异为0、接受的归属决定变化为0，最大logit差异0.0000362396240234375。这是有限测试，不能据此声称全部队列或所有显卡逐位一致。本机是Windows/AMD配置，本次未对NVIDIA CUDA或Linux硬件进行实测；其安装入口使用官方二进制。
+
+### 8. 引用与原项目来源
+
+本Applied Project基于[kylemin的WOUAF原项目](https://github.com/kylemin/WOUAF)，对应CVPR2024工作的上游实现。本项目扩展ECC/parity/拒绝实验、V1/V2/V3对照、本地部署和网页界面；原方法和实现归原作者，本仓库为应用扩展。学术引用请参考[上游Citation信息](https://github.com/kylemin/WOUAF#citation)，另见[引用及贡献范围](docs/REFERENCES.md)。
