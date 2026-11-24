@@ -1,6 +1,6 @@
 # Historical research source
 
-[English](#english) | [中文](#chinese)
+[English](#english) | [����](#chinese)
 
 <a name="english"></a>
 
@@ -18,10 +18,10 @@ Final V3 routes between the two immutable trained extractors using the file head
 
 <a name="chinese"></a>
 
-## 中文
+## ����
 
-这里保存早期实验代码，方便查看结果是怎么得到的。它不是成品启动入口，历史路径可能需要调整。日常使用看根目录README；想自行训练时，使用training/中的正式入口和训练说明。
+���ﱣ������ʵ����룬����鿴�������ô�õ��ġ������ǳ�Ʒ������ڣ���ʷ·��������Ҫ�������ճ�ʹ�ÿ���Ŀ¼README��������ѵ��ʱ��ʹ��training/�е���ʽ��ں�ѵ��˵����
 
-### 实验详情
+### ʵ������
 
-此处保留原配方与审计来源，个人路径已清理；原SHA和发布SHA在reports/provenance.json。历史路径结构需要适配，非便携默认入口。可执行的自行训练入口是training/train.py、train_v2.py、calibrate.py。最终V3是两份原权重的文件头路由；单模型/融合失败记录不当作最终模型。
+�˴�����ԭ�䷽�������Դ������·����������ԭSHA�ͷ���SHA��reports/provenance.json����ʷ·���ṹ��Ҫ���䣬�Ǳ�ЯĬ����ڡ���ִ�е�����ѵ�������training/train.py��train_v2.py��calibrate.py������V3������ԭȨ�ص��ļ�ͷ·�ɣ���ģ��/�ں�ʧ�ܼ�¼����������ģ�͡�

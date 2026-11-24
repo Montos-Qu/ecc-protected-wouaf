@@ -55,7 +55,7 @@ class WebProductTests(unittest.TestCase):
                 try:
                     with urllib.request.urlopen(url + "/api/health", timeout=1) as response:
                         health = json.load(response)
-                    if health.get("version") == "3.0.7":
+                    if health.get("version") == "3.0.6":
                         cls.url = url
                         break
                 except (OSError, ValueError):

@@ -1,6 +1,6 @@
 # Trained model files
 
-[English](#english) | [中文](#chinese)
+[English](#english) | [����](#chinese)
 
 <a name="english"></a>
 
@@ -23,17 +23,17 @@ For a weights-only download, run `python scripts/download_pretrained.py` from th
 
 <a name="chinese"></a>
 
-## 中文
+## ����
 
-这两份`.pth`文件保存了模型训练学到的参数，也就是“权重”。它们已经训练好，使用者不用重新训练。
+������`.pth`�ļ�������ģ��ѵ��ѧ���Ĳ�����Ҳ���ǡ�Ȩ�ء��������Ѿ�ѵ���ã�ʹ���߲�������ѵ����
 
-在项目根目录运行 `python wouaf.py setup` 即可自动检查已有文件并补齐缺失权重。完整产品ZIP已经包含两份权重；源码ZIP/克隆版会在配置时自动下载。大权重保存在GitHub Releases，不放进普通Git历史。
+����Ŀ��Ŀ¼���� `python wouaf.py setup` �����Զ���������ļ�������ȱʧȨ�ء�������ƷZIP�Ѿ���������Ȩ�أ�Դ��ZIP/��¡���������ʱ�Զ����ء���Ȩ�ر�����GitHub Releases�����Ž���ͨGit��ʷ��
 
-| 组件 | 怎么使用 |
+| ��� | ��ôʹ�� |
 |---|---|
-| V1，训练2400步 | 平衡提取器；V1使用，V3处理PNG/JPEG444时也使用 |
-| V2，选用追加800步的权重 | JPEG420专家；V2使用，V3处理JPEG420时也使用 |
+| V1��ѵ��2400�� | ƽ����ȡ����V1ʹ�ã�V3����PNG/JPEG444ʱҲʹ�� |
+| V2��ѡ��׷��800����Ȩ�� | JPEG420ר�ң�V2ʹ�ã�V3����JPEG420ʱҲʹ�� |
 
-V3按真实图片格式选择组件，不是缺少了第三个V3文件。组件保留原模型结构和固定判断门槛。
+V3����ʵͼƬ��ʽѡ�����������ȱ���˵�����V3�ļ����������ԭģ�ͽṹ�͹̶��ж��ż���
 
-如果只想下载权重，在根目录执行 `python scripts/download_pretrained.py`。`pretrained_manifest.json`保存项目Release下载地址、大小和SHA256校验值。正确文件直接复用，不符文件报错但不覆盖；程序不会拿随机未训练模型代替。
+���ֻ������Ȩ�أ��ڸ�Ŀ¼ִ�� `python scripts/download_pretrained.py`��`pretrained_manifest.json`������ĿRelease���ص�ַ����С��SHA256У��ֵ����ȷ�ļ�ֱ�Ӹ��ã������ļ������������ǣ����򲻻������δѵ��ģ�ʹ��档
