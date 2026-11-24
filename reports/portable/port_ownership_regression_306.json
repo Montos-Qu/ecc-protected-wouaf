@@ -1,0 +1,10 @@
+{
+  "distribution_version": "3.0.6",
+  "Windows_CPU_candidate_HTTP_tests": 6,
+  "tests_passed": true,
+  "occupied_Windows_port_exclusive_binding_passed": true,
+  "v305_first_install_model_self_check_passed": true,
+  "v305_port_collision_found": true,
+  "weights_core_thresholds_unchanged": true,
+  "fresh_public_v306_acceptance": "Performed separately after publication; not asserted by this candidate report."
+}

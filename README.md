@@ -12,7 +12,7 @@ Code, configuration and selection for V1, V2 and V3 are included. V3 is the defa
 
 ### 1. Download and use
 
-**Local web interface (recommended):** double-click `start_ui.cmd`. On first use it runs automatic setup if needed, then opens WOUAF Studio in your default browser. Upload/drop a native 512x512 PNG/JPEG, choose V3 (default), V1 or V2, and select **Identify fingerprint**. The page shows the accepted user ID or a plain-language rejection reason, the actual extractor/format, and a downloadable JSON. English/Chinese switching and built-in samples are included. Use **Stop app** to stop the local server; closing the tab alone leaves it running. Images are processed on this computer; no cloud service is used. See [local UI guide](docs/LOCAL_UI.md).
+**Local web interface (recommended):** double-click `start_ui.cmd`. On first use it runs automatic setup if needed, then opens WOUAF Studio in your default browser. Upload/drop a native 512x512 PNG/JPEG, choose V3 (default), V1 or V2, and select **Identify fingerprint**. The page shows the accepted user ID or a plain-language rejection reason, the actual extractor/format, and a downloadable JSON. English/Chinese switching and built-in samples are included. Use **Stop app** to stop the local server; closing the tab alone leaves it running. Images are processed on this computer; no cloud service is used. See [local UI guide](docs/LOCAL_UI.md). If another project copy or app occupies the default port, this copy uses a separate available port; repeated launches of this same running copy reopen its existing address.
 
 ```bash
 python wouaf.py ui                  # Open the installed portable product in a browser.
@@ -169,7 +169,7 @@ V1、V2、V3 的代码、配置和版本选择均保留；V1/V2 是额外选项�
 
 ### 1. 下载并使用
 
-**本地网页界面（推荐）：**双击 `start_ui.cmd`。首次需要时会自动配置环境，然后在默认浏览器打开 WOUAF Studio。上传/拖入原生512x512 PNG/JPEG，选择默认V3或V1/V2，点击“开始识别指纹”。直接显示接受的用户ID或直白的拒绝原因、实际提取器/格式，并可下载JSON。支持中英文切换及内置示例。点击“关闭服务”停止本机进程；仅关闭浏览器标签页不会停止服务。图片全部在本机处理，不使用云服务。见[界面说明](docs/LOCAL_UI.md)。
+**本地网页界面（推荐）：**双击 `start_ui.cmd`。首次需要时会自动配置环境，然后在默认浏览器打开 WOUAF Studio。上传/拖入原生512x512 PNG/JPEG，选择默认V3或V1/V2，点击“开始识别指纹”。直接显示接受的用户ID或直白的拒绝原因、实际提取器/格式，并可下载JSON。支持中英文切换及内置示例。点击“关闭服务”停止本机进程；仅关闭浏览器标签页不会停止服务。图片全部在本机处理，不使用云服务。见[界面说明](docs/LOCAL_UI.md)。其他项目副本或程序占用默认端口时，本副本会使用独立的空闲端口；重复启动同一运行中的副本会重新打开其原有地址。
 
 ```bash
 python wouaf.py ui                  # Open the installed portable product in a browser.
@@ -181,7 +181,7 @@ python wouaf.py ui --no-browser     # Print the loopback URL without opening a b
 从 [最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest) 下载 **完整产品 ZIP** 并解压；也可 clone 本仓库或使用 GitHub 的 Code → Download ZIP。进入项目目录后：
 
 ```bash
-# Download trained checkpoints, demo assets and the frozen runtime; restore and self-check.
+# Download trained checkpoints and demo assets; install the portable runtime and self-check.
 python wouaf.py setup
 
 # Use final V3 on a native 512x512 PNG/JPEG file.

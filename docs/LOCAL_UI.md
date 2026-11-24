@@ -14,7 +14,7 @@ On Windows, double-click `start_ui.cmd`. It prepares the portable environment wh
 4. Read **ACCEPTED** with its user ID, or **REJECTED** with the primary failed rule. No rejected candidate is presented as an accepted identity.
 5. Download the full JSON for logits, probabilities,32 predicted bits, hashes and runtime identity. A local copy is saved under `outputs/ui/`.
 
-**Stop app** shuts down the backend and releases its models. Closing a tab alone does not stop it. Double-clicking the launcher again reopens a healthy existing instance. The service binds only to127.0.0.1, normally port8765; an occupied port uses an available local port. The actual address is printed and recorded in `outputs/ui_server.json`. Logs are in `outputs/ui_stdout.log` and `outputs/ui_stderr.log`.
+**Stop app** shuts down the backend and releases its models. Closing a tab alone does not stop it. Double-clicking the launcher again reopens a healthy existing instance. The service binds only to127.0.0.1, normally port8765; an occupied port uses an available local port. Since3.0.6, Windows sockets use exclusive binding so separate project copies cannot silently share a port, including with a previously running3.0.5 copy. The actual address is printed and recorded in `outputs/ui_server.json`. Logs are in `outputs/ui_stdout.log` and `outputs/ui_stderr.log`.
 
 CLI on an installed Windows/Linux portable runtime:
 
@@ -42,7 +42,7 @@ Windows双击 `start_ui.cmd`。需要时自动配置普通模式环境，后台�
 4. 接受时显示用户ID；拒绝时解释最先未通过的规则，不将内部候选当成接受身份。
 5. 下载完整JSON，其中保留logits、概率、32位指纹、hash和运行环境；本地副本保存在 `outputs/ui/`。
 
-“关闭服务”停止后台并释放模型，仅关闭标签页不会退出服务。再次双击启动器会重新打开同一目录下的正常实例。服务只监听127.0.0.1，通常端口8765；被占用时选择空闲本地端口。实际地址记录在 `outputs/ui_server.json`；日志为 `outputs/ui_stdout.log` 和 `outputs/ui_stderr.log`。已安装普通模式也可使用以上CLI命令。
+“关闭服务”停止后台并释放模型，仅关闭标签页不会退出服务。再次双击启动器会重新打开同一目录下的正常实例。服务只监听127.0.0.1，通常端口8765；被占用时选择空闲本地端口。3.0.6起Windows使用独占绑定，避免两个项目副本静默共用端口，也兼容已运行的3.0.5旧副本。实际地址记录在 `outputs/ui_server.json`；日志为 `outputs/ui_stdout.log` 和 `outputs/ui_stderr.log`。已安装普通模式也可使用以上CLI命令。
 
 界面不增加网页框架、外部字体/CDN、身份服务或依赖变更。通过原Predictor读取上传的原始编码字节，改扩展名不影响实际JPEG格式路由；不缩放、不重新压缩、不训练、不调门槛、不改科学推理核心。各版本在内存共享原两份组件。上传上限10MiB，输入图片只留内存，仅保存结果JSON。此界面不包含生成器或训练控制。
 

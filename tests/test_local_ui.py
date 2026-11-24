@@ -4,6 +4,7 @@ from datetime import datetime
 import json
 from pathlib import Path
 import re
+import socket
 import subprocess
 import sys
 import time
@@ -15,6 +16,20 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 from ecc_wouaf import Predictor
 from PIL import Image
+from local_ui import LocalServer
+
+
+class PortOwnershipTests(unittest.TestCase):
+    def test_occupied_port_cannot_be_shared_with_another_checkout(self):
+        with socket.socket() as occupied:
+            if sys.platform == "win32":
+                occupied.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+            occupied.bind(("127.0.0.1", 0))
+            occupied.listen()
+            with self.assertRaises(OSError):
+                LocalServer(occupied.getsockname(), "cpu")
+            with LocalServer(("127.0.0.1", 0), "cpu") as alternative:
+                self.assertNotEqual(alternative.server_port, occupied.getsockname()[1])
 
 
 class WebProductTests(unittest.TestCase):
@@ -40,7 +55,7 @@ class WebProductTests(unittest.TestCase):
                 try:
                     with urllib.request.urlopen(url + "/api/health", timeout=1) as response:
                         health = json.load(response)
-                    if health.get("version") == "3.0.5":
+                    if health.get("version") == "3.0.6":
                         cls.url = url
                         break
                 except (OSError, ValueError):
