@@ -6,6 +6,10 @@
 
 ## English
 
+This folder is for researchers who want to generate the original watermarked test images. You can skip it when using the app to read an existing image. The saved generator and latent files are optional research downloads, not files needed by normal setup. The details below explain how to replay those older experiments.
+
+### Experiment details
+
 Default pretrained attribution does not load the Stable Diffusion generator. The separate `baseline_generator` research asset includes SD2 UNet/text encoder/tokenizer/original PNDM scheduler, VAE, checkpoint3000, mapping network, original training source/commit/diff/environment records and the pristine VAE. Restore optional assets with:
 
 ```bash
@@ -27,6 +31,10 @@ Original upstream full-training source and the3000-step checkpoint are research 
 <a name="chinese"></a>
 
 ## 中文
+
+这里用于重新生成带指纹的实验图片。普通用户只想上传已有图片识别时，可以跳过整个目录。生成器和latent（生成时使用的中间数据）属于可选研究下载，不是安装成品的必需文件。下面保留重做旧实验的具体参数。
+
+### 实验详情
 
 默认归属不需要加载SD生成器。完整生成资产作为 `baseline_generator` 单独保存，包括SD2的UNet/text encoder/tokenizer/原PNDMscheduler、VAE、checkpoint3000、mapping、原训练脚本/commit/diff/环境记录及pristine VAE。恢复：
 

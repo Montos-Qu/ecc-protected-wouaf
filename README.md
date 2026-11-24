@@ -1,4 +1,4 @@
-# ECC-Protected WOUAF - Pretrained V3 Product
+# ECC-Protected WOUAF — Pretrained V3
 
 [English](#english) | [中文](#chinese)
 
@@ -6,100 +6,97 @@
 
 ## English
 
-**Download the product, run the setup command, and use the trained final V3. No retraining is required.** The tool reads native 512x512 PNG/JPEG files, extracts WOUAF user fingerprints, and returns an accepted user attribution or `REJECT` when evidence is insufficient.
+**A ready-to-use tool for reading WOUAF fingerprints from images. Download it, set it up, and use the trained V3 model. You do not need to train anything.**
 
-Code, configuration and selection for V1, V2 and V3 are included. V3 is the default final product; V1/V2 are optional controls. Training source is separate in `training/` and is never invoked by normal setup or inference.
+If an image contains a recoverable WOUAF fingerprint, the app can report its user ID. If it cannot recover enough reliable information, it shows `REJECT` and explains why. This is an image-reading tool: it does not add fingerprints to your photos, detect every kind of watermark, or identify the author of any ordinary picture.
 
-### 1. Download and use
+### 1. Start here: Windows web app
 
-**Local web interface (recommended):** double-click `start_ui.cmd`. On first use it runs automatic setup if needed, then opens WOUAF Studio in your default browser. Upload/drop a native 512x512 PNG/JPEG, choose V3 (default), V1 or V2, and select **Identify fingerprint**. The page shows the accepted user ID or a plain-language rejection reason, the actual extractor/format, and a downloadable JSON. English/Chinese switching and built-in samples are included. Use **Stop app** to stop the local server; closing the tab alone leaves it running. Images are processed on this computer; no cloud service is used. See [local UI guide](docs/LOCAL_UI.md). If another project copy or app occupies the default port, this copy uses a separate available port; repeated launches of this same running copy reopen its existing address.
+1. Open the [latest Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest) and download the **complete product ZIP** whose name ends in `local-3.0.7.zip`. Choose this file rather than GitHub's automatically generated source ZIP if you want weights and demo files included.
+2. Extract the whole ZIP into a normal folder. Do not run files from inside the ZIP.
+3. Double-click `start_ui.cmd`. The first run downloads Python and installs the required packages in this project folder. Keep the window open until setup finishes. Internet is needed for this first setup; you do not need to preinstall Python, use Colab, log into the author's Drive, or have an A100.
+4. Your default browser opens WOUAF Studio. Upload a **native512x512 PNG or JPEG**, keep the default **V3**, and click **Identify fingerprint**.
+5. Read the user ID or rejection reason. **Download result JSON** saves the full result. A copy is also kept in `outputs/ui/`.
 
-```bash
-python wouaf.py ui                  # Open the installed portable product in a browser.
-python wouaf.py ui --no-browser     # Print the loopback URL without opening a browser.
+To check that your installation works, upload `demo/images/png8_control/positive_k11/10000000.png`. With the default V3/k11 settings, the supplied positive example should return **user565**. An ordinary photo may be rejected; that alone is not an installation problem. A watermarked JPEG can also be rejected if its fingerprint is too damaged.
+
+Use **Stop app** to stop the local service. Closing the browser tab alone leaves it running. Starting the same project again reopens its existing service; a different project copy uses another free local port if necessary. Images are processed on your computer, without a cloud upload. The page supports English and Chinese and includes a larger desktop layout. See the [UI guide](docs/LOCAL_UI.md).
+
+### 2. What pictures work, and what do the results mean?
+
+- Use original512x512 PNG/JPEG files, no larger than10MiB. The app does **not** resize, crop, or add borders. Resizing can damage the fingerprint even if the final file is512x512. See [why automatic resizing was removed](docs/IMAGE_SIZE_LIMITS.md).
+- `ACCEPT`: the recovered fingerprint passed the model's fixed checks. `user_id` is the accepted ID.
+- `REJECT`: the checks did not pass, so no user is attributed and `user_id` is `null`. This does not prove the image has no watermark. The page explains the first failed check, such as too many bit errors or insufficient evidence.
+- The JSON includes the chosen version, the extractor actually used, image format, model-file checksum,32 predicted bits, raw model scores (`logits`), bit probabilities, and the rejection reason. Bit probabilities are not the probability that an identity is correct.
+
+The measured accuracy applies to original512x512 RGB images, PNG and Pillow JPEG Q90 with4:4:4/4:2:0 sampling. Other qualities, editing, screenshots and attacks are not covered by those numbers. Converting a JPEG to PNG does not undo compression and also removes its original JPEG sampling information.
+
+### 3. V3, V1 and V2: which should I choose?
+
+| Choice | What it does | When to use it |
+|---|---|---|
+| **V3, default** | Uses V1 for PNG/JPEG444 and V2 for actual JPEG420 files | **Recommended final product** |
+| V1 | Uses the balanced extractor for every image | Compare with the earlier balanced version |
+| V2 | Uses the JPEG420 specialist for every image | Compare JPEG420 results; PNG/444 results may be worse |
+
+V3 chooses by the actual file header, not its extension or a known answer. It stores two trained components and runs one per image. It does not need a separate third V3 weight file.
+
+The default error-correcting code, BCH(31,11)+overall parity (`k11`), supports2048 user IDs. The optional `k16` setting supports65536 IDs but recovers fewer images in our tests. These are capacity choices, not different amounts of training. Start with V3 and k11.
+
+### 4. Prefer commands?
+
+Windows without Python can run `setup_windows.cmd` and then drag a picture onto `predict_windows.cmd`, or run:
+
+```bat
+predict_windows.cmd "YOUR_IMAGE.png" v3
+predict_windows.cmd "YOUR_IMAGE.jpg" v1
+predict_windows.cmd "YOUR_IMAGE.jpg" v2
 ```
 
-**Windows without Python:** extract the complete product ZIP and run `setup_windows.cmd`. It bootstraps a project-local Python automatically. Then drag a 512x512 image onto `predict_windows.cmd`, or use `predict_windows.cmd "YOUR_IMAGE.png" v3` in a terminal. The optional second argument selects `v1` or `v2`. Prediction JSON is saved under `outputs/`. No system Python or A100 is needed.
-
-Download the **complete product ZIP** from the [latest Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest), or clone this repository / use GitHub Code -> Download ZIP. Enter the extracted project directory:
+If you already have Python3.9+, clone/download the repository, open a terminal in its folder, and run:
 
 ```bash
 python wouaf.py setup
+python wouaf.py ui
 python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
-```
-
-`setup` automatically downloads/verifies trained checkpoints and support files, creates an isolated managed Python environment, installs fully locked and hash-verified official PyTorch packages, and checks the trained model. It does not change system Python. The complete product ZIP already contains weights and support files. No retraining or login to the author's Drive is required.
-
-**Ordinary local use is now the default. An A100 is not required.** Supported product platforms are Windows 10/11 x64 and x86_64 Linux (glibc2.28+). Any working host Python3.9+ can start setup; it automatically manages Python3.12.12, torch2.7.1, torchvision0.22.1, NumPy1.26.4, Pillow12.3.0 and SciPy1.15.3. Users do not locate/install packages one by one.
-
-```bash
-python wouaf.py setup                              # Select NVIDIA CUDA when usable, otherwise CPU.
-python wouaf.py predict --image YOUR_IMAGE.png
-python wouaf.py setup --device cpu                 # Explicit local CPU installation.
-python wouaf.py setup --device cuda                # Require a working supported NVIDIA GPU/driver.
-python wouaf.py predict --image YOUR_IMAGE.png --device cpu
-```
-
-Automatic GPU setup selects official CUDA11.8 or CUDA12.8 PyTorch wheels for the detected NVIDIA generation. RTX50/compute capability10+ selects CUDA12.8. `--cuda-backend cu118` or `--cuda-backend cu128` can override selection. A supported NVIDIA driver is required for GPU acceleration; setup does not replace drivers. In automatic mode, an unusable CUDA runtime selects CPU. CPU mode also works on PCs with AMD graphics; this product does not claim AMD GPU acceleration. Hardware is checked by an actual tensor operation and a model self-check, rather than an A100 model-name restriction.
-
-**A100 is retained only for historical strict reference reproduction**, through an explicit option:
-
-```bash
-python wouaf.py setup --runtime reference
-python wouaf.py predict --runtime reference --image YOUR_IMAGE.png
-```
-
-Reference mode preserves the original Linux Python3.10.21 / torch1.12.1+cu116 archive and A100-SXM4-80GB / driver580.82.07 checks. Portable mode uses the same trained weights, preprocessing, BCH codebooks, routing and rejection thresholds, with a separately pinned runtime; it does not label its output as strict A100 reference execution. See [portable runtime details](docs/PORTABLE_RUNTIME.md) and [reference environment](docs/ENVIRONMENT.md). macOS/ARM inference is outside the current executable profiles.
-
-
-The [public product notebook](01_PUBLIC_V3_REPRODUCE.ipynb) runs the same portable setup without mounting the author's Drive; A100 selection is optional. `00_PRETRAINED_V3_DEMO.ipynb` remains the historical author-Drive restore workflow.
-
-Try a supplied input and run the self-check:
-
-```bash
-python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.png
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+python wouaf.py predict --image YOUR_IMAGE.png --code 16
+python wouaf.py versions
 python wouaf.py verify
 ```
 
-**Image size policy:** this release restores the native512-only behavior of3.0.3 and removes the3.0.4 fitting UI, CLI option and API support. Resizing/padding changed fingerprint pixels and reduced measured recovery. Use original512x512 files; manually resizing a file does not ensure recovery. See [why automatic resizing was removed](docs/IMAGE_SIZE_LIMITS.md). The UI has the same explanation below the image preview.
+`setup` installs the exact locked package versions automatically; no manual comparison with a package list is needed. It also downloads missing trained weights and support files, checks their hashes, and tests the model. The complete product ZIP already includes those project files; the source ZIP/clone obtains them during setup. Setup does not train a model or change your system Python. After setup, inference works locally. The [public notebook](01_PUBLIC_V3_REPRODUCE.ipynb) is an optional alternative without mounting the author's Drive.
 
-### 2. Choose V1, V2 or V3
+### 5. Computer requirements and environment
 
-| Version | Behavior and trade-off | Role |
-|---|---|---|
-| **V3, default** | Actual JPEG420 -> trained V2 expert; PNG/JPEG444 -> V1; one forward per image | **Final product; recommended default** |
-| V1 | Trained balanced extractor for every format | Optional balanced baseline/control |
-| V2 | Trained JPEG420 expert for every format; better 420 with PNG/444 trade-offs | Optional expert/control |
+Supported installation profiles: Windows10/11 x64 and x86_64 Linux with glibc2.28+. An NVIDIA GPU can accelerate inference; CPU mode also works on a computer with AMD graphics. AMD GPU acceleration, macOS and ARM are not included in these profiles.
 
 ```bash
-python wouaf.py versions
-python wouaf.py predict --image YOUR_IMAGE.jpg
-python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
-python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+python wouaf.py setup --device cpu
+python wouaf.py setup --device cuda
+python wouaf.py predict --image YOUR_IMAGE.png --device cpu
+python wouaf.py ui --no-browser
 ```
 
-The default BCH(31,11)+overall parity supports 2048 users. Add `--code 16` for the 65536-user capacity control. All versions use fixed BCH, parity and rejection policies; inference never trains or calibrates them. Routing uses the **actual encoded file header**, not filenames, GT or test labels.
+The project manages Python3.12.12, PyTorch2.7.1, torchvision0.22.1, NumPy1.26.4, Pillow12.3.0 and SciPy1.15.3. All dependencies are pinned and checked against hashes. Automatic setup tries usable NVIDIA CUDA, otherwise CPU. It selects official CUDA11.8 or12.8 packages for the GPU generation; RTX50/compute capability10+ selects12.8. `--cuda-backend cu118` or `--cuda-backend cu128` overrides that choice. A compatible NVIDIA driver is required; setup does not install drivers. See [runtime details](docs/PORTABLE_RUNTIME.md).
 
-### 3. Trained weights and training requirements
+The components were trained on an A100. **Ordinary users do not need an A100 or the original training environment.** Local mode uses the same weights and decision rules with its own fixed package versions. Windows CPU was tested against saved A100 outputs on48 native fixtures: no changed fingerprint bits or accepted IDs; maximum raw-score difference0.0000362396240234375. This finite check does not prove identical results for every image or GPU. NVIDIA CUDA and Linux paths were not hardware-tested in this Windows/AMD session.
 
-Weights are learned network parameters stored in `.pth` files. Code defines the architecture; the weights supply the behavior learned during training. **Actual trained weights are provided and downloaded automatically, so consumers do not retrain the model.** Missing/corrupt files fail verification instead of silently using a randomly initialized network.
+For researchers who need the historical A100 environment, use `python wouaf.py setup --runtime reference` and `python wouaf.py predict --runtime reference --image YOUR_IMAGE.png`. That separate mode checks Linux Python3.10.21, torch1.12.1+cu116, A100-SXM4-80GB and driver580.82.07. See [reference environment](docs/ENVIRONMENT.md). Normal setup does not download that archive.
 
-V3 combines two trained components; it does not require a third separately trained V3 `.pth`:
+### 6. Results and optional research downloads
 
-| File | Used by | Original SHA256 |
-|---|---|---|
-| `models/v1_negative_aware_2400.pth` | V1; V3 PNG/JPEG444 branch | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
-| `models/v2_jpeg420_expert_extra800.pth` | V2; V3 JPEG420 branch | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
+On a new independent image set, with1024 watermarked images per code and format, the share correctly recovered and accepted was:
 
-### 4. Inputs and outputs
+| Capacity | PNG: V1 → V3 | JPEG444 Q90: V1 → V3 | JPEG420 Q90: V1 → V3 |
+|---|---:|---:|---:|
+| k11, default |90.14% →90.14%|87.60% →87.60%|**74.12% →76.86%**|
+| k16, larger capacity |67.68% →67.68%|56.35% →56.35%|**33.40% →37.40%**|
 
-`ACCEPT` means the candidate passed correction and rejection rules; `user_id` is the accepted identity. `REJECT` returns `user_id: null`; an internal candidate must not be treated as a valid attribution. JSON also records version/branch, model hash, 32-bit fingerprint, logits/probabilities and rejection reason.
+V3 improves JPEG420 while keeping PNG/444 outputs identical to V1 for this test. The paired scene-cluster95% interval for the420 gain is +1.37 to +4.10 percentage points for k11 and +2.64 to +5.47 for k16. No false user attribution was observed in this finite study; that is not a guarantee of zero risk. The original final table does not claim a full new-set V2 evaluation across every format. Earlier V1/V2 comparisons, failed attempts and limits are kept in [results](docs/RESULTS.md) and the [research workflow](docs/RESEARCH_REPRODUCTION_zh.md).
 
-The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. No silent resizing occurs. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
-
-### 5. Public environment and data
-
-These seven research asset groups/nine files are read-only link-public. **Ordinary portable setup does not download the archived A100 environment.** Full independent-image evaluation adds the six image groups; the archived environment is used only with `--runtime reference`. The private parent release folder is not needed.
+**You do not need the following large research downloads for normal use.** They are public, read-only downloads for replaying experiments. The old environment has3 parts; the six image groups are for full independent evaluation:
 
 | Public asset group | Download | Compressed size |
 |---|---|---:|
@@ -111,7 +108,7 @@ These seven research asset groups/nine files are read-only link-public. **Ordina
 | Positive k11 PNGs | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
 | Positive k16 PNGs | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
 
-Requested research-data downloads default to `offline_assets/`; select another destination with `--asset-root PATH`. Environment parts total 2,319,751,708 bytes; environment plus the independent images totals 4,829,967,179 bytes. Extraction needs additional space. Exact file URLs, sizes and SHA256 values are in [public_assets.json](public_assets.json).
+Exact file URLs, sizes and SHA256 checksums are in [public_assets.json](public_assets.json). The environment parts total2,319,751,708 bytes; environment plus images total4,829,967,179 bytes, with extra disk space needed for extraction. Optional downloads go to `offline_assets/`, or `--asset-root PATH`.
 
 ```bash
 python wouaf.py setup --with-evaluation
@@ -120,42 +117,33 @@ python wouaf.py evaluate --version v1 --out outputs/independent_v1
 python wouaf.py evaluate --version v2 --out outputs/independent_v2
 ```
 
-To recompute statistics from saved per-image predictions without new network forwards, see the [full public reproduction guide](docs/PUBLIC_REPRODUCTION.md). Original training data, the full generator and historical 5000 latents remain optional research assets; **loading the trained product and rerunning this fixed independent image cohort does not require them**.
+See [full reproduction steps](docs/PUBLIC_REPRODUCTION.md) to use saved per-image predictions or rerun image inference. The original generator, training data and5000 latents are separate research assets; the trained app and this fixed-image evaluation do not need them. `00_PRETRAINED_V3_DEMO.ipynb` is the historical author-Drive restore notebook, not the ordinary public setup.
 
-### 6. Final-version results
+### 7. Files, trained weights and optional training
 
-Fresh independent-content validation, 1024 positives per code/condition, V1 -> final V3:
+| Folder/file | Purpose |
+|---|---|
+| `start_ui.cmd`, `wouaf.py` | Normal app and command-line entry points |
+| `models/` | Already-trained V1/V2 component weights; V3 uses both |
+| `configs/`, `ecc_wouaf/`, `ecc/` | Version choices, image reading, bit recovery and fixed acceptance rules |
+| `environment/portable/` | Local environment installer and dependency locks |
+| `environment/locked/` | Historical reference environment support |
+| `training/` | Optional code for people who want to train a different model |
+| `reports/`, `docs/` | Experiments, results, limits and reproduction guides |
+| `outputs/` | Your local results and installation records |
 
-| Code | PNG accepted exact recovery | JPEG444 Q90 | JPEG420 Q90 |
-|---|---:|---:|---:|
-| k11, default | 90.14% -> 90.14% | 87.60% -> 87.60% | **74.12% -> 76.86%** |
-| k16, capacity control | 67.68% -> 67.68% | 56.35% -> 56.35% | **33.40% -> 37.40%** |
+**Weights** are the parameters learned during training, saved as`.pth` files. The provided weights make this a trained product. If they are missing, setup downloads them; it does not ask users to retrain or silently use a random model. The original files stay available in the [v3.0.0 model Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0):
 
-The JPEG420 gain has a paired scene-cluster 95% interval of +1.37 to +4.10 percentage points for k11, and +2.64 to +5.47 for k16. PNG/444 outputs remain identical per sample. Zero false attribution was observed in this finite study, not a guarantee of zero population risk. Full new-cohort V2 results across all formats are not presented as part of the original final validation table; save additional evaluations separately. Complete V1/V2/V3 controls, training history and limitations are in [RESULTS](docs/RESULTS.md) and the [research workflow](docs/RESEARCH_REPRODUCTION_zh.md).
+| File | SHA256 checksum |
+|---|---|
+| `models/v1_negative_aware_2400.pth` | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
+| `models/v2_jpeg420_expert_extra800.pth` | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
 
-### 7. Project layout and optional training
+Training is separate and optional; see [training instructions](docs/TRAINING.md). Normal setup, the UI and prediction commands never start it. Large files use GitHub Releases/public Drive instead of ordinary Git history.
 
-```text
-wouaf.py                         Product setup / predict / versions / verify / evaluate
-configs/pretrained.json          Default final V3 system
-configs/versions/v1.json,v2.json Optional V1/V2 controls
-models/                          Checkpoint destinations and verified download manifest
-ecc_wouaf/                       Extractor, format routing, BCH, parity, rejection
-environment/locked/              Frozen runtime restorer, inventories and isolated launcher
-public_assets.json               Public runtime/image file URLs, sizes and hashes
-training/                        Separate training source, unused by normal inference
-reports/                         Controls, training history and per-image results
-docs/                            Runtime, workflow, training and reproduction details
-01_PUBLIC_V3_REPRODUCE.ipynb      Public product setup without private Drive mounting
-```
+### 8. Original WOUAF and credits
 
-Only consumers who want to change/retrain models need the separate [training workflow](docs/TRAINING.md). `setup` automatically restores saved predictions, native demo files and binary decoding tables from support assets. Large objects use GitHub Releases/public Drive rather than ordinary Git history.
-
-Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace original model, image and library terms. Product-distribution updates do not retrain models, modify weights or tune thresholds. Windows CPU migration was tested on 48 native fixtures: zero bit differences and zero changed accepted attribution decisions versus saved A100 outputs; maximum logit difference was 0.0000362396240234375. This finite fixture check does not prove identical behavior on the entire cohort or on every GPU. NVIDIA CUDA and Linux installation paths use official binaries but were not hardware-tested in this Windows/AMD session.
-
-### 8. References and upstream credit
-
-This Applied Project builds on [the original WOUAF repository by kylemin](https://github.com/kylemin/WOUAF), the upstream implementation accompanying the CVPR2024 work. Our additions include ECC/parity/rejection experiments, V1/V2/V3 comparisons, local deployment and this web UI. The upstream work remains credited to its authors; this repository is an applied extension. For academic citation, use the [upstream citation information](https://github.com/kylemin/WOUAF#citation). See [references and contribution scope](docs/REFERENCES.md).
+This Applied Project builds on [kylemin's original WOUAF repository](https://github.com/kylemin/WOUAF), accompanying the CVPR2024 work. Our additions cover error correction, parity and rejection tests, V1/V2/V3 comparisons, local setup and the web UI. Credit for the original method and implementation remains with its authors. Use the [upstream citation](https://github.com/kylemin/WOUAF#citation) for academic references; see [references](docs/REFERENCES.md) and [third-party notices](THIRD_PARTY_NOTICES.md). Public downloads do not replace the original model, image or library license terms.
 
 ---
 
@@ -163,105 +151,97 @@ This Applied Project builds on [the original WOUAF repository by kylemin](https:
 
 ## 中文
 
-**下载、运行环境配置命令，然后直接使用。默认是已经训练好的最终 V3，不需要重新训练。** 本工具读取 512×512 的原生 PNG/JPEG 图片，恢复 WOUAF 用户指纹，并输出用户归属或 `REJECT`。证据不足时拒绝归属。
+**这是一个下载后就能使用的 WOUAF 图片指纹识别工具。默认加载训练好的 V3，无须重新训练。**
 
-V1、V2、V3 的代码、配置和版本选择均保留；V1/V2 是额外选项。训练源码单独位于 `training/`，普通安装和预测不会进入训练。
+如果图片里保留了能恢复的 WOUAF 指纹，程序会给出对应用户ID；信息不足时显示 `REJECT`，并说明原因。它负责读取已有指纹，不会给照片添加指纹，也不是通用水印检测器，不能识别任意普通照片的作者。
 
-### 1. 下载并使用
+### 1. Windows 用户从这里开始
 
-**本地网页界面（推荐）：**双击 `start_ui.cmd`。首次需要时会自动配置环境，然后在默认浏览器打开 WOUAF Studio。上传/拖入原生512x512 PNG/JPEG，选择默认V3或V1/V2，点击“开始识别指纹”。直接显示接受的用户ID或直白的拒绝原因、实际提取器/格式，并可下载JSON。支持中英文切换及内置示例。点击“关闭服务”停止本机进程；仅关闭浏览器标签页不会停止服务。图片全部在本机处理，不使用云服务。见[界面说明](docs/LOCAL_UI.md)。其他项目副本或程序占用默认端口时，本副本会使用独立的空闲端口；重复启动同一运行中的副本会重新打开其原有地址。
+1. 打开[最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest)，下载名称以 `local-3.0.7.zip` 结尾的**完整产品 ZIP**。它已经包含训练权重和演示文件；GitHub 自动生成的源码 ZIP 不包含这些大文件。
+2. 把整个 ZIP 解压到普通文件夹，不要在压缩包内直接运行。
+3. 双击 `start_ui.cmd`。首次会自动下载 Python 并安装依赖，所有环境文件都放在项目目录里。请等配置结束。首次需要联网；不用预装 Python、不用 Colab、不用登录作者的 Drive，也不用 A100。
+4. 默认浏览器会打开 WOUAF Studio。上传**原始512×512的 PNG/JPEG**，保留默认 **V3**，点击**开始识别指纹**。
+5. 查看用户ID或拒绝原因。点击**下载完整 JSON 结果**可保存详细结果，程序也会在 `outputs/ui/` 留一份副本。
 
-```bash
-python wouaf.py ui                  # Open the installed portable product in a browser.
-python wouaf.py ui --no-browser     # Print the loopback URL without opening a browser.
+想先确认安装正常，可以上传 `demo/images/png8_control/positive_k11/10000000.png`。保持默认V3/k11，随附的这张带指纹示例应显示**用户565**。普通照片被拒绝不代表安装失败；带指纹JPEG压缩后，也可能因为指纹受损而被拒绝。
+
+点击**关闭服务**才会停止后台；只关浏览器标签页不会停止。再次启动同一目录会打开已有服务，另一个项目副本遇到端口占用则自动换空闲端口。图片只在本机处理，不上传云端。界面支持中英文和较大的桌面字号，详见[网页界面说明](docs/LOCAL_UI.md)。
+
+### 2. 能上传什么图片？结果怎么看？
+
+- 使用原始512×512 PNG/JPEG，上限10MiB。程序**不缩放、不裁剪、不补边**。手动改成512也不能恢复缩放时丢失的指纹信息，见[为什么取消自动缩放](docs/IMAGE_SIZE_LIMITS.md)。
+- `ACCEPT`：恢复的指纹通过了固定检查，`user_id` 是被接受的用户ID。
+- `REJECT`：没有通过检查，因此不归属给任何用户，`user_id` 为 `null`。这不能证明图片没有水印。页面会解释最先失败的规则，例如错误位太多，或证据不足。
+- JSON保留所选版本、实际使用的提取器、图片格式、模型文件校验值、32位预测指纹、原始模型分数（`logits`）、每位概率和拒绝原因。每位概率不等于“用户身份正确的概率”。
+
+实验准确率对应原始512×512 RGB、PNG，以及Pillow Q90的JPEG444/JPEG420。其他压缩质量、编辑、截图或攻击不包含在这些准确率里。把JPEG转存为PNG既不能消除压缩损伤，也会丢失原JPEG采样信息。
+
+### 3. V3、V1、V2 怎么选？
+
+| 选项 | 做什么 | 适合用途 |
+|---|---|---|
+| **V3，默认** | PNG/JPEG444用V1，真实JPEG420用V2 | **最终成品，日常推荐** |
+| V1 | 所有图片都用平衡提取器 | 与早期平衡版本对比 |
+| V2 | 所有图片都用JPEG420专家 | 对比JPEG420效果；PNG/444可能下降 |
+
+V3读取真实文件头来选择模型，不看扩展名或已知答案。项目保存两份训练组件，每张图片只运行其中一份；不需要第三个单独的V3权重文件。
+
+默认纠错方式BCH(31,11)+整体奇偶校验（`k11`）支持2048个用户ID。可选 `k16` 支持65536个ID，但本实验中的成功恢复率较低。这是用户容量的取舍，不是训练步数的区别。一般保留V3和k11即可。
+
+### 4. 想用命令行？
+
+没有Python的Windows用户可先运行 `setup_windows.cmd`，再把图片拖到 `predict_windows.cmd` 上，也可执行：
+
+```bat
+predict_windows.cmd "YOUR_IMAGE.png" v3
+predict_windows.cmd "YOUR_IMAGE.jpg" v1
+predict_windows.cmd "YOUR_IMAGE.jpg" v2
 ```
 
-**Windows没有预装Python也可以：**解压完整产品ZIP后运行 `setup_windows.cmd`，它会自动准备项目独立的Python环境。然后把512×512图片拖到 `predict_windows.cmd` 上，或在终端执行 `predict_windows.cmd "YOUR_IMAGE.png" v3`；第二个参数也可选择v1或v2。结果JSON保存在 `outputs/`。不需要系统Python，也不需要A100。
-
-从 [最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest) 下载 **完整产品 ZIP** 并解压；也可 clone 本仓库或使用 GitHub 的 Code → Download ZIP。进入项目目录后：
+已经安装Python3.9+的用户，可以克隆或下载仓库，在项目目录打开终端执行：
 
 ```bash
-# Download trained checkpoints and demo assets; install the portable runtime and self-check.
 python wouaf.py setup
-
-# Use final V3 on a native 512x512 PNG/JPEG file.
+python wouaf.py ui
 python wouaf.py predict --image YOUR_IMAGE.png --output outputs/prediction.json
-```
-
-`setup` 自动下载/校验训练权重与支撑文件，创建独立的 Python 环境，按完整版本与hash锁文件安装官方 PyTorch 依赖，然后检查模型。不修改系统 Python。完整产品 ZIP 已包含权重和支撑文件，安装时直接复用。**不需要逐个对照清单安装依赖，不需要重新训练，也不用登录作者的 Drive。**
-
-**普通个人电脑本地使用已设为默认，不要求 A100。** 支持 Windows10/11 x64、x86_64 Linux（glibc2.28+）。用已有的 Python3.9+ 启动安装器即可，它自动管理 Python3.12.12、torch2.7.1、torchvision0.22.1、NumPy1.26.4、Pillow12.3.0 和 SciPy1.15.3。
-
-```bash
-python wouaf.py setup                              # Prefer usable NVIDIA CUDA; otherwise select CPU.
-python wouaf.py predict --image YOUR_IMAGE.png
-python wouaf.py setup --device cpu                 # Explicit CPU installation.
-python wouaf.py setup --device cuda                # Require a supported NVIDIA GPU and driver.
-python wouaf.py predict --image YOUR_IMAGE.png --device cpu
-```
-
-自动配置按显卡代际选择官方 CUDA11.8 或 CUDA12.8 PyTorch 安装包，RTX50/compute capability10+ 使用 CUDA12.8；也可添加 `--cuda-backend cu118` 或 `--cuda-backend cu128` 明确选择。GPU 加速需要可用的 NVIDIA 驱动，程序不替换系统驱动。自动模式下 CUDA 无法工作时改用 CPU。配有 AMD 显卡的电脑也可运行 CPU 模式，但本版不声称支持 AMD GPU 加速。检查依据是真实张量运算与模型自检，不再把显卡名称必须为 A100 当作普通使用条件。
-
-**A100 只作为原实验的严格参考环境保留**，需要主动选择：
-
-```bash
-python wouaf.py setup --runtime reference
-python wouaf.py predict --runtime reference --image YOUR_IMAGE.png
-```
-
-严格参考模式继续保留原 Linux Python3.10.21 / torch1.12.1+cu116 归档以及 A100-SXM4-80GB / driver580.82.07 检查。普通模式使用同一份训练权重、预处理、BCH 码表、格式路由和拒绝门槛，通过单独锁定的软件栈在本地运行；输出不会冒充 A100 严格复现。详见[普通运行模式](docs/PORTABLE_RUNTIME.md)和[参考环境说明](docs/ENVIRONMENT.md)。当前没有提供 macOS/ARM 的可执行推理环境。
-
-
-不想复制终端命令时，使用 [公开产品 notebook](01_PUBLIC_V3_REPRODUCE.ipynb)：它直接从公开 GitHub/Drive 文件恢复，不挂载作者 Drive。原 `00_PRETRAINED_V3_DEMO.ipynb` 保留为作者原 Drive 归档的历史恢复入口。
-
-先用随附图片验证输入：
-
-```bash
-python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.png
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
+python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+python wouaf.py predict --image YOUR_IMAGE.png --code 16
+python wouaf.py versions
 python wouaf.py verify
 ```
 
-**图片尺寸规则：**本版恢复3.0.3的原始512行为，取消3.0.4的缩放界面、CLI选项和API支持。缩放/补边改变指纹像素，实测导致恢复率下降。请使用原始512x512文件，手工改尺寸不保证恢复。原因见[为什么取消自动缩放](docs/IMAGE_SIZE_LIMITS.md)，网页预览下方也有相同说明。
+`setup` 自动按锁定版本安装依赖，不用对照清单逐个下载。它还会补齐训练权重和支撑文件，校验文件是否完整，并测试模型。完整产品ZIP已包含这些项目文件；源码ZIP/克隆版会在安装时补齐。安装不会训练模型，也不修改系统Python。配置完成后在本机推理；[公开 notebook](01_PUBLIC_V3_REPRODUCE.ipynb)只是另一种可选入口，不需要挂载作者Drive。
 
-### 2. V1、V2、V3 怎么选
+### 5. 电脑要求与环境配置
 
-| 版本 | 行为与区别 | 用途 |
-|---|---|---|
-| **V3，默认** | 真实 JPEG420 → V2 专家；PNG/JPEG444 → V1；每图一次网络前向 | **最终产品，推荐日常使用** |
-| V1 | 所有格式都用已训练的平衡提取器 | 额外的平衡基线/对照 |
-| V2 | 所有格式都用已训练 JPEG420 专家；420 改善，PNG/444 有取舍 | 额外的专家/对照 |
+目前提供Windows10/11 x64和x86_64 Linux（glibc2.28+）安装方案。有兼容NVIDIA显卡可以加速；配AMD显卡的电脑也能使用CPU模式。本版不包含AMD显卡加速、macOS或ARM运行方案。
 
 ```bash
-python wouaf.py versions
-python wouaf.py predict --image YOUR_IMAGE.jpg                 # Final V3 by default.
-python wouaf.py predict --image YOUR_IMAGE.jpg --version v1
-python wouaf.py predict --image YOUR_IMAGE.jpg --version v2
+python wouaf.py setup --device cpu
+python wouaf.py setup --device cuda
+python wouaf.py predict --image YOUR_IMAGE.png --device cpu
+python wouaf.py ui --no-browser
 ```
 
-默认 BCH(31,11)+整体 parity，容量 2048 用户；需要容量对照时添加 `--code 16`，容量 65536 用户。所有版本使用固定 BCH、parity 和拒绝门槛，预测时不会校准或训练。V3 按**实际文件头**识别 JPEG420，不按文件名或 GT 选分支。
+程序自动管理Python3.12.12、PyTorch2.7.1、torchvision0.22.1、NumPy1.26.4、Pillow12.3.0、SciPy1.15.3；所有依赖都有固定版本和文件校验。自动配置优先使用可工作的NVIDIA CUDA，否则改用CPU。按显卡代际选择官方CUDA11.8/12.8包，RTX50/compute capability10+使用12.8；也可用 `--cuda-backend cu118` 或 `--cuda-backend cu128` 指定。显卡驱动需要用户已有兼容版本，程序不安装驱动。详见[本地运行环境](docs/PORTABLE_RUNTIME.md)。
 
-### 3. 模型权重是什么，需不需要训练
+组件是在A100上训练的，**普通使用不需要A100，也不需要重建训练环境**。本地模式保留原权重和判断规则，使用单独固定的软件版本。Windows CPU已与保存的A100结果对比48张原始图片：指纹位和已接受用户ID均无变化，最大原始分数差0.0000362396240234375。有限测试不能证明所有图片、所有显卡都完全一致。本次Windows/AMD测试没有实测NVIDIA CUDA或Linux硬件。
 
-权重是训练得到的网络参数，保存在 `.pth` 文件中；代码定义网络，权重提供训练学到的行为。**本项目提供真实训练权重，安装器自动取得它们，所以使用者无需重新训练。** 缺失、损坏或校验不符会报错，不会把随机初始化网络当作成品。
+只有需要复现历史A100实验的研究者，才使用 `python wouaf.py setup --runtime reference` 和 `python wouaf.py predict --runtime reference --image YOUR_IMAGE.png`。该模式检查Linux Python3.10.21、torch1.12.1+cu116、A100-SXM4-80GB和driver580.82.07，见[参考环境说明](docs/ENVIRONMENT.md)。普通安装不会下载这份旧环境归档。
 
-V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pth`：
+### 6. 实验结果与可选研究数据
 
-| 文件 | 使用版本 | 原始 SHA256 |
-|---|---|---|
-| `models/v1_negative_aware_2400.pth` | V1，以及 V3 的 PNG/JPEG444 分支 | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
-| `models/v2_jpeg420_expert_extra800.pth` | V2，以及 V3 的 JPEG420 分支 | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
+在一组新的独立图片上，每种编码、每种格式各1024张带指纹图片，成功恢复正确用户并通过检查的比例为：
 
-权重与实验支撑附件在 [v3.0.0 模型 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0) 保留不变；当前产品安装器使用这些已校验的原始对象。产品安装/下载流程更新不代表追加训练了一个新模型版本。
+| 容量设置 | PNG：V1 → V3 | JPEG444 Q90：V1 → V3 | JPEG420 Q90：V1 → V3 |
+|---|---:|---:|---:|
+| k11，默认 |90.14% →90.14%|87.60% →87.60%|**74.12% →76.86%**|
+| k16，较大容量 |67.68% →67.68%|56.35% →56.35%|**33.40% →37.40%**|
 
-### 4. 读取结果
+这次测试里V3提高了JPEG420效果，PNG/444的逐图输出与V1完全一致。按同源场景分组计算，420提升的95%配对区间为：k11 +1.37～+4.10个百分点，k16 +2.64～+5.47个百分点。本次有限测试未观察到错误用户归属，不代表真实风险为零。原最终表没有声称完成V2在新数据全部格式上的全量测试。早期V1/V2对照、失败尝试和限制保留在[结果说明](docs/RESULTS.md)及[研究流程](docs/RESEARCH_REPRODUCTION_zh.md)。
 
-`ACCEPT` 表示通过纠错与拒绝规则，`user_id` 是接受的用户 ID。`REJECT` 时 `user_id` 为 `null`，内部候选不能当作有效归属。JSON 还保留所选版本/分支、模型 hash、32-bit 指纹、logits/probabilities 和拒绝原因。
-
-验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。输入不会被静默缩放。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
-
-### 5. 公开环境和数据下载
-
-下面 7 组、9 个研究资产允许匿名只读下载。**普通本地安装不下载旧 A100 环境归档**；完整独立图像验证才额外下载六组图片。旧环境归档只在 `--runtime reference` 模式中使用，不需要访问作者的私有发布根目录。
+**日常使用不用下载下面这些大型研究数据。** 它们开放匿名只读下载，供复现实验；旧环境有3个分片，6组图片用于完整独立评估：
 
 | 公开文件组 | 下载链接 | 下载大小 |
 |---|---|---:|
@@ -273,52 +253,39 @@ V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pt
 | 真实 JPEG444 Q90 验证视图 | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
 | 真实 JPEG420 Q90 验证视图 | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
 
-可选研究数据的默认下载位置为 `offline_assets/`，也可通过 `--asset-root PATH` 指定。演示环境归档共 2,319,751,708 字节；完整环境加独立图像共 4,829,967,179 字节，解压需额外空间。每个分片的 URL、大小和 SHA256 在 [public_assets.json](public_assets.json)。
+准确下载地址、大小和SHA256校验值见 [public_assets.json](public_assets.json)。环境分片合计2,319,751,708字节；环境加图片合计4,829,967,179字节，解压还需要额外空间。可选文件默认下载到 `offline_assets/`，也可用 `--asset-root PATH` 指定位置。
 
 ```bash
-# Prepare the product and complete independent images without training.
 python wouaf.py setup --with-evaluation
-
-# Evaluate V3 on native images and save new outputs.
 python wouaf.py evaluate --version v3 --out outputs/independent_v3
-# Optional controls on the same image cohort.
 python wouaf.py evaluate --version v1 --out outputs/independent_v1
 python wouaf.py evaluate --version v2 --out outputs/independent_v2
 ```
 
-无需重新前向时，可按 [完整复现指南](docs/PUBLIC_REPRODUCTION.md) 从公开保存的逐样本预测重算统计。旧训练数据、完整生成器、历史 5000 latents 等属于可选研究资产，仍独立保存；**加载成品和重跑上述独立图像验证不需要这些资产**。
+[完整复现指南](docs/PUBLIC_REPRODUCTION.md)介绍如何用已保存的逐图预测重算统计，以及如何重新读取图片评估。原生成器、训练数据和5000个latent是单独的研究资产，使用训练好的成品和这组固定图片评估不需要它们。`00_PRETRAINED_V3_DEMO.ipynb` 是历史作者Drive恢复入口，不是普通用户安装步骤。
 
-### 6. 最终版本的结果
+### 7. 项目文件、训练权重与自行训练
 
-以下为新独立内容验证，每码、每条件 1024 张正样本，V1 → 最终 V3：
+| 文件/目录 | 用途 |
+|---|---|
+| `start_ui.cmd`、`wouaf.py` | 日常网页和命令行入口 |
+| `models/` | 训练好的V1/V2组件权重，V3使用这两份组件 |
+| `configs/`、`ecc_wouaf/`、`ecc/` | 版本选择、读取图片、恢复指纹和固定判断规则 |
+| `environment/portable/` | 本地环境安装器和依赖锁定文件 |
+| `environment/locked/` | 历史参考环境相关文件 |
+| `training/` | 想训练其他模型时使用的可选代码 |
+| `reports/`、`docs/` | 实验、结果、限制和复现说明 |
+| `outputs/` | 本机结果与安装记录 |
 
-| 码 | PNG 正确恢复 | JPEG444 Q90 | JPEG420 Q90 |
-|---|---:|---:|---:|
-| k11，默认 | 90.14% → 90.14% | 87.60% → 87.60% | **74.12% → 76.86%** |
-| k16，容量对照 | 67.68% → 67.68% | 56.35% → 56.35% | **33.40% → 37.40%** |
+**权重**就是训练学到的参数，保存在`.pth`文件里。项目提供的权重让它成为训练好的产品；缺失时安装器自动下载，不会让用户重新训练，也不会悄悄使用随机模型。原文件继续保存在 [v3.0.0模型Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0)：
 
-JPEG420 改善的 95% 场景块配对区间：k11 +1.37～4.10 个百分点，k16 +2.64～5.47 个百分点。PNG/444 逐样本输出保持一致。本次有限样本中观察到错误归属为 0，不代表总体风险为 0。V2 在所有新格式的全量结果不冒充原最终验证表；自行评估应另存。详细的 V1/V2/V3 对照、训练过程与局限见 [RESULTS](docs/RESULTS.md) 和 [完整研究流程](docs/RESEARCH_REPRODUCTION_zh.md)。
+| 文件 | SHA256校验值 |
+|---|---|
+| `models/v1_negative_aware_2400.pth` | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
+| `models/v2_jpeg420_expert_extra800.pth` | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
 
-### 7. 项目结构与可选自行训练
+自行训练是独立的可选功能，见[训练说明](docs/TRAINING.md)。普通配置、网页和预测命令都不会启动训练。大文件通过GitHub Releases或公开Drive分发，不放入普通Git历史。
 
-```text
-wouaf.py                         成品入口：setup / predict / versions / verify / evaluate
-configs/pretrained.json          默认最终 V3
-configs/versions/v1.json,v2.json  可选 V1/V2
-models/                          真实权重的目标路径及自动下载清单
-ecc_wouaf/                       提取、格式路由、BCH、parity 与拒绝逻辑
-environment/locked/              冻结环境恢复器、清单和隔离启动器
-public_assets.json               已公开环境/验证图像的实际下载与校验信息
-training/                        单独的训练源码；普通使用不会调用
-reports/                         版本对照、训练历史与逐样本实验结果
-docs/                            完整环境、研究流程、训练和复现说明
-01_PUBLIC_V3_REPRODUCE.ipynb      不挂载私人 Drive 的成品入口
-```
+### 8. 原始 WOUAF 与引用
 
-自行训练仅供需要改变模型的使用者，说明在 [TRAINING](docs/TRAINING.md)。保存预测、演示图与二进制表由 `setup` 自动从支撑附件恢复。大文件采用 GitHub Releases / 公开 Drive 分发，不放进普通 Git 历史。
-
-保留上游 [WOUAF](https://github.com/kylemin/WOUAF) 许可与 [第三方通知](THIRD_PARTY_NOTICES.md)。公开下载不改变原模型、照片和归档库的既有许可。本次本地兼容改造没有重训、修改权重或调整门槛。Windows CPU 已实测48张原生测试图片：与保存的A100结果相比，指纹位差异为0、接受的归属决定变化为0，最大logit差异0.0000362396240234375。这是有限测试，不能据此声称全部队列或所有显卡逐位一致。本机是Windows/AMD配置，本次未对NVIDIA CUDA或Linux硬件进行实测；其安装入口使用官方二进制。
-
-### 8. 引用与原项目来源
-
-本Applied Project基于[kylemin的WOUAF原项目](https://github.com/kylemin/WOUAF)，对应CVPR2024工作的上游实现。本项目扩展ECC/parity/拒绝实验、V1/V2/V3对照、本地部署和网页界面；原方法和实现归原作者，本仓库为应用扩展。学术引用请参考[上游Citation信息](https://github.com/kylemin/WOUAF#citation)，另见[引用及贡献范围](docs/REFERENCES.md)。
+本Applied Project基于[kylemin的WOUAF原项目](https://github.com/kylemin/WOUAF)，对应CVPR2024工作。我们的扩展包括纠错、奇偶校验与拒绝测试、V1/V2/V3对照、本地安装和网页界面。原方法与实现归原作者。学术引用请使用[上游Citation](https://github.com/kylemin/WOUAF#citation)，并阅读[引用说明](docs/REFERENCES.md)和[第三方通知](THIRD_PARTY_NOTICES.md)。开放下载不改变原模型、图片和依赖库的许可条件。

@@ -1,5 +1,5 @@
 {
-  "distribution_version": "3.0.6",
+  "distribution_version": "3.0.7",
   "default_runtime": "portable",
   "default_model": "v3",
   "optional_models": [

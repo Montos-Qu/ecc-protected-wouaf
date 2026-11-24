@@ -1,0 +1,113 @@
+{
+  "passed": true,
+  "distribution_version": "3.0.6",
+  "platform_tested": "Windows x64 CPU",
+  "fresh_public_download_and_isolated_install": true,
+  "system_Python_removed_from_launcher_PATH": true,
+  "install_seconds": 71.21,
+  "selfcheck_fixtures": 48,
+  "selfcheck_bit_differences": 0,
+  "browser_file_upload_results": [
+    {
+      "requested_version": "v3",
+      "group": "positive_k11",
+      "condition": "png8_control",
+      "code": "BCH(31,11)+P",
+      "decision": "ACCEPT",
+      "user_id": 565,
+      "reject_reason": null,
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v1",
+      "group": "positive_k11",
+      "condition": "png8_control",
+      "code": "BCH(31,11)+P",
+      "decision": "ACCEPT",
+      "user_id": 565,
+      "reject_reason": null,
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v2",
+      "group": "positive_k11",
+      "condition": "png8_control",
+      "code": "BCH(31,11)+P",
+      "decision": "ACCEPT",
+      "user_id": 565,
+      "reject_reason": null,
+      "selected_branch": "jpeg420_expert",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v3",
+      "group": "positive_k11",
+      "condition": "jpeg_q90_420",
+      "code": "BCH(31,11)+P",
+      "decision": "REJECT",
+      "user_id": null,
+      "reject_reason": "outside_BCH_decoding_radius",
+      "selected_branch": "jpeg420_expert",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v3",
+      "group": "generated_negative",
+      "condition": "png8_control",
+      "code": "BCH(31,11)+P",
+      "decision": "REJECT",
+      "user_id": null,
+      "reject_reason": "outside_BCH_decoding_radius",
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v3",
+      "group": "positive_k16",
+      "condition": "png8_control",
+      "code": "BCH(31,16)+P",
+      "decision": "ACCEPT",
+      "user_id": 16218,
+      "reject_reason": null,
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v3",
+      "group": "positive_k11",
+      "condition": "jpeg_q90_444",
+      "code": "BCH(31,11)+P",
+      "decision": "REJECT",
+      "user_id": null,
+      "reject_reason": "outside_BCH_decoding_radius",
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    },
+    {
+      "requested_version": "v3",
+      "group": "positive_k11",
+      "condition": "png8_control",
+      "code": "BCH(31,11)+P",
+      "decision": "ACCEPT",
+      "user_id": 565,
+      "reject_reason": null,
+      "selected_branch": "clean_v1",
+      "download_equals_saved_JSON": true
+    }
+  ],
+  "English_Chinese_switch_observed": true,
+  "wrong_dimensions_message_observed": true,
+  "size_explanation_observed": true,
+  "actual_header_routing_with_renamed_file_passed": true,
+  "all_result_download_bodies_equal_saved_JSON": true,
+  "browser_JSON_download_link_clicked": true,
+  "browser_download_disk_location_claimed": false,
+  "same_checkout_reopen_and_separate_port_passed": true,
+  "local_README_links_checked": 48,
+  "CUDA_hardware_tested": false,
+  "Linux_hardware_tested": false,
+  "training_performed": false,
+  "automatic_resizing_available": false
+}

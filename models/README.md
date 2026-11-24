@@ -1,4 +1,4 @@
-# Trained model components
+# Trained model files
 
 [English](#english) | [中文](#chinese)
 
@@ -6,15 +6,18 @@
 
 ## English
 
-V3 uses two already trained checkpoint files. No retraining is required. Ordinary Git history excludes these large objects; their actual bytes are available in the GitHub Release.
+These two`.pth` files contain what the models learned during training. They are already trained: users do not need to train them again.
 
-```bash
-python scripts/download_pretrained.py
-```
+From the project root, run `python wouaf.py setup`. It checks existing files and downloads missing ones automatically. The complete product ZIP already includes both weights; GitHub's source ZIP/clone downloads them during setup. Large weights are stored in GitHub Releases rather than ordinary Git history.
 
-Normal consumers can run `python wouaf.py setup` from the repository root; it includes this download step. `pretrained_manifest.json` records the actual Release URLs, file sizes and original SHA256 values. Correct existing files are reused. Conflicting existing files are rejected without overwrite, and inference never falls back to random weights. The complete pretrained Release ZIP already contains both checkpoints, so the downloader verifies those files.
+| Component | How it is used |
+|---|---|
+| V1, trained2400 steps | Balanced image reader; used by V1 and by V3 for PNG/JPEG444 |
+| V2, selected at800 extra steps | JPEG420 specialist; used by V2 and by V3 for JPEG420 |
 
-V1 is the negative-aware dual-head extractor trained for 2400 steps. V2 is the JPEG420 expert selected at extra800. V3 selects the trained component from the actual file header; it is not a newly trained single network. Names, architectures, thresholds and hashes remain consistent with the original Drive archive.
+V3 chooses between these components from the actual image format. There is no missing third V3 file. Both use the original architecture and fixed decision thresholds.
+
+For a weights-only download, run `python scripts/download_pretrained.py` from the root. `pretrained_manifest.json` records the official project Release URLs, sizes and SHA256 checksums. A matching file is reused. A conflicting file causes an error without being overwritten; the app never substitutes a random untrained model.
 
 ---
 
@@ -22,12 +25,15 @@ V1 is the negative-aware dual-head extractor trained for 2400 steps. V2 is the J
 
 ## 中文
 
-V3默认使用这两份已经训练好的权重，不需要重新训练。普通Git历史不存储大权重；GitHub Release提供实际文件。
+这两份`.pth`文件保存了模型训练学到的参数，也就是“权重”。它们已经训练好，使用者不用重新训练。
 
-```bash
-python scripts/download_pretrained.py
-```
+在项目根目录运行 `python wouaf.py setup` 即可自动检查已有文件并补齐缺失权重。完整产品ZIP已经包含两份权重；源码ZIP/克隆版会在配置时自动下载。大权重保存在GitHub Releases，不放进普通Git历史。
 
-下载器使用 `pretrained_manifest.json` 的真实Release地址、文件大小和原始SHA256。已有正确文件直接复用；已有不符文件会报错，不会覆盖，也不会回退到随机模型。完整预训练Release ZIP已经包含权重，下载器只做校验。
+| 组件 | 怎么使用 |
+|---|---|
+| V1，训练2400步 | 平衡提取器；V1使用，V3处理PNG/JPEG444时也使用 |
+| V2，选用追加800步的权重 | JPEG420专家；V2使用，V3处理JPEG420时也使用 |
 
-V1：负样本感知双头提取器，2400步。V2：JPEG420专家，选择extra800。V3根据实际文件头选择分支；这不是一个新训练的单模型。两版本的文件名、网络、门槛和hash均与原Drive归档一致。
+V3按真实图片格式选择组件，不是缺少了第三个V3文件。组件保留原模型结构和固定判断门槛。
+
+如果只想下载权重，在根目录执行 `python scripts/download_pretrained.py`。`pretrained_manifest.json`保存项目Release下载地址、大小和SHA256校验值。正确文件直接复用，不符文件报错但不覆盖；程序不会拿随机未训练模型代替。

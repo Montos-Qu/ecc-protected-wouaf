@@ -6,6 +6,10 @@
 
 ## English
 
+What happened: further training helped JPEG420, but this candidate did not keep every required PNG/444 result. It was therefore not chosen as a replacement for V1 at that stage. Its trained JPEG420 specialist was later used as one component of the final V3. This folder records that earlier experiment; ordinary users can choose V3 in the app and skip these training details.
+
+### Experiment details
+
 Historical experiment record: this candidate failed the full predeclared retention requirements, so V1 remained the retained release at that stage. The current product defaults to final format-routed V3; V2 is its optional JPEG420 expert/control. No historical outcome is changed here.
 
 Parent: `<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z`.
@@ -17,13 +21,17 @@ The objective adds full BCH-codebook cross-entropy divided by32 to the dual-head
 
 Selection requires at least98% of V1's per-condition correct count for k11,95% for k16, and no bad acceptance for either code. Candidates are ordered by the fixed JPEG420 criteria, with the parent as step0 fallback. BCH/bit/presence thresholds never change; tests are not used for selection/tuning. Calibration roles had been observed historically, so this is not fresh independent data.
 
-Regression tables are in `RESULTS_zh.html`/`regression_cells.csv`; per-image GT/logits/bits/presence/decisions are in `regression_v2_k*.npz`. Zero observed error is not zero population risk. This experiment did not automatically replace the release; later independent content validation addresses generalization.
+Regression tables are in `RESULTS_zh.html`/`regression_cells.csv`; per-image GT/logits/bits/presence/decisions are in `regression_v2_k*.npz`. Seeing no mistakes in this sample does not mean the system can never make a mistake. This experiment did not automatically replace the release; later independent content validation addresses generalization.
 
 ---
 
 <a name="chinese"></a>
 
 ## 中文
+
+这轮做了什么：继续训练以改善JPEG420，但候选没有同时保住所有要求的PNG/444结果，因此当时没有整体替换V1。后来最终V3使用了其中训练好的JPEG420专家组件。这里保留的是早期实验记录；普通用户在界面选择V3即可，不需要照着下面重新训练。
+
+### 实验详情
 
 历史实验记录；当前成品默认版本见仓库根README中的最终V3。以下保留该阶段的方法和结果。
 

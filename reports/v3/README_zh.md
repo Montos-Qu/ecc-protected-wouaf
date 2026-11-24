@@ -6,6 +6,10 @@
 
 ## English
 
+The final V3 keeps the better choice for each format: PNG/JPEG444 use V1, JPEG420 uses V2. Users only need to select V3; the app makes that choice automatically. The table below is an earlier regression test, not the later independent final test shown in the root README. Both records are kept, with their different datasets clearly identified.
+
+### Experiment details
+
 This is a system-level improvement: PNG/JPEG444 use V1, actual JPEG420 uses the trained V2 expert. Routing reads header sampling factors rather than filename, GT, user ID or test labels. BCH, confidence and presence policies remain fixed.
 
 The extra1600-step single-model attempt and subsequent weight interpolation failed simultaneous retention and remain separate controls. This routed combination adds no training updates and does not claim one network improved every format.
@@ -50,6 +54,10 @@ The raw delivery retained both trained weights, inference code, per-image record
 
 ## 中文
 
+最终V3按格式选择更合适的组件：PNG/JPEG444用V1，JPEG420用V2。用户只要选V3，程序会自动选择。下表是较早的一轮回归检查，不是根目录README中后来的独立最终测试；两轮数据集不同，因此都保留并分别说明。
+
+### 实验详情
+
 历史实验记录；当前成品默认版本见仓库根README中的最终V3。以下保留该阶段的方法和结果。
 
 ## V3：按文件格式自适应的已训练双提取器
@@ -80,6 +88,15 @@ PNG/444逐样本预测bit与接收/拒绝决策均与V1完全一致。错误归�
 实验解释：路由规则是在观察V1/V2及V3单模型失败结果后提出的开发方案。selection/calibration和4096源图均已在历史实验观察，不能称为新独立测试。PNG/444保留来自使用相同V1模型与像素，不是单模型训练的泛化证明。需要两个固定checkpoint，单张图只执行其中一个网络。
 
 ### 加载已训练模型
+
+当前成品请在项目根目录执行以下命令，无需恢复旧交付包：
+
+```bash
+python wouaf.py setup
+python wouaf.py predict --image YOUR_ACTUAL_FILE.jpg --code 11 --output outputs/v3.json
+```
+
+以下是旧交付包的历史用法，普通用户不需要执行：
 
 将V3_FORMAT_ROUTED_DELIVERY.zip解压到原V1便携仓库新目录experiments/v3_format_router。按V1 README恢复相同冻结环境后，在仓库根目录运行：
 

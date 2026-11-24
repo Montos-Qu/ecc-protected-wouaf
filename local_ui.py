@@ -108,7 +108,7 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlsplit(self.path)
         path = parsed.path
         if path == "/api/health":
-            self.reply(200, {"application": "ecc-wouaf-local-ui", "version": "3.0.6", "device": self.server.device,
+            self.reply(200, {"application": "ecc-wouaf-local-ui", "version": "3.0.7", "device": self.server.device,
                              "default_model": "v3", "url": self.server.url, "ready": True,
                              "checkout_id": self.server.checkout_id})
         elif path in ("/", "/app.js", "/style.css"):
@@ -217,7 +217,7 @@ def main():
             with urllib.request.urlopen(url + "/api/health", timeout=2) as source:
                 health = json.load(source)
             checkout_id = hashlib.sha256(str(ROOT).encode("utf-8")).hexdigest()[:16]
-            if health.get("application") == "ecc-wouaf-local-ui" and health.get("version") == "3.0.6" and health.get("checkout_id") == checkout_id:
+            if health.get("application") == "ecc-wouaf-local-ui" and health.get("version") == "3.0.7" and health.get("checkout_id") == checkout_id:
                 if not args.no_browser:
                     webbrowser.open(url)
                 print("LOCAL_UI_ALREADY_RUNNING", url, flush=True)
@@ -225,7 +225,7 @@ def main():
         except Exception:
             pass
         server = LocalServer(("127.0.0.1", 0), args.device)
-    record = {"url": server.url, "device": args.device, "distribution": "3.0.6",
+    record = {"url": server.url, "device": args.device, "distribution": "3.0.7",
               "pid": os.getpid(), "checkout_id": server.checkout_id,
               "started_at": datetime.now(timezone.utc).isoformat()}
     (ROOT / "outputs/ui_server.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")

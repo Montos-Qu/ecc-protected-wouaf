@@ -6,6 +6,10 @@
 
 ## English
 
+This was an unsuccessful attempt to make one model handle all three image formats better. It did not meet every requirement, so it is kept for comparison rather than used by the final app. Final V3 instead chooses between the already-trained V1 and V2. You do not need these failed candidates to run it.
+
+### Experiment details
+
 Historical failed candidate: it did not satisfy every fixed retention requirement, so V1 remained the retained release at that stage. This is not the final format-routed V3 product.
 
 The model starts from V1 and trains only layer4 and the bit head; earlier layers, BN statistics and the presence head are frozen. Every step uses the same12 fit images as PNG/JPEG444/JPEG420 views. V1 teaches PNG/444 with logit and correct-bit-margin retention. V2 supplies JPEG420 teacher outputs only on fit images where its decoding is correct and GT BCE is lower. Gradient projection makes the first-order SGD update nonconflicting with both clean-view objectives. This does not guarantee unseen-image retention; development/regression checks remain necessary.
@@ -19,6 +23,10 @@ Old development and4096-source regression cohorts had been observed before and a
 <a name="chinese"></a>
 
 ## 中文
+
+这是一轮没有成功的尝试：希望单个模型同时改善三种格式，但结果没有达到全部要求，所以只保留作对照，不用于最终网页应用。最终V3改为在训练好的V1/V2之间自动选择，运行成品不需要这些失败候选。
+
+### 实验详情
 
 历史实验记录；当前成品默认版本见仓库根README中的最终V3。以下保留该阶段的方法和结果。
 
