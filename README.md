@@ -61,6 +61,8 @@ python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.p
 python wouaf.py verify
 ```
 
+Optional sizing: the default remains **Original512**. Select **Fit to512 + padding · Experimental** to accept other sizes with proportional scaling, a processed preview, and explicit JSON metadata. Native512 inputs retain original bytes. The small real-image regression found worse recovery after resizing; this is an ingestion feature, not a robustness improvement. See [separate resize protocol/results](docs/OPTIONAL_RESIZE.md).
+
 ### 2. Choose V1, V2 or V3
 
 | Version | Behavior and trade-off | Role |
@@ -93,7 +95,7 @@ V3 combines two trained components; it does not require a third separately train
 
 `ACCEPT` means the candidate passed correction and rejection rules; `user_id` is the accepted identity. `REJECT` returns `user_id: null`; an internal candidate must not be treated as a valid attribution. JSON also records version/branch, model hash, 32-bit fingerprint, logits/probabilities and rejection reason.
 
-The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. No silent resizing occurs. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
+The validated scope is native 512x512 RGB, PNG, and Pillow JPEG Q90 4:4:4 / 4:2:0. Native mode never resizes; the separate explicit experimental fit option is documented above. Actually decoding a compressed JPEG and saving it as PNG removes historical JPEG sampling metadata, so V3 uses V1 for that new PNG. Other sizes, compression conditions and attacks require separate validation.
 
 ### 5. Public environment and data
 
@@ -215,6 +217,8 @@ python wouaf.py predict --image demo/images/png8_control/positive_k11/10000000.p
 python wouaf.py verify
 ```
 
+可选尺寸处理：默认仍为**原始512**。显式选择“等比缩放至512 + 补边·实验”后，才处理其他尺寸，并显示处理后预览、保存JSON元数据。原图512保留编码字节。真实小样本回归显示缩放后恢复率下降，这是接收尺寸的兼容功能，不代表鲁棒性改善；见[独立保存的缩放协议与结果](docs/OPTIONAL_RESIZE.md)。
+
 ### 2. V1、V2、V3 怎么选
 
 | 版本 | 行为与区别 | 用途 |
@@ -249,7 +253,7 @@ V3 是两份已训练组件组成的系统，不是第三份单独训练的 `.pt
 
 `ACCEPT` 表示通过纠错与拒绝规则，`user_id` 是接受的用户 ID。`REJECT` 时 `user_id` 为 `null`，内部候选不能当作有效归属。JSON 还保留所选版本/分支、模型 hash、32-bit 指纹、logits/probabilities 和拒绝原因。
 
-验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。输入不会被静默缩放。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
+验证范围为原生 512×512 RGB、PNG 与 Pillow JPEG Q90 4:4:4 / 4:2:0。默认原始模式不缩放；另有显式开启的实验性等比缩放选项，效果边界见上文。把压缩 JPEG 真正转存成 PNG 会丢失原 JPEG 采样历史，V3 此时按新的 PNG 文件头使用 V1；其他尺寸、压缩条件和攻击需要另做验证。
 
 ### 5. 公开环境和数据下载
 

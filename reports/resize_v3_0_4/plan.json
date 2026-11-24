@@ -1,0 +1,34 @@
+{
+  "study": "optional_resize_existing_real_demo_v1",
+  "source_manifest_sha256": "4d67a88340948991ccc80e0a01e82a1dd3f4a6458723443e97a357c2c326f965",
+  "native_encoded_files": 48,
+  "unique_source_images": 16,
+  "scenarios": [
+    "native512",
+    "auto512",
+    "reencode512",
+    "up1024",
+    "down256",
+    "wide768x512"
+  ],
+  "models": [
+    "v3"
+  ],
+  "codes": [
+    11,
+    16
+  ],
+  "device": "cpu",
+  "weights_and_gates_fixed": true,
+  "new_training_steps": 0,
+  "encoding_protocol": "Keep input PNG/JPEG container. Derived JPEG uses Pillow Q90, original subsampling, optimize=False, progressive=False. Auto fit uses LANCZOS, centered RGB128 padding and a lossless PNG handoff; routing retains the incoming container header.",
+  "interpretation": "Existing regression fixtures, not a fresh independent cohort. Correlated views are not independent images. Four positive source images per code. Report rates descriptively; do not claim population robustness.",
+  "software_release_checks": [
+    "native and auto512 complete results equal after removing preprocessing metadata",
+    "uploaded source hashes match manifest",
+    "actual input header routing preserved",
+    "correct+reject+false equals sample count",
+    "no training or threshold changes"
+  ],
+  "quality_policy": "Non-native geometry remains explicitly experimental regardless of these small-sample rates; native mode stays default. Reencode512 separates an additional JPEG encoding from geometry."
+}

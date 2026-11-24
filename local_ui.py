@@ -1,9 +1,9 @@
 """Serve the pretrained product through a loopback-only local web interface."""
 import argparse
+import base64
 from datetime import datetime, timezone
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
-import io
 import json
 import os
 from pathlib import Path
@@ -39,25 +39,21 @@ class LocalServer(ThreadingHTTPServer):
         self.url = "http://127.0.0.1:" + str(self.server_port)
         self.checkout_id = hashlib.sha256(str(ROOT).encode("utf-8")).hexdigest()[:16]
 
-    def predict(self, data, version, code, filename):
-        from PIL import Image, UnidentifiedImageError
+    def predict(self, data, version, code, filename, resize="native"):
         from ecc_wouaf import Predictor
-        try:
-            with Image.open(io.BytesIO(data)) as image:
-                if image.format not in ("PNG", "JPEG"):
-                    raise ValueError("unsupported_format")
-                if image.size != (512, 512):
-                    raise ValueError("wrong_dimensions")
-                image.verify()
-        except (UnidentifiedImageError, OSError, Image.DecompressionBombError) as error:
-            raise ValueError("invalid_image") from error
+        from image_preprocessing import prepare_image, predict_prepared
+        prepared = prepare_image(data, resize)
         with self.inference_lock:
             if version not in self.predictors:
                 predictor = Predictor(version, self.device, strict=False)
                 # All versions use the same two immutable extractor components.
                 predictor.models = self.extractors
                 self.predictors[version] = predictor
-            return self.predictors[version].predict_encoded(data, code, filename)
+            result = predict_prepared(self.predictors[version], prepared, code, filename)
+        preview = None
+        if prepared.preprocessing and prepared.preprocessing["applied"]:
+            preview = "data:image/png;base64," + base64.b64encode(prepared.encoded).decode("ascii")
+        return result, preview
 
 
 class Handler(BaseHTTPRequestHandler):
@@ -101,7 +97,7 @@ class Handler(BaseHTTPRequestHandler):
         parsed = urlsplit(self.path)
         path = parsed.path
         if path == "/api/health":
-            self.reply(200, {"application": "ecc-wouaf-local-ui", "version": "3.0.3", "device": self.server.device,
+            self.reply(200, {"application": "ecc-wouaf-local-ui", "version": "3.0.4", "device": self.server.device,
                              "default_model": "v3", "url": self.server.url, "ready": True,
                              "checkout_id": self.server.checkout_id})
         elif path in ("/", "/app.js", "/style.css"):
@@ -145,9 +141,8 @@ class Handler(BaseHTTPRequestHandler):
         query = parse_qs(parsed.query)
         version = query.get("version", ["v3"])[0]
         code = query.get("code", ["11"])[0]
-        if version not in ("v1", "v2", "v3") or code not in ("11", "16"):
-            self.reply(400, {"error": "invalid_configuration"})
-            return
+        resize = query.get("resize", ["native"])[0]
+        valid_configuration = version in ("v1", "v2", "v3") and code in ("11", "16") and resize in ("native", "fit")
         try:
             size = int(self.headers.get("Content-Length", "0"))
         except ValueError:
@@ -163,18 +158,21 @@ class Handler(BaseHTTPRequestHandler):
             data = self.rfile.read(size)
             if len(data) != size:
                 raise ValueError("invalid_upload")
+            if not valid_configuration:
+                raise ValueError("invalid_configuration")
             filename = unquote(self.headers.get("X-Filename", "uploaded_image"))
             filename = filename.replace("\\", "/").rsplit("/", 1)[-1][:240]
             started = time.perf_counter()
-            result = self.server.predict(data, version, int(code), filename)
+            result, preview = self.server.predict(data, version, int(code), filename, resize)
             elapsed = round((time.perf_counter() - started) * 1000)
             identifier = "prediction_" + secrets.token_hex(16) + ".json"
             target = ROOT / "outputs/ui" / identifier
             target.parent.mkdir(parents=True, exist_ok=True)
             target.write_text(json.dumps(result, ensure_ascii=False, indent=2, allow_nan=False) + "\n", encoding="utf-8")
-            self.reply(200, {"result": result, "elapsed_ms": elapsed, "download_url": "/api/results/" + identifier})
+            self.reply(200, {"result": result, "elapsed_ms": elapsed, "download_url": "/api/results/" + identifier,
+                             "processed_preview": preview})
         except ValueError as error:
-            known = {"unsupported_format", "wrong_dimensions", "invalid_image", "invalid_upload"}
+            known = {"unsupported_format", "wrong_dimensions", "invalid_image", "invalid_upload", "too_many_pixels", "invalid_configuration"}
             self.reply(400, {"error": str(error) if str(error) in known else "invalid_image"})
         except TimeoutError:
             self.reply(408, {"error": "upload_timeout"})
@@ -199,7 +197,7 @@ def main():
             with urllib.request.urlopen(url + "/api/health", timeout=2) as source:
                 health = json.load(source)
             checkout_id = hashlib.sha256(str(ROOT).encode("utf-8")).hexdigest()[:16]
-            if health.get("application") == "ecc-wouaf-local-ui" and health.get("version") == "3.0.3" and health.get("checkout_id") == checkout_id:
+            if health.get("application") == "ecc-wouaf-local-ui" and health.get("version") == "3.0.4" and health.get("checkout_id") == checkout_id:
                 if not args.no_browser:
                     webbrowser.open(url)
                 print("LOCAL_UI_ALREADY_RUNNING", url, flush=True)
@@ -207,7 +205,7 @@ def main():
         except Exception:
             pass
         server = LocalServer(("127.0.0.1", 0), args.device)
-    record = {"url": server.url, "device": args.device, "distribution": "3.0.3",
+    record = {"url": server.url, "device": args.device, "distribution": "3.0.4",
               "pid": os.getpid(), "checkout_id": server.checkout_id,
               "started_at": datetime.now(timezone.utc).isoformat()}
     (ROOT / "outputs/ui_server.json").write_text(json.dumps(record, indent=2) + "\n", encoding="utf-8")

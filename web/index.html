@@ -26,6 +26,7 @@
           <span class="replace" id="replace" hidden data-i18n="replace">Click to replace image</span>
         </label>
         <div class="file-info" id="file-info" hidden><span id="filename"></span><span id="filesize"></span></div>
+        <p id="processed-info" class="resize-hint" hidden></p>
         <div class="sample-row"><span data-i18n="trySample">Try a sample</span><div><button class="sample" data-sample="positive_png" data-i18n="samplePng">Watermarked PNG</button><button class="sample" data-sample="positive_jpeg" data-i18n="sampleJpeg">JPEG420</button><button class="sample" data-sample="negative_png" data-i18n="sampleNegative">Unmarked PNG</button></div></div>
         <div class="divider"></div>
         <div class="section-heading"><span class="step">02</span><h2 data-i18n="modelTitle">Choose a model</h2></div>
@@ -35,6 +36,8 @@
           <label class="version"><input type="radio" name="version" value="v2"><span class="version-label"><b>V2</b><small data-i18n="v2">JPEG420 expert</small></span></label>
         </fieldset>
         <label class="capacity"><span data-i18n="capacity">User capacity</span><select id="code"><option value="11" data-i18n="k11">2,048 users · BCH(31,11)+P · Default</option><option value="16" data-i18n="k16">65,536 users · BCH(31,16)+P · Control</option></select></label>
+        <label class="capacity resize-control"><span data-i18n="resizeLabel">Image sizing</span><select id="resize"><option value="native" data-i18n="resizeNative">Original 512 × 512 · Default</option><option value="fit" data-i18n="resizeFit">Fit to 512 + padding · Experimental</option></select></label>
+        <p class="resize-hint" data-i18n="resizeHint">Optional fitting preserves aspect ratio. Original 512 images remain untouched.</p>
         <button id="predict" class="primary" disabled><span data-i18n="analyze">Identify fingerprint</span><span aria-hidden="true">→</span></button>
         <p class="privacy" data-i18n="privacy">Images stay on this computer. No cloud upload. No training.</p>
       </section>
@@ -47,6 +50,7 @@
           <div id="decision-card" class="decision-card"><div class="decision-top"><span id="decision" class="decision"></span><span id="elapsed"></span></div><h3 id="identity"></h3><p id="explanation"></p></div>
           <dl class="metadata"><div><dt data-i18n="usedModel">Selected model</dt><dd id="used-model"></dd></div><div><dt data-i18n="branch">Extractor used</dt><dd id="branch"></dd></div><div><dt data-i18n="format">Actual image format</dt><dd id="format"></dd></div><div><dt data-i18n="ecc">Correction scheme</dt><dd id="ecc"></dd></div></dl>
           <div class="bits-heading"><h3 data-i18n="bitsTitle">Extracted fingerprint</h3><span>32 BIT</span></div><div id="bits" class="bits" aria-label="Predicted 32-bit fingerprint"></div>
+          <p id="resize-result-note" class="scope-note" hidden></p>
           <p id="scope-note" class="scope-note" hidden data-i18n="outsideScope">This JPEG sampling mode is outside the validated 4:4:4 / 4:2:0 scope.</p>
           <a id="download" class="secondary" download data-i18n="download">Download result JSON</a>
           <details><summary data-i18n="technical">View complete result</summary><pre id="raw"></pre></details>
@@ -54,7 +58,7 @@
         <div class="result-footer"><strong data-i18n="readTitle">A careful decision</strong><p data-i18n="readText">REJECT means no identity is accepted. A compressed watermarked image can also be rejected when recovery is unreliable.</p></div>
       </section>
     </div>
-    <footer><span>WOUAF Studio <span class="footer-separator">/</span> 3.0.3</span><span data-i18n="footer">A100-trained components. Local inference. Original weights and thresholds.</span></footer>
+    <footer><span>WOUAF Studio <span class="footer-separator">/</span> 3.0.4</span><span data-i18n="footer">A100-trained components. Local inference. Original weights and thresholds.</span></footer>
   </main>
 </body>
 </html>

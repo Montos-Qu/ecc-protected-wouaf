@@ -1,5 +1,5 @@
 {
-  "distribution_version": "3.0.3",
+  "distribution_version": "3.0.4",
   "default_runtime": "portable",
   "default_model": "v3",
   "optional_models": [
@@ -9,7 +9,7 @@
   "A100_required_for_ordinary_use": false,
   "weights_and_inference_core_unchanged": true,
   "source_audit_counts": {
-    "python_files": 60,
+    "python_files": 62,
     "notebooks": 2,
     "bilingual_readmes": 9,
     "Windows_launchers": 3,
@@ -45,6 +45,34 @@
     "training_performed": false,
     "profile_scope_tested": "Windows CPU dependency lock",
     "NVIDIA_hardware_tested": false
+  },
+  "optional_resize_validation": {
+    "distribution_version": "3.0.4",
+    "software_checks_passed": true,
+    "HTTP_test_methods_passed": 5,
+    "default_mode": "native",
+    "fit_mode": "opt_in_experimental",
+    "regression_prediction_records": 432,
+    "encoded_source_files": 48,
+    "unique_source_images": 16,
+    "native_auto512_full_result_matches": 72,
+    "browser_native_rejects_1024": true,
+    "browser_fit_accepts_1024_and_previews_512": true,
+    "browser_proportional_padding_768x512_to_512x341": true,
+    "browser_experimental_warning_visible": true,
+    "browser_native_recovers_user565": true,
+    "browser_bilingual_and_JSON_download_passed": true,
+    "fresh_independent_test": false,
+    "resized_quality_equivalent_to_native": false,
+    "wrong_accepted_identities_observed": 0,
+    "accepted_negatives_observed": 0,
+    "weights_changed": false,
+    "thresholds_changed": false,
+    "dependencies_changed": false,
+    "new_training_steps": 0,
+    "CUDA_hardware_tested": false,
+    "Linux_hardware_tested": false,
+    "colab_started": false
   },
   "local_web_UI_validation": {
     "distribution_version": "3.0.3",

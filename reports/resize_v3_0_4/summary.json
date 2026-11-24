@@ -1,0 +1,135 @@
+{
+  "complete": true,
+  "software_checks_passed": true,
+  "auto512_exact_native_result_matches": 72,
+  "prediction_records": 432,
+  "source_encoded_files": 48,
+  "unique_source_images": 16,
+  "new_training_steps": 0,
+  "thresholds_changed": false,
+  "weights_changed": false,
+  "experimental_geometry_only": true,
+  "fresh_independent_test": false,
+  "aggregate_by_code_and_scenario": [
+    {
+      "scenario": "native512",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 8,
+      "rejected_positive": 4,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "native512",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 5,
+      "rejected_positive": 7,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "auto512",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 8,
+      "rejected_positive": 4,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "auto512",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 5,
+      "rejected_positive": 7,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "reencode512",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 8,
+      "rejected_positive": 4,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "reencode512",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 5,
+      "rejected_positive": 7,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "up1024",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 4,
+      "rejected_positive": 8,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "up1024",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 2,
+      "rejected_positive": 10,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "down256",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 0,
+      "rejected_positive": 12,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "down256",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 0,
+      "rejected_positive": 12,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "wide768x512",
+      "code": 11,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 0,
+      "rejected_positive": 12,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    },
+    {
+      "scenario": "wide768x512",
+      "code": 16,
+      "positive_views": 12,
+      "negative_views": 24,
+      "correct_positive": 0,
+      "rejected_positive": 12,
+      "false_positive_identity": 0,
+      "accepted_negative": 0
+    }
+  ]
+}
