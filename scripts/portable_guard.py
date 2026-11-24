@@ -37,6 +37,8 @@ if target.name in ("infer.py", "evaluate.py"):
     arguments += ["--device", device, "--allow-unvalidated-runtime"]
 elif target.name == "verify_portable.py":
     arguments += ["--device", device]
+elif target.name == "local_ui.py":
+    arguments += ["--device", device]
 sys.argv = [str(target), *arguments]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(target.parent))

@@ -112,6 +112,11 @@ def main():
     verify.add_argument("--runtime", choices=("portable", "reference"), default="portable")
     verify.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
     commands.add_parser("versions", help="Describe the available trained product versions")
+    ui = commands.add_parser("ui", help="Open the local web interface for pretrained V3/V1/V2")
+    ui.add_argument("--device", choices=("auto", "cpu", "cuda"), default="auto")
+    ui.add_argument("--port", type=int, default=8765)
+    ui.add_argument("--no-browser", action="store_true")
+    ui.set_defaults(runtime="portable")
     evaluate = commands.add_parser("evaluate", help="Evaluate a version on the prepared independent native image cohort")
     evaluate.add_argument("--version", choices=("v3", "v1", "v2"), default="v3")
     evaluate.add_argument("--out", type=Path, required=True)
@@ -132,6 +137,11 @@ def main():
             locked("scripts/verify_pretrained.py", "--output", ROOT / "outputs/product_verification.json")
         else:
             portable("scripts/verify_portable.py", args.device, "--output", ROOT / "outputs/portable_verification.json")
+    elif args.command == "ui":
+        arguments = ["--port", args.port]
+        if args.no_browser:
+            arguments.append("--no-browser")
+        portable("local_ui.py", args.device, *arguments)
     elif args.command == "evaluate":
         arguments = ["--data", ROOT / "data/independent", "--version", args.version, "--out", args.out.resolve()]
         if args.runtime == "reference":

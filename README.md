@@ -12,6 +12,13 @@ Code, configuration and selection for V1, V2 and V3 are included. V3 is the defa
 
 ### 1. Download and use
 
+**Local web interface (recommended):** double-click `start_ui.cmd`. On first use it runs automatic setup if needed, then opens WOUAF Studio in your default browser. Upload/drop a native 512x512 PNG/JPEG, choose V3 (default), V1 or V2, and select **Identify fingerprint**. The page shows the accepted user ID or a plain-language rejection reason, the actual extractor/format, and a downloadable JSON. English/Chinese switching and built-in samples are included. Use **Stop app** to stop the local server; closing the tab alone leaves it running. Images are processed on this computer; no cloud service is used. See [local UI guide](docs/LOCAL_UI.md).
+
+```bash
+python wouaf.py ui                  # Open the installed portable product in a browser.
+python wouaf.py ui --no-browser     # Print the loopback URL without opening a browser.
+```
+
 **Windows without Python:** extract the complete product ZIP and run `setup_windows.cmd`. It bootstraps a project-local Python automatically. Then drag a 512x512 image onto `predict_windows.cmd`, or use `predict_windows.cmd "YOUR_IMAGE.png" v3` in a terminal. The optional second argument selects `v1` or `v2`. Prediction JSON is saved under `outputs/`. No system Python or A100 is needed.
 
 Download the **complete product ZIP** from the [latest Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest), or clone this repository / use GitHub Code -> Download ZIP. Enter the extracted project directory:
@@ -155,6 +162,13 @@ Preserve upstream [WOUAF](https://github.com/kylemin/WOUAF) licensing and [third
 V1、V2、V3 的代码、配置和版本选择均保留；V1/V2 是额外选项。训练源码单独位于 `training/`，普通安装和预测不会进入训练。
 
 ### 1. 下载并使用
+
+**本地网页界面（推荐）：**双击 `start_ui.cmd`。首次需要时会自动配置环境，然后在默认浏览器打开 WOUAF Studio。上传/拖入原生512x512 PNG/JPEG，选择默认V3或V1/V2，点击“开始识别指纹”。直接显示接受的用户ID或直白的拒绝原因、实际提取器/格式，并可下载JSON。支持中英文切换及内置示例。点击“关闭服务”停止本机进程；仅关闭浏览器标签页不会停止服务。图片全部在本机处理，不使用云服务。见[界面说明](docs/LOCAL_UI.md)。
+
+```bash
+python wouaf.py ui                  # Open the installed portable product in a browser.
+python wouaf.py ui --no-browser     # Print the loopback URL without opening a browser.
+```
 
 **Windows没有预装Python也可以：**解压完整产品ZIP后运行 `setup_windows.cmd`，它会自动准备项目独立的Python环境。然后把512×512图片拖到 `predict_windows.cmd` 上，或在终端执行 `predict_windows.cmd "YOUR_IMAGE.png" v3`；第二个参数也可选择v1或v2。结果JSON保存在 `outputs/`。不需要系统Python，也不需要A100。
 

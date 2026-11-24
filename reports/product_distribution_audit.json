@@ -1,5 +1,5 @@
 {
-  "distribution_version": "3.0.2",
+  "distribution_version": "3.0.3",
   "default_runtime": "portable",
   "default_model": "v3",
   "optional_models": [
@@ -9,10 +9,10 @@
   "A100_required_for_ordinary_use": false,
   "weights_and_inference_core_unchanged": true,
   "source_audit_counts": {
-    "python_files": 58,
+    "python_files": 60,
     "notebooks": 2,
     "bilingual_readmes": 9,
-    "Windows_launchers": 2,
+    "Windows_launchers": 3,
     "archived_reference_python_comments": 19
   },
   "code_comments_English_no_emoji": true,
@@ -45,6 +45,48 @@
     "training_performed": false,
     "profile_scope_tested": "Windows CPU dependency lock",
     "NVIDIA_hardware_tested": false
+  },
+  "local_web_UI_validation": {
+    "distribution_version": "3.0.3",
+    "passed": true,
+    "system": "Windows",
+    "device": "cpu",
+    "new_dependencies": 0,
+    "new_training_steps": 0,
+    "weights_and_inference_core_unchanged": true,
+    "runtime_profile_unchanged": true,
+    "API_unittest_methods_passed": 4,
+    "real_HTTP_predictions": 7,
+    "full_result_comparisons_against_original_Predictor": 6,
+    "full_result_comparisons_identical": true,
+    "tested_models": [
+      "v3",
+      "v1",
+      "v2"
+    ],
+    "tested_codes": [
+      11,
+      16
+    ],
+    "actual_JPEG_header_routing_after_extension_change": true,
+    "JSON_download_matches_result": true,
+    "bad_dimensions_format_configuration_upload_boundaries_tested": true,
+    "loopback_host_origin_session_boundaries_tested": true,
+    "Windows_start_ui_launcher_passed": true,
+    "browser_automatically_opened_by_launcher": true,
+    "fresh_UI_auto_setup_branch_exercised": false,
+    "existing_no_system_Python_setup_validation_preserved": true,
+    "browser_upload_and_preview_passed": true,
+    "browser_V3_accept_user_id": 565,
+    "browser_V1_V2_switch_passed": true,
+    "browser_JPEG420_primary_rejection_reason": "outside_BCH_decoding_radius",
+    "browser_wrong_size_error_visible": true,
+    "browser_English_Chinese_switch_passed": true,
+    "browser_JSON_download_HTTP_200": true,
+    "browser_stop_service_passed": true,
+    "CUDA_hardware_tested": false,
+    "Linux_hardware_tested": false,
+    "colab_started": false
   },
   "six_official_dependency_locks_metadata_resolved_and_hash_verified": [
     "linux-cpu",
