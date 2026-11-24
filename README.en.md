@@ -1,6 +1,6 @@
-# ECC-Protected WOUAF �� Pretrained V3
+# ECC-Protected WOUAF — Pretrained V3
 
-[English](#english) | [����](#chinese)
+[English](#english) | [中文](#chinese)
 
 <a name="english"></a>
 
@@ -89,10 +89,10 @@ For researchers who need the historical A100 environment, use `python wouaf.py s
 
 On a new independent image set, with1024 watermarked images per code and format, the share correctly recovered and accepted was:
 
-| Capacity | PNG: V1 �� V3 | JPEG444 Q90: V1 �� V3 | JPEG420 Q90: V1 �� V3 |
+| Capacity | PNG: V1 → V3 | JPEG444 Q90: V1 → V3 | JPEG420 Q90: V1 → V3 |
 |---|---:|---:|---:|
-| k11, default |90.14% ��90.14%|87.60% ��87.60%|**74.12% ��76.86%**|
-| k16, larger capacity |67.68% ��67.68%|56.35% ��56.35%|**33.40% ��37.40%**|
+| k11, default |90.14% →90.14%|87.60% →87.60%|**74.12% →76.86%**|
+| k16, larger capacity |67.68% →67.68%|56.35% →56.35%|**33.40% →37.40%**|
 
 V3 improves JPEG420 while keeping PNG/444 outputs identical to V1 for this test. The paired scene-cluster95% interval for the420 gain is +1.37 to +4.10 percentage points for k11 and +2.64 to +5.47 for k16. No false user attribution was observed in this finite study; that is not a guarantee of zero risk. The original final table does not claim a full new-set V2 evaluation across every format. Earlier V1/V2 comparisons, failed attempts and limits are kept in [results](docs/RESULTS.md) and the [research workflow](docs/RESEARCH_REPRODUCTION_zh.md).
 
@@ -149,48 +149,48 @@ This Applied Project builds on [kylemin's original WOUAF repository](https://git
 
 <a name="chinese"></a>
 
-## ����
+## 中文
 
-**����һ�����غ����ʹ�õ� WOUAF ͼƬָ��ʶ�𹤾ߡ�Ĭ�ϼ���ѵ���õ� V3����������ѵ����**
+**这是一个下载后就能使用的 WOUAF 图片指纹识别工具。默认加载训练好的 V3，无须重新训练。**
 
-���ͼƬ�ﱣ�����ָܻ��� WOUAF ָ�ƣ�����������Ӧ�û�ID����Ϣ����ʱ��ʾ `REJECT`����˵��ԭ���������ȡ����ָ�ƣ��������Ƭ����ָ�ƣ�Ҳ����ͨ��ˮӡ�����������ʶ��������ͨ��Ƭ�����ߡ�
+如果图片里保留了能恢复的 WOUAF 指纹，程序会给出对应用户ID；信息不足时显示 `REJECT`，并说明原因。它负责读取已有指纹，不会给照片添加指纹，也不是通用水印检测器，不能识别任意普通照片的作者。
 
-### 1. Windows �û������￪ʼ
+### 1. Windows 用户从这里开始
 
-1. ��[���� Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest)������������ `local-3.0.6-final.zip` ��β��**������Ʒ ZIP**�����Ѿ�����ѵ��Ȩ�غ���ʾ�ļ���GitHub �Զ����ɵ�Դ�� ZIP ��������Щ���ļ���
-2. ������ ZIP ��ѹ����ͨ�ļ��У���Ҫ��ѹ������ֱ�����С�
-3. ˫�� `start_ui.cmd`���״λ��Զ����� Python ����װ���������л����ļ���������ĿĿ¼�������ý������״���Ҫ����������Ԥװ Python������ Colab�����õ�¼���ߵ� Drive��Ҳ���� A100��
-4. Ĭ���������� WOUAF Studio���ϴ�**ԭʼ512��512�� PNG/JPEG**������Ĭ�� **V3**�����**��ʼʶ��ָ��**��
-5. �鿴�û�ID��ܾ�ԭ�򡣵��**�������� JSON ���**�ɱ�����ϸ���������Ҳ���� `outputs/ui/` ��һ�ݸ�����
+1. 打开[最新 Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/latest)，下载名称以 `local-3.0.6-final.zip` 结尾的**完整产品 ZIP**。它已经包含训练权重和演示文件；GitHub 自动生成的源码 ZIP 不包含这些大文件。
+2. 把整个 ZIP 解压到普通文件夹，不要在压缩包内直接运行。
+3. 双击 `start_ui.cmd`。首次会自动下载 Python 并安装依赖，所有环境文件都放在项目目录里。请等配置结束。首次需要联网；不用预装 Python、不用 Colab、不用登录作者的 Drive，也不用 A100。
+4. 默认浏览器会打开 WOUAF Studio。上传**原始512×512的 PNG/JPEG**，保留默认 **V3**，点击**开始识别指纹**。
+5. 查看用户ID或拒绝原因。点击**下载完整 JSON 结果**可保存详细结果，程序也会在 `outputs/ui/` 留一份副本。
 
-����ȷ�ϰ�װ�����������ϴ� `demo/images/png8_control/positive_k11/10000000.png`������Ĭ��V3/k11���渽�����Ŵ�ָ��ʾ��Ӧ��ʾ**�û�565**����ͨ��Ƭ���ܾ���������װʧ�ܣ���ָ��JPEGѹ����Ҳ������Ϊָ����������ܾ���
+想先确认安装正常，可以上传 `demo/images/png8_control/positive_k11/10000000.png`。保持默认V3/k11，随附的这张带指纹示例应显示**用户565**。普通照片被拒绝不代表安装失败；带指纹JPEG压缩后，也可能因为指纹受损而被拒绝。
 
-���**�رշ���**�Ż�ֹͣ��̨��ֻ���������ǩҳ����ֹͣ���ٴ�����ͬһĿ¼������з�����һ����Ŀ���������˿�ռ�����Զ������ж˿ڡ�ͼƬֻ�ڱ������������ϴ��ƶˡ�����֧����Ӣ�ĺͽϴ�������ֺţ����[��ҳ����˵��](docs/LOCAL_UI.md)��
+点击**关闭服务**才会停止后台；只关浏览器标签页不会停止。再次启动同一目录会打开已有服务，另一个项目副本遇到端口占用则自动换空闲端口。图片只在本机处理，不上传云端。界面支持中英文和较大的桌面字号，详见[网页界面说明](docs/LOCAL_UI.md)。
 
-### 2. ���ϴ�ʲôͼƬ�������ô����
+### 2. 能上传什么图片？结果怎么看？
 
-- ʹ��ԭʼ512��512 PNG/JPEG������10MiB������**�����š����ü���������**���ֶ��ĳ�512Ҳ���ָܻ�����ʱ��ʧ��ָ����Ϣ����[Ϊʲôȡ���Զ�����](docs/IMAGE_SIZE_LIMITS.md)��
-- `ACCEPT`���ָ���ָ��ͨ���˹̶���飬`user_id` �Ǳ����ܵ��û�ID��
-- `REJECT`��û��ͨ����飬��˲��������κ��û���`user_id` Ϊ `null`���ⲻ��֤��ͼƬû��ˮӡ��ҳ����������ʧ�ܵĹ����������λ̫�࣬��֤�ݲ��㡣
-- JSON������ѡ�汾��ʵ��ʹ�õ���ȡ����ͼƬ��ʽ��ģ���ļ�У��ֵ��32λԤ��ָ�ơ�ԭʼģ�ͷ�����`logits`����ÿλ���ʺ;ܾ�ԭ��ÿλ���ʲ����ڡ��û�������ȷ�ĸ��ʡ���
+- 使用原始512×512 PNG/JPEG，上限10MiB。程序**不缩放、不裁剪、不补边**。手动改成512也不能恢复缩放时丢失的指纹信息，见[为什么取消自动缩放](docs/IMAGE_SIZE_LIMITS.md)。
+- `ACCEPT`：恢复的指纹通过了固定检查，`user_id` 是被接受的用户ID。
+- `REJECT`：没有通过检查，因此不归属给任何用户，`user_id` 为 `null`。这不能证明图片没有水印。页面会解释最先失败的规则，例如错误位太多，或证据不足。
+- JSON保留所选版本、实际使用的提取器、图片格式、模型文件校验值、32位预测指纹、原始模型分数（`logits`）、每位概率和拒绝原因。每位概率不等于“用户身份正确的概率”。
 
-ʵ��׼ȷ�ʶ�Ӧԭʼ512��512 RGB��PNG���Լ�Pillow Q90��JPEG444/JPEG420������ѹ���������༭����ͼ�򹥻�����������Щ׼ȷ�����JPEGת��ΪPNG�Ȳ�������ѹ�����ˣ�Ҳ�ᶪʧԭJPEG������Ϣ��
+实验准确率对应原始512×512 RGB、PNG，以及Pillow Q90的JPEG444/JPEG420。其他压缩质量、编辑、截图或攻击不包含在这些准确率里。把JPEG转存为PNG既不能消除压缩损伤，也会丢失原JPEG采样信息。
 
-### 3. V3��V1��V2 ��ôѡ��
+### 3. V3、V1、V2 怎么选？
 
-| ѡ�� | ��ʲô | �ʺ���; |
+| 选项 | 做什么 | 适合用途 |
 |---|---|---|
-| **V3��Ĭ��** | PNG/JPEG444��V1����ʵJPEG420��V2 | **���ճ�Ʒ���ճ��Ƽ�** |
-| V1 | ����ͼƬ����ƽ����ȡ�� | ������ƽ��汾�Ա� |
-| V2 | ����ͼƬ����JPEG420ר�� | �Ա�JPEG420Ч����PNG/444�����½� |
+| **V3，默认** | PNG/JPEG444用V1，真实JPEG420用V2 | **最终成品，日常推荐** |
+| V1 | 所有图片都用平衡提取器 | 与早期平衡版本对比 |
+| V2 | 所有图片都用JPEG420专家 | 对比JPEG420效果；PNG/444可能下降 |
 
-V3��ȡ��ʵ�ļ�ͷ��ѡ��ģ�ͣ�������չ������֪�𰸡���Ŀ��������ѵ�������ÿ��ͼƬֻ��������һ�ݣ�����Ҫ������������V3Ȩ���ļ���
+V3读取真实文件头来选择模型，不看扩展名或已知答案。项目保存两份训练组件，每张图片只运行其中一份；不需要第三个单独的V3权重文件。
 
-Ĭ�Ͼ�����ʽBCH(31,11)+������żУ�飨`k11`��֧��2048���û�ID����ѡ `k16` ֧��65536��ID������ʵ���еĳɹ��ָ��ʽϵ͡������û�������ȡ�ᣬ����ѵ������������һ�㱣��V3��k11���ɡ�
+默认纠错方式BCH(31,11)+整体奇偶校验（`k11`）支持2048个用户ID。可选 `k16` 支持65536个ID，但本实验中的成功恢复率较低。这是用户容量的取舍，不是训练步数的区别。一般保留V3和k11即可。
 
-### 4. ���������У�
+### 4. 想用命令行？
 
-û��Python��Windows�û��������� `setup_windows.cmd`���ٰ�ͼƬ�ϵ� `predict_windows.cmd` �ϣ�Ҳ��ִ�У�
+没有Python的Windows用户可先运行 `setup_windows.cmd`，再把图片拖到 `predict_windows.cmd` 上，也可执行：
 
 ```bat
 predict_windows.cmd "YOUR_IMAGE.png" v3
@@ -198,7 +198,7 @@ predict_windows.cmd "YOUR_IMAGE.jpg" v1
 predict_windows.cmd "YOUR_IMAGE.jpg" v2
 ```
 
-�Ѿ���װPython3.9+���û������Կ�¡�����زֿ⣬����ĿĿ¼���ն�ִ�У�
+已经安装Python3.9+的用户，可以克隆或下载仓库，在项目目录打开终端执行：
 
 ```bash
 python wouaf.py setup
@@ -211,11 +211,11 @@ python wouaf.py versions
 python wouaf.py verify
 ```
 
-`setup` �Զ��������汾��װ���������ö����嵥������ء������Ჹ��ѵ��Ȩ�غ�֧���ļ���У���ļ��Ƿ�������������ģ�͡�������ƷZIP�Ѱ�����Щ��Ŀ�ļ���Դ��ZIP/��¡����ڰ�װʱ���롣��װ����ѵ��ģ�ͣ�Ҳ���޸�ϵͳPython��������ɺ��ڱ���������[���� notebook](01_PUBLIC_V3_REPRODUCE.ipynb)ֻ����һ�ֿ�ѡ��ڣ�����Ҫ��������Drive��
+`setup` 自动按锁定版本安装依赖，不用对照清单逐个下载。它还会补齐训练权重和支撑文件，校验文件是否完整，并测试模型。完整产品ZIP已包含这些项目文件；源码ZIP/克隆版会在安装时补齐。安装不会训练模型，也不修改系统Python。配置完成后在本机推理；[公开 notebook](01_PUBLIC_V3_REPRODUCE.ipynb)只是另一种可选入口，不需要挂载作者Drive。
 
-### 5. ����Ҫ���뻷������
+### 5. 电脑要求与环境配置
 
-Ŀǰ�ṩWindows10/11 x64��x86_64 Linux��glibc2.28+����װ�������м���NVIDIA�Կ����Լ��٣���AMD�Կ��ĵ���Ҳ��ʹ��CPUģʽ�����治����AMD�Կ����١�macOS��ARM���з�����
+目前提供Windows10/11 x64和x86_64 Linux（glibc2.28+）安装方案。有兼容NVIDIA显卡可以加速；配AMD显卡的电脑也能使用CPU模式。本版不包含AMD显卡加速、macOS或ARM运行方案。
 
 ```bash
 python wouaf.py setup --device cpu
@@ -224,36 +224,36 @@ python wouaf.py predict --image YOUR_IMAGE.png --device cpu
 python wouaf.py ui --no-browser
 ```
 
-�����Զ�����Python3.12.12��PyTorch2.7.1��torchvision0.22.1��NumPy1.26.4��Pillow12.3.0��SciPy1.15.3�������������й̶��汾���ļ�У�顣�Զ���������ʹ�ÿɹ�����NVIDIA CUDA���������CPU�����Կ�����ѡ��ٷ�CUDA11.8/12.8����RTX50/compute capability10+ʹ��12.8��Ҳ���� `--cuda-backend cu118` �� `--cuda-backend cu128` ָ�����Կ�������Ҫ�û����м��ݰ汾�����򲻰�װ���������[�������л���](docs/PORTABLE_RUNTIME.md)��
+程序自动管理Python3.12.12、PyTorch2.7.1、torchvision0.22.1、NumPy1.26.4、Pillow12.3.0、SciPy1.15.3；所有依赖都有固定版本和文件校验。自动配置优先使用可工作的NVIDIA CUDA，否则改用CPU。按显卡代际选择官方CUDA11.8/12.8包，RTX50/compute capability10+使用12.8；也可用 `--cuda-backend cu118` 或 `--cuda-backend cu128` 指定。显卡驱动需要用户已有兼容版本，程序不安装驱动。详见[本地运行环境](docs/PORTABLE_RUNTIME.md)。
 
-�������A100��ѵ���ģ�**��ͨʹ�ò���ҪA100��Ҳ����Ҫ�ؽ�ѵ������**������ģʽ����ԭȨ�غ��жϹ���ʹ�õ����̶��������汾��Windows CPU���뱣���A100����Ա�48��ԭʼͼƬ��ָ��λ���ѽ����û�ID���ޱ仯�����ԭʼ������0.0000362396240234375�����޲��Բ���֤������ͼƬ�������Կ�����ȫһ�¡�����Windows/AMD����û��ʵ��NVIDIA CUDA��LinuxӲ����
+组件是在A100上训练的，**普通使用不需要A100，也不需要重建训练环境**。本地模式保留原权重和判断规则，使用单独固定的软件版本。Windows CPU已与保存的A100结果对比48张原始图片：指纹位和已接受用户ID均无变化，最大原始分数差0.0000362396240234375。有限测试不能证明所有图片、所有显卡都完全一致。本次Windows/AMD测试没有实测NVIDIA CUDA或Linux硬件。
 
-ֻ����Ҫ������ʷA100ʵ����о��ߣ���ʹ�� `python wouaf.py setup --runtime reference` �� `python wouaf.py predict --runtime reference --image YOUR_IMAGE.png`����ģʽ���Linux Python3.10.21��torch1.12.1+cu116��A100-SXM4-80GB��driver580.82.07����[�ο�����˵��](docs/ENVIRONMENT.md)����ͨ��װ����������ݾɻ����鵵��
+只有需要复现历史A100实验的研究者，才使用 `python wouaf.py setup --runtime reference` 和 `python wouaf.py predict --runtime reference --image YOUR_IMAGE.png`。该模式检查Linux Python3.10.21、torch1.12.1+cu116、A100-SXM4-80GB和driver580.82.07，见[参考环境说明](docs/ENVIRONMENT.md)。普通安装不会下载这份旧环境归档。
 
-### 6. ʵ�������ѡ�о�����
+### 6. 实验结果与可选研究数据
 
-��һ���µĶ���ͼƬ�ϣ�ÿ�ֱ��롢ÿ�ָ�ʽ��1024�Ŵ�ָ��ͼƬ���ɹ��ָ���ȷ�û���ͨ�����ı���Ϊ��
+在一组新的独立图片上，每种编码、每种格式各1024张带指纹图片，成功恢复正确用户并通过检查的比例为：
 
-| �������� | PNG��V1 �� V3 | JPEG444 Q90��V1 �� V3 | JPEG420 Q90��V1 �� V3 |
+| 容量设置 | PNG：V1 → V3 | JPEG444 Q90：V1 → V3 | JPEG420 Q90：V1 → V3 |
 |---|---:|---:|---:|
-| k11��Ĭ�� |90.14% ��90.14%|87.60% ��87.60%|**74.12% ��76.86%**|
-| k16���ϴ����� |67.68% ��67.68%|56.35% ��56.35%|**33.40% ��37.40%**|
+| k11，默认 |90.14% →90.14%|87.60% →87.60%|**74.12% →76.86%**|
+| k16，较大容量 |67.68% →67.68%|56.35% →56.35%|**33.40% →37.40%**|
 
-��β�����V3�����JPEG420Ч����PNG/444����ͼ�����V1��ȫһ�¡���ͬԴ����������㣬420������95%�������Ϊ��k11 +1.37��+4.10���ٷֵ㣬k16 +2.64��+5.47���ٷֵ㡣�������޲���δ�۲쵽�����û���������������ʵ����Ϊ�㡣ԭ���ձ�û���������V2��������ȫ����ʽ�ϵ�ȫ�����ԡ�����V1/V2���ա�ʧ�ܳ��Ժ����Ʊ�����[���˵��](docs/RESULTS.md)��[�о�����](docs/RESEARCH_REPRODUCTION_zh.md)��
+这次测试里V3提高了JPEG420效果，PNG/444的逐图输出与V1完全一致。按同源场景分组计算，420提升的95%配对区间为：k11 +1.37～+4.10个百分点，k16 +2.64～+5.47个百分点。本次有限测试未观察到错误用户归属，不代表真实风险为零。原最终表没有声称完成V2在新数据全部格式上的全量测试。早期V1/V2对照、失败尝试和限制保留在[结果说明](docs/RESULTS.md)及[研究流程](docs/RESEARCH_REPRODUCTION_zh.md)。
 
-**�ճ�ʹ�ò�������������Щ�����о����ݡ�** ���ǿ�������ֻ�����أ�������ʵ�飻�ɻ�����3����Ƭ��6��ͼƬ������������������
+**日常使用不用下载下面这些大型研究数据。** 它们开放匿名只读下载，供复现实验；旧环境有3个分片，6组图片用于完整独立评估：
 
-| �����ļ��� | �������� | ���ش�С |
+| 公开文件组 | 下载链接 | 下载大小 |
 |---|---|---:|
-| ���� Python��PyTorch ��ȫ��������3 ����Ƭ�� | [frozen_environment](https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt) | 2.16 GiB |
-| k11 ˮӡ PNG ������ | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
-| k16 ˮӡ PNG ������ | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
-| ͬԴ��ˮӡ PNG ������ | [independent_source_pngs_generated_negative](https://drive.google.com/drive/u/0/folders/1MAbvrbca6pEMSOhdRQ7itg_piP0zVbh1) | 0.44 GiB |
-| ��Ȼͼ PNG ������ | [independent_source_pngs_natural_negative](https://drive.google.com/drive/u/0/folders/1--F3b4k6_mGp-yFE1qAqjc0OjxR54QeL) | 0.38 GiB |
-| ��ʵ JPEG444 Q90 ��֤��ͼ | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
-| ��ʵ JPEG420 Q90 ��֤��ͼ | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
+| 冻结 Python、PyTorch 与全部依赖（3 个分片） | [frozen_environment](https://drive.google.com/drive/u/0/folders/16Lve4kE37wyv8aooVufue7Sga5GYCXRt) | 2.16 GiB |
+| k11 水印 PNG 正样本 | [independent_source_pngs_positive_k11](https://drive.google.com/drive/u/0/folders/1QKEYbcB803RMJ51x5Mzb36eZ6PI8LuFA) | 0.43 GiB |
+| k16 水印 PNG 正样本 | [independent_source_pngs_positive_k16](https://drive.google.com/drive/u/0/folders/1NUgPI13HwKFWIoLI-i0dHWBi7kl9r0uO) | 0.43 GiB |
+| 同源无水印 PNG 负样本 | [independent_source_pngs_generated_negative](https://drive.google.com/drive/u/0/folders/1MAbvrbca6pEMSOhdRQ7itg_piP0zVbh1) | 0.44 GiB |
+| 自然图 PNG 负样本 | [independent_source_pngs_natural_negative](https://drive.google.com/drive/u/0/folders/1--F3b4k6_mGp-yFE1qAqjc0OjxR54QeL) | 0.38 GiB |
+| 真实 JPEG444 Q90 验证视图 | [independent_encoded_jpeg_q90_444](https://drive.google.com/drive/u/0/folders/1BHrB2RYjG6jKitZDuo1lAM88K8tTZ_BA) | 0.37 GiB |
+| 真实 JPEG420 Q90 验证视图 | [independent_encoded_jpeg_q90_420](https://drive.google.com/drive/u/0/folders/1MmT0jjIyqGQ3P0iao8vbs7uyJnFhzMJ1) | 0.29 GiB |
 
-׼ȷ���ص�ַ����С��SHA256У��ֵ�� [public_assets.json](public_assets.json)��������Ƭ�ϼ�2,319,751,708�ֽڣ�������ͼƬ�ϼ�4,829,967,179�ֽڣ���ѹ����Ҫ����ռ䡣��ѡ�ļ�Ĭ�����ص� `offline_assets/`��Ҳ���� `--asset-root PATH` ָ��λ�á�
+准确下载地址、大小和SHA256校验值见 [public_assets.json](public_assets.json)。环境分片合计2,319,751,708字节；环境加图片合计4,829,967,179字节，解压还需要额外空间。可选文件默认下载到 `offline_assets/`，也可用 `--asset-root PATH` 指定位置。
 
 ```bash
 python wouaf.py setup --with-evaluation
@@ -262,30 +262,30 @@ python wouaf.py evaluate --version v1 --out outputs/independent_v1
 python wouaf.py evaluate --version v2 --out outputs/independent_v2
 ```
 
-[��������ָ��](docs/PUBLIC_REPRODUCTION.md)����������ѱ������ͼԤ������ͳ�ƣ��Լ�������¶�ȡͼƬ������ԭ��������ѵ�����ݺ�5000��latent�ǵ������о��ʲ���ʹ��ѵ���õĳ�Ʒ������̶�ͼƬ��������Ҫ���ǡ�`00_PRETRAINED_V3_DEMO.ipynb` ����ʷ����Drive�ָ���ڣ�������ͨ�û���װ���衣
+[完整复现指南](docs/PUBLIC_REPRODUCTION.md)介绍如何用已保存的逐图预测重算统计，以及如何重新读取图片评估。原生成器、训练数据和5000个latent是单独的研究资产，使用训练好的成品和这组固定图片评估不需要它们。`00_PRETRAINED_V3_DEMO.ipynb` 是历史作者Drive恢复入口，不是普通用户安装步骤。
 
-### 7. ��Ŀ�ļ���ѵ��Ȩ��������ѵ��
+### 7. 项目文件、训练权重与自行训练
 
-| �ļ�/Ŀ¼ | ��; |
+| 文件/目录 | 用途 |
 |---|---|
-| `start_ui.cmd`��`wouaf.py` | �ճ���ҳ����������� |
-| `models/` | ѵ���õ�V1/V2���Ȩ�أ�V3ʹ����������� |
-| `configs/`��`ecc_wouaf/`��`ecc/` | �汾ѡ�񡢶�ȡͼƬ���ָ�ָ�ƺ͹̶��жϹ��� |
-| `environment/portable/` | ���ػ�����װ�������������ļ� |
-| `environment/locked/` | ��ʷ�ο���������ļ� |
-| `training/` | ��ѵ������ģ��ʱʹ�õĿ�ѡ���� |
-| `reports/`��`docs/` | ʵ�顢��������ƺ͸���˵�� |
-| `outputs/` | ��������밲װ��¼ |
+| `start_ui.cmd`、`wouaf.py` | 日常网页和命令行入口 |
+| `models/` | 训练好的V1/V2组件权重，V3使用这两份组件 |
+| `configs/`、`ecc_wouaf/`、`ecc/` | 版本选择、读取图片、恢复指纹和固定判断规则 |
+| `environment/portable/` | 本地环境安装器和依赖锁定文件 |
+| `environment/locked/` | 历史参考环境相关文件 |
+| `training/` | 想训练其他模型时使用的可选代码 |
+| `reports/`、`docs/` | 实验、结果、限制和复现说明 |
+| `outputs/` | 本机结果与安装记录 |
 
-**Ȩ��**����ѵ��ѧ���Ĳ�����������`.pth`�ļ����Ŀ�ṩ��Ȩ��������Ϊѵ���õĲ�Ʒ��ȱʧʱ��װ���Զ����أ��������û�����ѵ����Ҳ��������ʹ�����ģ�͡�ԭ�ļ����������� [v3.0.0ģ��Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0)��
+**权重**就是训练学到的参数，保存在`.pth`文件里。项目提供的权重让它成为训练好的产品；缺失时安装器自动下载，不会让用户重新训练，也不会悄悄使用随机模型。原文件继续保存在 [v3.0.0模型Release](https://github.com/Montos-Qu/ecc-protected-wouaf/releases/tag/v3.0.0)：
 
-| �ļ� | SHA256У��ֵ |
+| 文件 | SHA256校验值 |
 |---|---|
 | `models/v1_negative_aware_2400.pth` | `39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb` |
 | `models/v2_jpeg420_expert_extra800.pth` | `7a5f5b5b3149dd4ebd2837e3a36367fbb3cda4691935ca017c24fd403b48827d` |
 
-����ѵ���Ƕ����Ŀ�ѡ���ܣ���[ѵ��˵��](docs/TRAINING.md)����ͨ���á���ҳ��Ԥ�������������ѵ�������ļ�ͨ��GitHub Releases�򹫿�Drive�ַ�����������ͨGit��ʷ��
+自行训练是独立的可选功能，见[训练说明](docs/TRAINING.md)。普通配置、网页和预测命令都不会启动训练。大文件通过GitHub Releases或公开Drive分发，不放入普通Git历史。
 
-### 8. ԭʼ WOUAF ������
+### 8. 原始 WOUAF 与引用
 
-��Applied Project����[kylemin��WOUAFԭ��Ŀ](https://github.com/kylemin/WOUAF)����ӦCVPR2024���������ǵ���չ������������żУ����ܾ����ԡ�V1/V2/V3���ա����ذ�װ����ҳ���档ԭ������ʵ�ֹ�ԭ���ߡ�ѧ��������ʹ��[����Citation](https://github.com/kylemin/WOUAF#citation)�����Ķ�[����˵��](docs/REFERENCES.md)��[������֪ͨ](THIRD_PARTY_NOTICES.md)���������ز��ı�ԭģ�͡�ͼƬ�������������������
+本Applied Project基于[kylemin的WOUAF原项目](https://github.com/kylemin/WOUAF)，对应CVPR2024工作。我们的扩展包括纠错、奇偶校验与拒绝测试、V1/V2/V3对照、本地安装和网页界面。原方法与实现归原作者。学术引用请使用[上游Citation](https://github.com/kylemin/WOUAF#citation)，并阅读[引用说明](docs/REFERENCES.md)和[第三方通知](THIRD_PARTY_NOTICES.md)。开放下载不改变原模型、图片和依赖库的许可条件。

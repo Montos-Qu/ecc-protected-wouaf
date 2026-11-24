@@ -1,6 +1,6 @@
 # V2 extension: full-codeword objective and JPEG420 recovery
 
-[English](#english) | [����](#chinese)
+[English](#english) | [中文](#chinese)
 
 <a name="english"></a>
 
@@ -27,25 +27,25 @@ Regression tables are in `RESULTS_zh.html`/`regression_cells.csv`; per-image GT/
 
 <a name="chinese"></a>
 
-## ����
+## 中文
 
-��������ʲô������ѵ���Ը���JPEG420������ѡû��ͬʱ��ס����Ҫ���PNG/444�������˵�ʱû�������滻V1����������V3ʹ��������ѵ���õ�JPEG420ר����������ﱣ����������ʵ���¼����ͨ�û��ڽ���ѡ��V3���ɣ�����Ҫ������������ѵ����
+这轮做了什么：继续训练以改善JPEG420，但候选没有同时保住所有要求的PNG/444结果，因此当时没有整体替换V1。后来最终V3使用了其中训练好的JPEG420专家组件。这里保留的是早期实验记录；普通用户在界面选择V3即可，不需要照着下面重新训练。
 
-### ʵ������
+### 实验详情
 
-��ʷʵ���¼����ǰ��ƷĬ�ϰ汾���ֿ��README�е�����V3�����±����ý׶εķ����ͽ����
+历史实验记录；当前成品默认版本见仓库根README中的最终V3。以下保留该阶段的方法和结果。
 
-## V2 ��չѵ������������Ŀ�꣫JPEG420�ָ�
+## V2 扩展训练：完整码字目标＋JPEG420恢复
 
-δͨ��ȫ��Ԥ�ȹ̶��Ļع��ѡҪ��V1���Ǳ��������汾��V2�������Ϊʵ���¼��
+未通过全部预先固定的回归候选要求；V1仍是保留发布版本，V2结果仅作为实验记录。
 
-���汾��<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z
-��ģ��SHA256��39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb
+父版本：<ORIGINAL_PRIVATE_DRIVE>/WOUAF_ECC/negative_aware_multitask_20261029T020157Z
+父模型SHA256：39f57ba4864fefcd78f7ba7354d779df6adac209a0ec24b9eb774fe3560c1dfb
 
-��Ŀ¼�Ƕ���ʵ��汾�����޸�֮ǰGitHub׼����������ģ��Ϊͬһ˫ͷ�ܹ���selected_multitask.pthΪѡ��Ȩ�أ�plan/protocol_lock��¼Ԥ�ȹ̶����䷽�͹���training_history/selection_history��¼���̣�last_resumable_checkpoint����optimizer/RNG��
+此目录是独立实验版本，不修改之前GitHub准备发布包。模型为同一双头架构，selected_multitask.pth为选中权重；plan/protocol_lock记录预先固定的配方和规则，training_history/selection_history记录过程，last_resumable_checkpoint包含optimizer/RNG。
 
-Ŀ�꣺��ԭ˫ͷloss�����ϼ�������BCH�뱾�����أ�����32������ʹ�õ�ǰV1��Ϊfit-only��ʦ����ʵͼ��������PNG/JPEG420/JPEG444/JPEG420/JPEG420ѭ��������LRΪ1e-6/2.5e-6/5e-6/2e-5��2,400׷�Ӳ���100 warmup + cosine��BNͳ�ƺ�ǰ�㶳�ᡣ
+目标：在原双头loss基础上加入完整BCH码本交叉熵（除以32），并使用当前V1作为fit-only教师。真实图像条件按PNG/JPEG420/JPEG444/JPEG420/JPEG420循环；分组LR为1e-6/2.5e-6/5e-6/2e-5。2,400追加步，100 warmup + cosine；BN统计和前层冻结。
 
-ֻ��selectionͬʱ����k11>=98%��k16>=95%��ÿ������ȷ�������붼�޻�����ʱ���Ű�JPEG420��ȷ���ȹ̶�˳��ѡ�񣻸�ģ��Ҳ��Ϊstep0��ѡ��BCH/bit/presence�ż�ȫ�̶̹������Բ�����ѡ��/���ż���calibration��ɫ������ʷ�о�ʹ�ã���˴˴�Ҳ����ȫ�¶������ݡ�
+只有selection同时保持k11>=98%、k16>=95%的每条件正确数且两码都无坏接受时，才按JPEG420正确数等固定顺序选择；父模型也作为step0备选。BCH/bit/presence门槛全程固定，测试不用于选点/调门槛。calibration角色已在历史研究使用，因此此次也不是全新独立数据。
 
-��ǰ�ع����RESULTS_zh.html��regression_cells.csv��������GT��logits��bits��presence�;��߼�regression_v2_k*.npz���۲쵽�����������ʵ����ա�δ�Զ��滻����ģ�ͣ���Ҫ�¶��н�һ����֤������
+当前回归表见RESULTS_zh.html、regression_cells.csv；逐样本GT、logits、bits、presence和决策见regression_v2_k*.npz。观察到零错不等于真实零风险。未自动替换发布模型；需要新队列进一步验证泛化。

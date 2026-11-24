@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="wouaf-token" content="__SESSION_TOKEN__">
-  <title>WOUAF Studio �� Local fingerprint attribution</title>
+  <title>WOUAF Studio · Local fingerprint attribution</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="/style.css">
   <script src="/app.js" defer></script>
@@ -12,7 +12,7 @@
 <body>
   <header class="topbar">
     <a class="brand" href="/" aria-label="WOUAF Studio home"><span class="brand-mark">W</span><span>WOUAF <b>Studio</b></span></a>
-    <div class="top-actions"><span class="local-pill"><i></i><span data-i18n="local">Local workspace</span></span><button id="language" class="text-button">����</button><button id="stop" class="text-button" data-i18n="stop">Stop app</button></div>
+    <div class="top-actions"><span class="local-pill"><i></i><span data-i18n="local">Local workspace</span></span><button id="language" class="text-button">中文</button><button id="stop" class="text-button" data-i18n="stop">Stop app</button></div>
   </header>
   <main>
     <section class="intro"><div><div class="eyebrow" data-i18n="eyebrow">ECC-PROTECTED WOUAF / PRETRAINED V3</div><h1 data-i18n="title">A fingerprint. A clearer answer.</h1><p data-i18n="subtitle">Read a WOUAF user fingerprint from an image, with correction and careful rejection built in.</p></div><div class="runtime"><span class="runtime-dot"></span><div><strong id="device">Checking runtime</strong><small data-i18n="runtimeNote">Runs on your computer</small></div></div></section>
@@ -21,12 +21,12 @@
         <div class="section-heading"><span class="step">01</span><h2 id="input-title" data-i18n="inputTitle">Choose an image</h2><span class="format-tag">PNG / JPEG</span></div>
         <label class="dropzone" id="dropzone" tabindex="0" role="button" aria-label="Upload image">
           <input type="file" id="file" accept="image/png,image/jpeg,.png,.jpg,.jpeg" hidden>
-          <div id="upload-placeholder"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect x="5" y="5" width="34" height="34" rx="10" stroke="currentColor" stroke-width="1.5"/><path d="M22 29V15m0 0-5 5m5-5 5 5M14 31h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong data-i18n="drop">Drop your image here</strong><span data-i18n="browse">or click to browse files</span><small data-i18n="requirements">Native 512 �� 512 �� PNG or JPEG �� Up to 10 MB</small></div>
+          <div id="upload-placeholder"><svg width="44" height="44" viewBox="0 0 44 44" fill="none" aria-hidden="true"><rect x="5" y="5" width="34" height="34" rx="10" stroke="currentColor" stroke-width="1.5"/><path d="M22 29V15m0 0-5 5m5-5 5 5M14 31h16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg><strong data-i18n="drop">Drop your image here</strong><span data-i18n="browse">or click to browse files</span><small data-i18n="requirements">Native 512 × 512 · PNG or JPEG · Up to 10 MB</small></div>
           <img id="preview" alt="Selected image preview" hidden>
           <span class="replace" id="replace" hidden data-i18n="replace">Click to replace image</span>
         </label>
         <div class="file-info" id="file-info" hidden><span id="filename"></span><span id="filesize"></span></div>
-        <details class="size-help"><summary data-i18n="sizeTitle">Why only 512 �� 512?</summary><p data-i18n="sizeReason">Resizing changes pixel details used by the fingerprint. It can make a valid fingerprint undecodable.</p><p data-i18n="sizeEvidence">Small real-image regression: original8/12, enlargement and return4/12, downsampling/return and padding0/12 (k11 positive views).</p><p data-i18n="sizeAction">Use the original512 image. Manually resizing a file does not restore lost fingerprint information. Automatic fitting was removed after this test.</p></details>
+        <details class="size-help"><summary data-i18n="sizeTitle">Why only 512 × 512?</summary><p data-i18n="sizeReason">Resizing changes pixel details used by the fingerprint. It can make a valid fingerprint undecodable.</p><p data-i18n="sizeEvidence">Small real-image regression: original8/12, enlargement and return4/12, downsampling/return and padding0/12 (k11 positive views).</p><p data-i18n="sizeAction">Use the original512 image. Manually resizing a file does not restore lost fingerprint information. Automatic fitting was removed after this test.</p></details>
         <div class="sample-row"><span data-i18n="trySample">Try a sample</span><div><button class="sample" data-sample="positive_png" data-i18n="samplePng">Watermarked PNG</button><button class="sample" data-sample="positive_jpeg" data-i18n="sampleJpeg">JPEG420</button><button class="sample" data-sample="negative_png" data-i18n="sampleNegative">Unmarked PNG</button></div></div>
         <div class="divider"></div>
         <div class="section-heading"><span class="step">02</span><h2 data-i18n="modelTitle">Choose a model</h2></div>
@@ -35,14 +35,14 @@
           <label class="version"><input type="radio" name="version" value="v1"><span class="version-label"><b>V1</b><small data-i18n="v1">Balanced extractor</small></span></label>
           <label class="version"><input type="radio" name="version" value="v2"><span class="version-label"><b>V2</b><small data-i18n="v2">JPEG420 expert</small></span></label>
         </fieldset>
-        <label class="capacity"><span data-i18n="capacity">User capacity</span><select id="code"><option value="11" data-i18n="k11">2,048 users �� BCH(31,11)+P �� Default</option><option value="16" data-i18n="k16">65,536 users �� BCH(31,16)+P �� Control</option></select></label>
-        <button id="predict" class="primary" disabled><span data-i18n="analyze">Identify fingerprint</span><span aria-hidden="true">��</span></button>
+        <label class="capacity"><span data-i18n="capacity">User capacity</span><select id="code"><option value="11" data-i18n="k11">2,048 users · BCH(31,11)+P · Default</option><option value="16" data-i18n="k16">65,536 users · BCH(31,16)+P · Control</option></select></label>
+        <button id="predict" class="primary" disabled><span data-i18n="analyze">Identify fingerprint</span><span aria-hidden="true">→</span></button>
         <p class="privacy" data-i18n="privacy">Images stay on this computer. No cloud upload. No training.</p>
       </section>
       <section class="panel result-panel" aria-labelledby="result-title">
         <div class="section-heading"><span class="step">03</span><h2 id="result-title" data-i18n="resultTitle">Attribution result</h2><span id="model-badge" class="format-tag">V3</span></div>
         <div id="empty" class="empty-state"><div class="fingerprint" aria-hidden="true"><svg viewBox="0 0 100 100" fill="none"><path d="M23 64V47a27 27 0 0 1 54 0v18M31 72V47a19 19 0 0 1 38 0v27M39 80V47a11 11 0 0 1 22 0v32M47 84V48a3 3 0 0 1 6 0v36M15 54v-7a35 35 0 0 1 70 0v7" stroke="currentColor" stroke-width="2.8" stroke-linecap="round"/></svg></div><h3 data-i18n="emptyTitle">Your result starts here</h3><p data-i18n="emptyText">Choose an image and a model, then identify its fingerprint.</p><div class="empty-note"><span class="mini-dot"></span><span data-i18n="emptyNote">Trained weights ready. No retraining needed.</span></div></div>
-        <div id="busy" class="empty-state" hidden><div class="spinner"></div><h3 data-i18n="working">Reading the fingerprint��</h3><p data-i18n="workingText">The first image may take longer while trained weights load.</p></div>
+        <div id="busy" class="empty-state" hidden><div class="spinner"></div><h3 data-i18n="working">Reading the fingerprint…</h3><p data-i18n="workingText">The first image may take longer while trained weights load.</p></div>
         <div id="error" class="error-box" role="alert" hidden></div>
         <div id="result" hidden aria-live="polite">
           <div id="decision-card" class="decision-card"><div class="decision-top"><span id="decision" class="decision"></span><span id="elapsed"></span></div><h3 id="identity"></h3><p id="explanation"></p></div>
@@ -55,7 +55,7 @@
         <div class="result-footer"><strong data-i18n="readTitle">A careful decision</strong><p data-i18n="readText">REJECT means no identity is accepted. A compressed watermarked image can also be rejected when recovery is unreliable.</p></div>
       </section>
     </div>
-    <footer><span>WOUAF Studio <span class="footer-separator">/</span> 3.0.6</span><span data-i18n="footer">A100-trained components. Local inference. Original weights and thresholds.</span><a class="upstream-link" href="https://github.com/kylemin/WOUAF" target="_blank" rel="noopener noreferrer" data-i18n="upstream">Original WOUAF �� GitHub</a></footer>
+    <footer><span>WOUAF Studio <span class="footer-separator">/</span> 3.0.6</span><span data-i18n="footer">A100-trained components. Local inference. Original weights and thresholds.</span><a class="upstream-link" href="https://github.com/kylemin/WOUAF" target="_blank" rel="noopener noreferrer" data-i18n="upstream">Original WOUAF · GitHub</a></footer>
   </main>
 </body>
 </html>
